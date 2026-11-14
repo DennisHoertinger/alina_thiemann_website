@@ -32,6 +32,20 @@
   });
   setzeSprache(html.getAttribute("data-sprache") || "de");
 
+  /* ---------- Kopfleiste: transparent, fest oben ---------- */
+  var kopf = document.querySelector(".kopf");
+  var hero = document.querySelector(".hero");
+  if (kopf) {
+    var kopfPruefen = function () {
+      var ueberBild = !!hero && hero.getBoundingClientRect().bottom > kopf.offsetHeight;
+      kopf.classList.toggle("ueber-bild", ueberBild);
+      kopf.classList.toggle("gescrollt", !ueberBild && window.scrollY > 4);
+    };
+    kopfPruefen();
+    window.addEventListener("scroll", kopfPruefen, { passive: true });
+    window.addEventListener("resize", kopfPruefen);
+  }
+
   /* ---------- Menü ---------- */
   var menue = document.getElementById("menue");
   var burger = document.querySelector(".burger");
