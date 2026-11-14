@@ -1,0 +1,48 @@
+# Holt täglich die Profildaten von Filmmakers und setzt sie in die HTML-Seiten ein.
+# Geheimnisse (Settings → Secrets and variables → Actions):
+#   FILMMAKERS_API_TOKEN   API-Key von Filmmakers (nie ins Repo schreiben)
+#   FILMMAKERS_PROFILE_ID  Profil-ID von Alina bei Filmmakers
+# Ohne Key bleibt der Stand aus daten/filmmakers.json.
+name: Filmmakers-Daten
+
+on:
+  schedule:
+    - cron: "15 3 * * *"   # täglich ca. 4:15 Uhr deutscher Zeit
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "daten/filmmakers.json"
+      - "skripte/filmmakers.mjs"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: filmmakers
+  cancel-in-progress: false
+
+jobs:
+  aktualisieren:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Daten holen und einsetzen
+        env:
+          FILMMAKERS_API_TOKEN: ${{ secrets.FILMMAKERS_API_TOKEN }}
+          FILMMAKERS_PROFILE_ID: ${{ secrets.FILMMAKERS_PROFILE_ID }}
+        run: node skripte/filmmakers.mjs
+      - name: Änderungen speichern
+        run: |
+          if git diff --quiet; then
+            echo "Keine Änderungen."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898333+github-actions[bot]@users.noreply.github.com"
+          git add -A daten *.html
+          git commit -m "Filmmakers-Daten aktualisiert"
+          git push
