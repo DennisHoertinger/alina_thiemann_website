@@ -196,8 +196,8 @@ audio{width:100%;max-width:34em;margin:0 auto;display:block}
 
 /* Bewegung: Einblenden beim Scrollen, nur wenn erwünscht */
 @media (prefers-reduced-motion:no-preference){
-  .js .einblenden{opacity:0;transform:translateY(14px);transition:opacity .7s ease,transform .7s ease}
-  .js .einblenden.sichtbar{opacity:1;transform:none}
+  .einblenden-an .einblenden{opacity:0;transform:translateY(14px);transition:opacity .7s ease,transform .7s ease}
+  .einblenden-an .einblenden.sichtbar{opacity:1;transform:none}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 

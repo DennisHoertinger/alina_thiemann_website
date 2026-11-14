@@ -140,15 +140,30 @@
     }
   });
 
-  /* ---------- Einblenden beim Scrollen ---------- */
+  /* ---------- Einblenden beim Scrollen ----------
+     Inhalte sind immer sichtbar, solange das Einblenden nicht sicher läuft:
+     Erst wenn der Beobachter steht, wird ausgeblendet. Sicherheitsnetz nach 2,5 s. */
+  var bloecke = document.querySelectorAll(".einblenden");
+  function alleZeigen() { bloecke.forEach(function (el) { el.classList.add("sichtbar"); }); }
   if (!ruhig && "IntersectionObserver" in window) {
-    var beob = new IntersectionObserver(function (eintraege) {
-      eintraege.forEach(function (e) {
-        if (e.isIntersecting) { e.target.classList.add("sichtbar"); beob.unobserve(e.target); }
-      });
-    }, { rootMargin: "0px 0px -8% 0px" });
-    document.querySelectorAll(".einblenden").forEach(function (el) { beob.observe(el); });
+    try {
+      var beob = new IntersectionObserver(function (eintraege) {
+        eintraege.forEach(function (e) {
+          if (e.isIntersecting || e.boundingClientRect.top < 0) {
+            e.target.classList.add("sichtbar");
+            beob.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.01 });
+      bloecke.forEach(function (el) { beob.observe(el); });
+      html.classList.add("einblenden-an");
+      setTimeout(function () {
+        bloecke.forEach(function (el) {
+          if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add("sichtbar");
+        });
+      }, 2500);
+    } catch (e) { alleZeigen(); }
   } else {
-    document.querySelectorAll(".einblenden").forEach(function (el) { el.classList.add("sichtbar"); });
+    alleZeigen();
   }
 })();
