@@ -51,6 +51,7 @@ Schrift Newsreader (eine Familie, Kursiv nur für Rollennamen). Papier `#fbf9f4`
 ## Arbeitsweise
 
 - Auf Deutsch mit Dennis, auch Commits und Kommentare. Website-Texte gendergerecht mit Doppelpunkt, Alinas Texte in Ich-Form.
-- Änderungen über Branches und Pull Requests, Dennis prüft.
+- Änderungen über Branches und Pull Requests. Dennis (14.11.2026): jede gewünschte Änderung sofort umsetzen, testen und selbst mergen.
+- Bei jeder Änderung an CSS oder JS die Version `?v=JJJJMMTT-HHMM` an den Links in allen HTML-Dateien hochzählen (GitHub Pages lässt Browser bis zu 10 Minuten zwischenspeichern).
 - Erst auf dem Handy (ca. 375 px) prüfen, dann Desktop. Nichts darf waagerecht überlaufen.
 - CMS (Sveltia) kommt in einem zweiten Schritt: Texte und Fotos als JSON, eingesetzt vom selben Skript-Prinzip wie Filmmakers.
