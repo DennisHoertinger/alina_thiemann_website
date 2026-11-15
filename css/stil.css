@@ -77,7 +77,7 @@ body.mit-hero{padding-top:0}
 .spur img{object-fit:cover}
 /* Laufender Balken am unteren Bildrand: zeigt, wo man im Karussell ist */
 .balken{position:absolute;left:0;right:0;bottom:0;height:3px;overflow:hidden;pointer-events:none;color:var(--gruen)}
-.balken::before{content:"";position:absolute;inset:0;background:var(--gruen-hell)}
+.balken::before{content:"";position:absolute;inset:0;background:var(--papier)}
 .balken i{position:absolute;top:0;bottom:0;left:0;width:var(--anteil,33%);background:currentColor;transform:translateX(var(--stelle,0%));will-change:transform}
 .fotos .balken{left:var(--rand);right:var(--rand);bottom:auto;top:var(--balken-oben,0);color:var(--gruen)}
 
