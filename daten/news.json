@@ -1,0 +1,27 @@
+{
+  "_hinweis": "Aktuelles auf der Startseite. Neueste Meldung oben. Felder: datum (frei, z. B. \"November 2026\"), titel, text, ort, link, linktext; Texte als {de, en}. Später über das CMS pflegbar.",
+  "eintraege": [
+    {
+      "datum": { "de": "2026", "en": "2026" },
+      "titel": { "de": "15 Minutes of Fame", "en": "15 Minutes of Fame" },
+      "ort": { "de": "Schauspiel Stuttgart", "en": "Schauspiel Stuttgart" },
+      "text": { "de": "Ich bin als Gast im Ensemble von „15 Minutes of Fame“ in der Regie von Emma Scharff zu sehen.", "en": "I appear as a guest in “15 Minutes of Fame”, directed by Emma Scharff." },
+      "link": "https://www.schauspiel-stuttgart.de/spielplan/a-z/15-minutes-of-fame/",
+      "linktext": { "de": "Spielplan", "en": "Schedule" }
+    },
+    {
+      "datum": { "de": "2026", "en": "2026" },
+      "titel": { "de": "Was das Nashorn sah, als es auf die andere Seite des Zauns schaute", "en": "Was das Nashorn sah, als es auf die andere Seite des Zauns schaute" },
+      "ort": { "de": "Staatstheater Regensburg, Jugendtheater", "en": "Staatstheater Regensburg, youth theatre" },
+      "text": { "de": "Gastrolle in der Regie von Oda Zuschneid.", "en": "Guest role, directed by Oda Zuschneid." },
+      "link": "https://www.staatstheater-regensburg.de/produktionen/was-das-nashorn-sah-als-es-auf-die-andere-seite-des-zauns-schaute.html",
+      "linktext": { "de": "Zur Produktion", "en": "About the production" }
+    },
+    {
+      "datum": { "de": "In Entwicklung", "en": "In development" },
+      "titel": { "de": "Home (AT)", "en": "Home (working title)" },
+      "ort": { "de": "ITV Studios Germany, SWR", "en": "ITV Studios Germany, SWR" },
+      "text": { "de": "Spielfilm in der Regie von Greta Benkelmann, ich spiele Frau Oster.", "en": "Feature film directed by Greta Benkelmann, I play Frau Oster." }
+    }
+  ]
+}

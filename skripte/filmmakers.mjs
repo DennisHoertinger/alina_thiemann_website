@@ -17,6 +17,8 @@ import { fileURLToPath } from "node:url";
 
 const WURZEL = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DATEI = join(WURZEL, "daten", "filmmakers.json");
+// Aktuelles (News) pflegt Alina/Dennis selbst, nicht Filmmakers. Gleicher Einsetz-Mechanismus.
+const NEWS = join(WURZEL, "daten", "news.json");
 
 // ---------- 1. Daten holen ----------
 
@@ -66,7 +68,9 @@ const link = (url, inhalt) =>
 
 function filmEintrag(f) {
   const hinweis = f.inEntwicklung ? `<span class="hinweis">${beide("In Entwicklung", "In development")}</span>` : "";
-  return `<li><span class="jahr">${esc(f.jahr)}</span><span class="werk">${link(f.link, esc(f.titel))}</span>` +
+  // data-art: für den Filter auf der Vita-Seite (Kino/TV, Kurzfilm, Ausbildung)
+  const art = /Kurzfilm/.test(f.art?.de) ? "kurz" : /Ausbildung/.test(f.art?.de) ? "ausbildung" : "kino-tv";
+  return `<li data-art="${art}"><span class="jahr">${esc(f.jahr)}</span><span class="werk">${link(f.link, esc(f.titel))}</span>` +
     `<span class="rolle">${esc(f.rolle)}</span>` +
     `<span class="details">${t(f.art)} · ${t(f.rollentyp)} · ${beide("Regie", "Dir.")} ${esc(f.regie)}<br>${esc(f.produktion)}</span>${hinweis}</li>`;
 }
@@ -76,7 +80,11 @@ function theaterEintrag(e) {
   if (e.zusatz) teile.push(t(e.zusatz));
   if (e.regie) teile.push(`${beide("Regie", "Dir.")} ${esc(e.regie)}`);
   const titel = esc(e.titel) + (e.autor ? ` <span class="details" style="display:inline">(${esc(e.autor)})</span>` : "");
-  return `<li><span class="jahr">${esc(e.jahr)}</span><span class="werk">${link(e.link, titel)}</span>` +
+  // "bild" ist eine Ergänzung (nicht auf Filmmakers): Bühnenfoto aus img/ als Vorschau
+  const bild = e.bild
+    ? `<img class="vorschau" src="img/${esc(e.bild)}-800.webp" alt="" loading="lazy" decoding="async">`
+    : "";
+  return `<li${bild ? ' class="mit-bild"' : ""}>${bild}<span class="jahr">${esc(e.jahr)}</span><span class="werk">${link(e.link, titel)}</span>` +
     (e.rolle ? `<span class="rolle">${t(e.rolle)}</span>` : "") +
     `<span class="details">${teile.join(" · ")}<br>${esc(e.haus)}</span></li>`;
 }
@@ -95,17 +103,39 @@ function bildungEintrag(a) {
   return `<li><span class="jahr">${esc(a.jahr)}</span><span class="details" style="font-size:17px;color:inherit">${t(a.text)}</span>${notiz}${verweis}</li>`;
 }
 
-function bloecke(d) {
+function newsBlock(n) {
+  if (!n || !n.eintraege || !n.eintraege.length) return "";
+  return `<ul class="news">\n` + n.eintraege.map((e) =>
+    `<li><span class="datum">${t(e.datum)}</span><span class="news-titel">${t(e.titel)}</span>` +
+    (e.ort ? `<span class="ort-zeile">${t(e.ort)}</span>` : "") +
+    (e.text ? `<span class="news-text">${t(e.text)}</span>` : "") +
+    (e.link ? `<a class="link" href="${esc(e.link)}" rel="noopener" target="_blank">${t(e.linktext || { de: "Mehr", en: "More" })}</a>` : "") +
+    `</li>`).join("\n") + `\n</ul>`;
+}
+
+function bloecke(d, news) {
   const liste = (eintraege) => `<ul class="vita">\n${eintraege.join("\n")}\n</ul>`;
   const datum = new Date(d.stand + "T12:00:00Z");
   const standDe = datum.toLocaleDateString("de-DE", { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Berlin" });
   const standEn = datum.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Berlin" });
   return {
+    news: newsBlock(news),
     "start-vita": liste([filmEintrag(d.film[0]), theaterEintrag(d.theater[0]), preisEintrag(d.preise[0])]),
     steckbrief:
       `<dl class="steckbrief">\n` +
-      d.steckbrief.map((s) => `<div><dt>${beide(s.de, s.en)}</dt><dd>${t(s.wert)}</dd></div>`).join("\n") +
+      d.steckbrief.map((s) => `<div${String(s.wert?.de ?? s.wert).length > 34 ? ' class="lang"' : ""}><dt>${beide(s.de, s.en)}</dt><dd>${t(s.wert)}</dd></div>`).join("\n") +
       `\n<div><dt>${beide("Agentur", "Agency")}</dt><dd>${link(d.agentur.url, esc(d.agentur.name))}</dd></div>\n</dl>`,
+    "vita-kurz":
+      `<dl class="kurzdaten">\n` +
+      ["Spielalter", "Größe", "Wohnort", "Wohnmöglichkeiten"]
+        .map((n) => d.steckbrief.find((s) => s.de === n))
+        .filter(Boolean)
+        .map((s) => `<div><dt>${beide(s.de, s.en)}</dt><dd>${t(s.wert)}</dd></div>`).join("\n") +
+      `\n</dl>`,
+    studienrollen:
+      `<ul class="rollenraster">\n` +
+      d.studium.map((s) => `<li><span class="rolle">${esc(s.rolle)}</span><span class="werk">${esc(s.stueck)}</span><span class="details">${esc(s.autor)}</span></li>`).join("\n") +
+      `\n</ul>`,
     film: liste(d.film.map(filmEintrag)),
     theater: liste(d.theater.map(theaterEintrag)),
     studium: liste(d.studium.map((s) =>
@@ -149,7 +179,9 @@ async function main() {
     console.warn("Filmmakers nicht erreichbar, nutze letzten Stand:", fehler.message);
   }
 
-  const b = bloecke(daten);
+  let news = null;
+  try { news = JSON.parse(await readFile(NEWS, "utf8")); } catch { console.log("Keine daten/news.json gefunden."); }
+  const b = bloecke(daten, news);
   let geaendert = 0;
   for (const datei of await htmlDateien(WURZEL)) {
     const alt = await readFile(datei, "utf8");
