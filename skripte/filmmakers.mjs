@@ -12,6 +12,7 @@
 //    <!-- filmmakers:NAME --> … <!-- /filmmakers:NAME --> in allen *.html-Dateien ersetzt werden.
 
 import { readFile, writeFile, readdir } from "node:fs/promises";
+import { readFileSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -79,18 +80,34 @@ function filmEintrag(f) {
     `<span class="details">${t(f.art)} · ${t(f.rollentyp)} · ${beide("Regie", "Dir.")} ${esc(f.regie)}<br>${esc(f.produktion)}</span>${video}${hinweis}</li>`;
 }
 
+// Breite/Höhe einer WebP-Datei aus dem Dateikopf lesen (für width/height am <img>, damit nichts springt)
+function webpMasse(datei) {
+  try {
+    const b = readFileSync(datei);
+    const art = b.toString("ascii", 12, 16);
+    if (art === "VP8X") return [1 + b.readUIntLE(24, 3), 1 + b.readUIntLE(27, 3)];
+    if (art === "VP8L") { const n = b.readUInt32LE(21); return [1 + (n & 0x3fff), 1 + ((n >> 14) & 0x3fff)]; }
+    if (art === "VP8 ") return [b.readUInt16LE(26) & 0x3fff, b.readUInt16LE(28) & 0x3fff];
+  } catch {}
+  return null;
+}
+
 function theaterEintrag(e) {
   const teile = [beide("Theater", "Theatre")];
   if (e.zusatz) teile.push(t(e.zusatz));
   if (e.regie) teile.push(`${beide("Regie", "Dir.")} ${esc(e.regie)}`);
   const titel = esc(e.titel) + (e.autor ? ` <span class="details" style="display:inline">(${esc(e.autor)})</span>` : "");
-  // "bild" ist eine Ergänzung (nicht auf Filmmakers): Bühnenfoto aus img/ als Vorschau
-  const bild = e.bild
-    ? `<img class="vorschau" src="img/${esc(e.bild)}-800.webp" alt="" loading="lazy" decoding="async">`
+  // "bilder"/"foto" sind Ergänzungen (nicht auf Filmmakers): Bühnenfotos aus img/ mit Credit
+  const bilder = e.bilder || (e.bild ? [e.bild] : []);
+  const alt = (de, en) => `alt="${esc(de)}" data-alt-de="${esc(de)}" data-alt-en="${esc(en)}"`;
+  const bild = bilder.length
+    ? `<div class="buehnenbilder"><div class="reihe" tabindex="0">` +
+      bilder.map((b) => { const m = webpMasse(join(WURZEL, "img", `${b}-800.webp`)); return `<img src="img/${esc(b)}-800.webp" srcset="img/${esc(b)}-800.webp 800w, img/${esc(b)}-1600.webp 1600w" sizes="(min-width:760px) 640px, 420px"${m ? ` width="${m[0]}" height="${m[1]}"` : ""} ${alt(`Alina Thiemann in „${e.titel}“`, `Alina Thiemann in “${e.titel}”`)} loading="lazy" decoding="async">`; }).join("") +
+      `</div>` + (e.foto ? `<p class="nachweis">${beide("Foto: " + e.foto, "Photo: " + e.foto)}</p>` : "") + `</div>`
     : "";
-  return `<li${bild ? ' class="mit-bild"' : ""}>${bild}<span class="jahr">${esc(e.jahr)}</span><span class="werk">${link(e.link, titel)}</span>` +
+  return `<li${bild ? ' class="mit-bildern"' : ""}><span class="jahr">${esc(e.jahr)}</span><span class="werk">${link(e.link, titel)}</span>` +
     (e.rolle ? `<span class="rolle">${t(e.rolle)}</span>` : "") +
-    `<span class="details">${teile.join(" · ")}<br>${esc(e.haus)}</span></li>`;
+    `<span class="details">${teile.join(" · ")}<br>${esc(e.haus)}</span>${bild}</li>`;
 }
 
 function preisEintrag(p) {
@@ -124,7 +141,7 @@ function bloecke(d, news) {
   const standEn = datum.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Berlin" });
   return {
     news: newsBlock(news),
-    "start-vita": liste([filmEintrag(d.film[0]), theaterEintrag(d.theater[0]), preisEintrag(d.preise[0])]),
+    "start-vita": liste([filmEintrag(d.film[0]), theaterEintrag({ ...d.theater[0], bilder: [], bild: null }), preisEintrag(d.preise[0])]),
     steckbrief:
       `<dl class="steckbrief">\n` +
       d.steckbrief.map((s) => `<div${String(s.wert?.de ?? s.wert).length > 34 ? ' class="lang"' : ""}><dt>${beide(s.de, s.en)}</dt><dd>${t(s.wert)}</dd></div>`).join("\n") +

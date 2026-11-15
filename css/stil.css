@@ -316,8 +316,12 @@ nav.sprungleiste.seitentitel{margin-top:0;padding-top:40px}
 .filter button{background:none;border:1px solid var(--unterstrich);border-radius:20px;padding:6px 14px;color:var(--gruen);cursor:pointer;min-height:36px}
 .filter button[aria-pressed="true"]{background:var(--gruen);border-color:var(--gruen);color:var(--papier)}
 
-.vita li.mit-bild{display:grid;grid-template-columns:96px 1fr;column-gap:16px;align-items:start}
-.vita li.mit-bild .vorschau{grid-row:1/span 4;aspect-ratio:1;object-fit:cover;width:96px;height:96px}
+/* Theater mit Bühnenfotos: Bildreihe unter dem Eintrag, wischbar, auf dem Handy bis an den Rand */
+.buehnenbilder{margin:22px calc(-1 * var(--rand)) 4px 0;min-width:0}
+.buehnenbilder .reihe{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none;padding-right:var(--rand)}
+.buehnenbilder .reihe::-webkit-scrollbar{display:none}
+.buehnenbilder img{flex:none;height:280px;width:auto;max-width:none;scroll-snap-align:start;background:var(--gruen-hell)}
+.buehnenbilder .nachweis{margin-top:8px;font-size:13px;color:var(--grau)}
 
 .rollenraster{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:44em;margin:0 auto}
 .rollenraster li{background:var(--gruen-hell);padding:18px 16px;display:flex;flex-direction:column;gap:2px}
@@ -337,11 +341,11 @@ nav.sprungleiste.seitentitel{margin-top:0;padding-top:40px}
   .vita-kopf .name{font-size:48px}
   .wegweiser{grid-template-columns:1fr 1fr;gap:20px}
   .vita-seite .vita li{display:grid;grid-template-columns:8em 1fr;column-gap:20px}
-  .vita-seite .vita li>*:not(.jahr):not(.vorschau){grid-column:2}
+  .vita-seite .vita li>*:not(.jahr){grid-column:2}
   .vita-seite .vita li .jahr{grid-row:1/span 4;padding-top:6px}
-  .vita li.mit-bild{grid-template-columns:8em 1fr 120px}
-  .vita-seite .vita li.mit-bild>*:not(.jahr):not(.vorschau){grid-column:2}
-  .vita li.mit-bild .vorschau{grid-column:3;grid-row:1/span 4;width:120px;height:120px}
+  .vita-seite .vita li .buehnenbilder{grid-column:1/-1;margin-right:0}
+  .buehnenbilder .reihe{padding-right:0;gap:10px}
+  .buehnenbilder img{height:420px}
   .vita-seite .steckbrief{grid-template-columns:repeat(3,1fr)}
   .rollenraster{grid-template-columns:repeat(3,1fr)}
   .spalten{grid-template-columns:repeat(3,1fr)}
