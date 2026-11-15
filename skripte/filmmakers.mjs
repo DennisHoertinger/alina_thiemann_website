@@ -86,6 +86,15 @@ function preisEintrag(p) {
   return `<li><span class="jahr">${esc(p.jahr)}</span><span class="werk">${link(p.link, t(p.titel))}</span>${text}</li>`;
 }
 
+// Ausbildung/Weiterbildung; "notiz" und "link" sind Ergänzungen, die nicht auf Filmmakers stehen
+function bildungEintrag(a) {
+  const notiz = a.notiz ? `<span class="details">${t(a.notiz)}</span>` : "";
+  const verweis = a.link
+    ? `<span class="details"><a class="link" href="${esc(a.link)}" rel="noopener" target="_blank">${t(a.linktext || { de: "Mehr", en: "More" })}</a></span>`
+    : "";
+  return `<li><span class="jahr">${esc(a.jahr)}</span><span class="details" style="font-size:17px;color:inherit">${t(a.text)}</span>${notiz}${verweis}</li>`;
+}
+
 function bloecke(d) {
   const liste = (eintraege) => `<ul class="vita">\n${eintraege.join("\n")}\n</ul>`;
   const datum = new Date(d.stand + "T12:00:00Z");
@@ -104,8 +113,8 @@ function bloecke(d) {
     hoerspiel: liste(d.hoerspiel.map((h) =>
       `<li><span class="jahr">${esc(h.jahr)}</span><span class="werk">${t(h.titel)}</span><span class="rolle">${esc(h.rolle)}</span>` +
       `<span class="details">${beide("Regie", "Dir.")} ${esc(h.regie)}<br>${esc(h.haus)}</span></li>`)),
-    ausbildung: liste(d.ausbildung.map((a) => `<li><span class="jahr">${esc(a.jahr)}</span><span class="details" style="font-size:17px;color:inherit">${t(a.text)}</span></li>`)),
-    weiterbildung: liste(d.weiterbildung.map((a) => `<li><span class="jahr">${esc(a.jahr)}</span><span class="details" style="font-size:17px;color:inherit">${t(a.text)}</span></li>`)),
+    ausbildung: liste(d.ausbildung.map(bildungEintrag)),
+    weiterbildung: liste(d.weiterbildung.map(bildungEintrag)),
     preise: liste(d.preise.map(preisEintrag)),
     stand:
       `<p class="quelle">${beide(`Daten von Filmmakers, Stand ${standDe}.`, `Data from Filmmakers, as of ${standEn}.`)} ` +

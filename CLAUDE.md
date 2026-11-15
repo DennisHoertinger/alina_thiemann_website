@@ -33,6 +33,7 @@ Steckbrief, Film/TV, Theater, Rollen im Studium, Hörspiel, Ausbildung, Weiterbi
 - Nur freigegebene Fotos aus `material/fotos/Freigegebne Bilder mit Credits /`, immer mit Credit („Foto: …“). Nicht freigegeben: serie-alina-t, serie-sw-img, s/w-Versionen, 0426_02.
 - Fotos liegen als WebP in `img/` in zwei Breiten (`-800`, `-1600`), Dateiname nach Fotograf:in und Nummer der freigegebenen Datei (z. B. `stella-butz-2026-15` = „Stella Butz 2026 15.jpeg“).
 - `medien/showreel-2026.mp4` (720p, ca. 9 MB) und `medien/hoerprobe.mp3` liegen selbst gehostet hier, laden erst beim Abspielen (`preload="none"`). Rollenvideos und About me (je über 100 MB) sind noch nicht eingebunden; Hosting offen.
+- `medien/bachelorarbeit-alina-thiemann.pdf`: Bachelorarbeit ohne private Daten (Deckblatt ohne Anschrift, E-Mail, Matrikelnummer; Seite mit Unterschrift entfernt). Nie das Original verlinken.
 - Originale und `material/` nie ins Repo.
 
 ## Rechtlich sicher
@@ -46,7 +47,7 @@ Steckbrief, Film/TV, Theater, Rollen im Studium, Hörspiel, Ausbildung, Weiterbi
 
 ## Gestaltung (Entwurf 7)
 
-Schrift Newsreader (eine Familie, Kursiv nur für Rollennamen). Papier `#fbf9f4`, Tinte `#2a2118`, PANTONE 18-0425 TSX Commander Green `#6b6c45`, hell `#e9e9dc`, Coaching `#d2d3b6`. Wortmarke „alina — thiemann“ klein in Grün. Kopfleiste fest oben und transparent (Dennis, 14.11.2026): über dem Startbild weiß, nach dem Scrollen halbtransparentes Papier mit Weichzeichner. Viel Kleinschreibung, keine Pfeil-Zeichen, Links fein unterstrichen. Karussells mit Wischen, Pfeilknöpfen, Punkten; Startbilder laufen von selbst (Pause-Knopf, „Bewegung reduzieren“ wird respektiert).
+Schrift Newsreader (eine Familie, Kursiv nur für Rollennamen). Papier `#fbf9f4`, Tinte `#2a2118`, PANTONE 18-0425 TSX Commander Green `#6b6c45`, hell `#e9e9dc`, Coaching `#d2d3b6`. Wortmarke „alina — thiemann“ klein in Grün. Kopfleiste fest oben und transparent (Dennis, 14.11.2026): über dem Startbild weiß, nach dem Scrollen halbtransparentes Papier mit Weichzeichner. Alles klein geschrieben per CSS (`body{text-transform:lowercase}`, Wunsch Alina 15.11.2026), keine Pfeil-Zeichen, Links fein unterstrichen. Karussells mit Wischen, Pfeilknöpfen, Punkten; Startbilder laufen von selbst (Pause-Knopf, „Bewegung reduzieren“ wird respektiert).
 
 ## Arbeitsweise
 
