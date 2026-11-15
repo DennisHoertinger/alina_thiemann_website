@@ -45,6 +45,11 @@ button{font:inherit;color:inherit;text-transform:inherit;letter-spacing:inherit}
 /* Über dem Startbild: weiße Schrift, sonst Grün; der Hintergrund bleibt immer durchsichtig */
 .kopf.ueber-bild{color:#fff;text-shadow:0 0 10px rgba(0,0,0,.35)}
 .kopf.ueber-bild .burger span{filter:drop-shadow(0 0 3px rgba(0,0,0,.35))}
+/* Mit JavaScript: jedes Element der Leiste wird schwarz oder weiß, je nachdem was darunter liegt (Dennis, 15.11.2026) */
+.kopf.selbst{color:var(--tinte);text-shadow:none}
+.kopf.selbst>*{transition:color .25s}
+.kopf.selbst .hell{color:#fff;text-shadow:0 0 10px rgba(0,0,0,.35)}
+.kopf.selbst .hell span{filter:drop-shadow(0 0 3px rgba(0,0,0,.35))}
 /* Nach dem Scrollen bleibt die Leiste durchsichtig (Dennis, 15.11.2026) */
 .kopf.gescrollt{background:transparent}
 body{padding-top:68px}

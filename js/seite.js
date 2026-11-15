@@ -34,16 +34,37 @@
 
   /* ---------- Kopfleiste: transparent, fest oben ---------- */
   var kopf = document.querySelector(".kopf");
-  var hero = document.querySelector(".hero");
   if (kopf) {
-    var kopfPruefen = function () {
-      var ueberBild = !!hero && hero.getBoundingClientRect().bottom > kopf.offsetHeight;
-      kopf.classList.toggle("ueber-bild", ueberBild);
-      kopf.classList.toggle("gescrollt", !ueberBild && window.scrollY > 4);
+    /* Schwarz oder weiß je nach Hintergrund: Für Menü, Name und Sprache wird geprüft,
+       ob darunter ein Foto oder Video liegt (dann weiß) oder Papier (dann schwarz). */
+    var teile = [kopf.querySelector(".burger"), kopf.querySelector(".marke"), kopf.querySelector(".sprache")].filter(Boolean);
+    var dunkelDarunter = function (el) {
+      var r = el.getBoundingClientRect();
+      var x = r.left + r.width / 2, y = r.top + r.height / 2;
+      if (el.classList.contains("marke")) {
+        var t = el.firstChild && document.createRange ? document.createRange() : null;
+        if (t) { t.selectNodeContents(el); var tr = t.getBoundingClientRect(); if (tr.width) { x = tr.left + tr.width / 2; y = tr.top + tr.height / 2; } }
+      }
+      var liste = document.elementsFromPoint ? document.elementsFromPoint(x, y) : [];
+      for (var i = 0; i < liste.length; i++) {
+        var u = liste[i];
+        if (kopf.contains(u)) continue;
+        return u.tagName === "IMG" || u.tagName === "VIDEO" || !!u.closest(".rahmen, .hero");
+      }
+      return false;
     };
+    kopf.classList.remove("ueber-bild");
+    kopf.classList.add("selbst");
+    var kopfTick;
+    var kopfPruefen = function () {
+      teile.forEach(function (el) { el.classList.toggle("hell", dunkelDarunter(el)); });
+      kopf.classList.toggle("gescrollt", window.scrollY > 4);
+    };
+    var kopfPlanen = function () { cancelAnimationFrame(kopfTick); kopfTick = requestAnimationFrame(kopfPruefen); };
     kopfPruefen();
-    window.addEventListener("scroll", kopfPruefen, { passive: true });
-    window.addEventListener("resize", kopfPruefen);
+    window.addEventListener("scroll", kopfPlanen, { passive: true });
+    window.addEventListener("resize", kopfPlanen);
+    window.addEventListener("load", kopfPlanen);
   }
 
   /* ---------- Menü ---------- */

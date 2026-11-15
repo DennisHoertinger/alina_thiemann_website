@@ -47,7 +47,7 @@ Steckbrief, Film/TV, Theater, Rollen im Studium, Hörspiel, Ausbildung, Weiterbi
 
 ## Gestaltung (Entwurf 7)
 
-Schrift Newsreader (eine Familie, Kursiv nur für Rollennamen). Papier `#fbf9f4`, Tinte `#2a2118`, PANTONE 18-0425 TSX Commander Green `#6b6c45`, hell `#e9e9dc`, Coaching `#d2d3b6`. Wortmarke „alina — thiemann“ klein in Grün. Kopfleiste fest oben und transparent (Dennis, 14.11.2026): über dem Startbild weiß, nach dem Scrollen halbtransparentes Papier mit Weichzeichner. Alles klein geschrieben per CSS (`body{text-transform:lowercase}`, Wunsch Alina 15.11.2026), keine Pfeil-Zeichen, Links fein unterstrichen. Karussells mit Wischen, Pfeilknöpfen, Punkten; Startbilder laufen von selbst (Pause-Knopf, „Bewegung reduzieren“ wird respektiert).
+Schrift Newsreader (eine Familie, Kursiv nur für Rollennamen). Papier `#fbf9f4`, Tinte `#2a2118`, PANTONE 18-0425 TSX Commander Green `#6b6c45`, hell `#e9e9dc`, Coaching `#d2d3b6`. Wortmarke „alina — thiemann“ klein in Grün. Kopfleiste fest oben und immer durchsichtig (Dennis, 15.11.2026): Menü, Name und Sprache werden einzeln weiß über Fotos/Videos und schwarz (Tinte) über Papier (`js/seite.js` prüft per `elementsFromPoint`). Alles klein geschrieben per CSS (`body{text-transform:lowercase}`, Wunsch Alina 15.11.2026), keine Pfeil-Zeichen, Links fein unterstrichen. Karussells mit Wischen, Pfeilknöpfen, Punkten; Startbilder laufen von selbst (Pause-Knopf, „Bewegung reduzieren“ wird respektiert).
 
 ## Arbeitsweise
 
