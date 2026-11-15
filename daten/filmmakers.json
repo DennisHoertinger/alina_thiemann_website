@@ -3,69 +3,515 @@
   "stand": "2026-11-14",
   "profil": "https://www.filmmakers.eu/de/actors/alina-thiemann",
   "vitaPdf": "https://www.filmmakers.eu/de/actors/alina-thiemann/pdf",
-  "agentur": { "name": "ATR – agentur tanja rohmann", "url": "https://www.a-t-r.net/alina-thiemann/" },
+  "agentur": {
+    "name": "ATR – agentur tanja rohmann",
+    "url": "https://www.a-t-r.net/alina-thiemann/"
+  },
   "steckbrief": [
-    { "de": "Spielalter", "en": "Playing age", "wert": { "de": "21–31", "en": "21–31" } },
-    { "de": "Jahrgang", "en": "Born", "wert": { "de": "1999, Buchholz in der Nordheide", "en": "1999, Buchholz in der Nordheide" } },
-    { "de": "Wohnort", "en": "Based in", "wert": { "de": "Berlin", "en": "Berlin" } },
-    { "de": "Wohnmöglichkeiten", "en": "Local hire", "wert": { "de": "Hamburg, Stuttgart", "en": "Hamburg, Stuttgart" } },
-    { "de": "Größe", "en": "Height", "wert": { "de": "166 cm", "en": "166 cm" } },
-    { "de": "Statur", "en": "Build", "wert": { "de": "schlank, sportlich", "en": "slim, athletic" } },
-    { "de": "Haarfarbe", "en": "Hair", "wert": { "de": "dunkelbraun", "en": "dark brown" } },
-    { "de": "Augenfarbe", "en": "Eyes", "wert": { "de": "blau-grau", "en": "blue-grey" } },
-    { "de": "Stimmlage", "en": "Voice", "wert": { "de": "Alt, Mezzosopran", "en": "alto, mezzo-soprano" } },
-    { "de": "Gesang", "en": "Singing", "wert": { "de": "Bühnengesang, Chanson, Chorgesang, klassisch", "en": "stage singing, chanson, choir, classical" } },
-    { "de": "Tanz", "en": "Dance", "wert": { "de": "Zeitgenössischer Tanz", "en": "contemporary dance" } },
-    { "de": "Sprachen", "en": "Languages", "wert": { "de": "Deutsch (Muttersprache), Englisch (B2), Schwedisch (Grundkenntnisse)", "en": "German (native), English (B2), Swedish (basic)" } },
-    { "de": "Dialekt", "en": "Dialect", "wert": { "de": "Norddeutsch", "en": "Northern German" } },
-    { "de": "Sport", "en": "Sports", "wert": { "de": "Fußball, Laufen, Fitness, Pilates, Yoga, Schwimmen, Aikido, Leichtathletik, Volleyball, Tischtennis, Wandern, Bowling", "en": "football, running, fitness, Pilates, yoga, swimming, aikido, athletics, volleyball, table tennis, hiking, bowling" } },
-    { "de": "Besondere Fähigkeiten", "en": "Special skills", "wert": { "de": "Biomechanik", "en": "biomechanics" } },
-    { "de": "Führerschein", "en": "Driving licence", "wert": { "de": "Klasse B", "en": "class B (car)" } }
+    {
+      "de": "Spielalter",
+      "en": "Playing age",
+      "wert": {
+        "de": "21–31",
+        "en": "21–31"
+      }
+    },
+    {
+      "de": "Jahrgang",
+      "en": "Born",
+      "wert": {
+        "de": "1999, Buchholz in der Nordheide",
+        "en": "1999, Buchholz in der Nordheide"
+      }
+    },
+    {
+      "de": "Wohnort",
+      "en": "Based in",
+      "wert": {
+        "de": "Berlin",
+        "en": "Berlin"
+      }
+    },
+    {
+      "de": "Wohnmöglichkeiten",
+      "en": "Local hire",
+      "wert": {
+        "de": "Hamburg, Stuttgart",
+        "en": "Hamburg, Stuttgart"
+      }
+    },
+    {
+      "de": "Größe",
+      "en": "Height",
+      "wert": {
+        "de": "166 cm",
+        "en": "166 cm"
+      }
+    },
+    {
+      "de": "Statur",
+      "en": "Build",
+      "wert": {
+        "de": "schlank, sportlich",
+        "en": "slim, athletic"
+      }
+    },
+    {
+      "de": "Haarfarbe",
+      "en": "Hair",
+      "wert": {
+        "de": "dunkelbraun",
+        "en": "dark brown"
+      }
+    },
+    {
+      "de": "Augenfarbe",
+      "en": "Eyes",
+      "wert": {
+        "de": "blau-grau",
+        "en": "blue-grey"
+      }
+    },
+    {
+      "de": "Stimmlage",
+      "en": "Voice",
+      "wert": {
+        "de": "Alt, Mezzosopran",
+        "en": "alto, mezzo-soprano"
+      }
+    },
+    {
+      "de": "Gesang",
+      "en": "Singing",
+      "wert": {
+        "de": "Bühnengesang, Chanson, Chorgesang, klassisch",
+        "en": "stage singing, chanson, choir, classical"
+      }
+    },
+    {
+      "de": "Tanz",
+      "en": "Dance",
+      "wert": {
+        "de": "Zeitgenössischer Tanz",
+        "en": "contemporary dance"
+      }
+    },
+    {
+      "de": "Sprachen",
+      "en": "Languages",
+      "wert": {
+        "de": "Deutsch (Muttersprache), Englisch (B2), Schwedisch (Grundkenntnisse)",
+        "en": "German (native), English (B2), Swedish (basic)"
+      }
+    },
+    {
+      "de": "Dialekt",
+      "en": "Dialect",
+      "wert": {
+        "de": "Norddeutsch",
+        "en": "Northern German"
+      }
+    },
+    {
+      "de": "Sport",
+      "en": "Sports",
+      "wert": {
+        "de": "Fußball, Laufen, Fitness, Pilates, Yoga, Schwimmen, Aikido, Leichtathletik, Volleyball, Tischtennis, Wandern, Bowling",
+        "en": "football, running, fitness, Pilates, yoga, swimming, aikido, athletics, volleyball, table tennis, hiking, bowling"
+      }
+    },
+    {
+      "de": "Besondere Fähigkeiten",
+      "en": "Special skills",
+      "wert": {
+        "de": "Biomechanik",
+        "en": "biomechanics"
+      }
+    },
+    {
+      "de": "Führerschein",
+      "en": "Driving licence",
+      "wert": {
+        "de": "Klasse B",
+        "en": "class B (car)"
+      }
+    }
   ],
   "film": [
-    { "jahr": "2026", "titel": "Home (AT)", "art": { "de": "Spielfilm", "en": "Feature film" }, "rolle": "Frau Oster", "rollentyp": { "de": "Nebenrolle", "en": "Supporting role" }, "regie": "Greta Benkelmann", "produktion": "ITV Studios Germany, SWR", "inEntwicklung": true },
-    { "jahr": "2026", "titel": "Freier Wille", "art": { "de": "Kurzfilm", "en": "Short film" }, "rolle": "Hannah", "rollentyp": { "de": "Nebenrolle", "en": "Supporting role" }, "regie": "Jonatan Maiwald", "produktion": "Filmakademie Baden-Württemberg", "inEntwicklung": true },
-    { "jahr": "2026", "titel": "Quality Time (AT)", "art": { "de": "Kurzfilm", "en": "Short film" }, "rolle": "Mika", "rollentyp": { "de": "Hauptrolle", "en": "Lead" }, "regie": "Lejan Samuelson", "produktion": "Filmakademie Baden-Württemberg", "inEntwicklung": true },
-    { "jahr": "2026", "titel": "Ballet Rivalry", "art": { "de": "Ausbildungsproduktion", "en": "Training production" }, "rolle": "Nathalie", "rollentyp": { "de": "Hauptrolle", "en": "Lead" }, "regie": "Alina Thiemann, Lina Agnes Nordhausen", "produktion": "ADK, FABW" },
-    { "jahr": "2026", "titel": "Zorge", "art": { "de": "Kurzfilm", "en": "Short film" }, "rolle": "Reisende", "rollentyp": { "de": "Hauptrolle", "en": "Lead" }, "regie": "Moritz Müßig, Noah Bösel", "produktion": "Phil Albrecht" },
-    { "jahr": "2026", "titel": "Holy Ship!", "art": { "de": "Kurzfilm", "en": "Short film" }, "rolle": "Erste Offizierin Constance Miller", "rollentyp": { "de": "Nebenrolle", "en": "Supporting role" }, "regie": "Vick Polok", "produktion": "Filmakademie Baden-Württemberg" },
-    { "jahr": "2025–2026", "titel": "TONI", "art": { "de": "Kurzfilm", "en": "Short film" }, "rolle": "Schiedsrichterin Toni", "rollentyp": { "de": "Hauptrolle", "en": "Lead" }, "regie": "Mauriz Thabo Röckle", "produktion": "Nathalie Felkel" },
-    { "jahr": "2024–2025", "titel": "Stammheim – Zeit des Terrors", "art": { "de": "Spielfilm", "en": "Feature film" }, "rolle": "Irmgard Möller", "rollentyp": { "de": "Nebenrolle", "en": "Supporting role" }, "regie": "Niki Stein", "produktion": "Spiegel TV / SWR, ARD, NDR, rbb", "link": "https://www.ardmediathek.de/video/stammheim-zeit-des-terrors/stammheim-zeit-des-terrors/swr/Y3JpZDovL3N3ci5kZS9hZXgvbzIyNDA5OTE" },
-    { "jahr": "2024", "titel": "SOKO Stuttgart – Das Spukhaus", "art": { "de": "Serie", "en": "Series" }, "rolle": "Victoria Schäfer", "rollentyp": { "de": "Episodennebenrolle", "en": "Episode supporting role" }, "regie": "Daniel Helfer", "produktion": "Bavaria Fiction / ZDF" },
-    { "jahr": "2024", "titel": "Große Freiheit", "art": { "de": "Kurzfilm", "en": "Short film" }, "rolle": "Inhaftierte", "rollentyp": { "de": "Hauptrolle", "en": "Lead" }, "regie": "Leve Kühl", "produktion": "ADK, Filmakademie Baden-Württemberg" },
-    { "jahr": "2024", "titel": "Mountain of Miracle", "art": { "de": "Kurzfilm", "en": "Short film" }, "rolle": "Sonja Wischnewski", "rollentyp": { "de": "Nebenrolle", "en": "Supporting role" }, "regie": "Max Kubitschek", "produktion": "Filmakademie Baden-Württemberg" },
-    { "jahr": "2023–2024", "titel": "The Deep Above – First Hunt", "art": { "de": "Kurzfilm", "en": "Short film" }, "rolle": "Sinh", "rollentyp": { "de": "Hauptrolle", "en": "Lead" }, "regie": "Niklas Wolff", "produktion": "Filmakademie Baden-Württemberg" },
-    { "jahr": "2023–2024", "titel": "Feed Your Head", "art": { "de": "Kurzfilm", "en": "Short film" }, "rolle": "Crying Girl", "rollentyp": { "de": "Nebenrolle", "en": "Supporting role" }, "regie": "Bernhard Strobel", "produktion": "FABW & KLITS FILM, Filmfestival Max Ophüls Preis" }
+    {
+      "jahr": "2026",
+      "titel": "Home (AT)",
+      "art": {
+        "de": "Spielfilm",
+        "en": "Feature film"
+      },
+      "rolle": "Frau Oster",
+      "rollentyp": {
+        "de": "Nebenrolle",
+        "en": "Supporting role"
+      },
+      "regie": "Greta Benkelmann",
+      "produktion": "ITV Studios Germany, SWR",
+      "inEntwicklung": true
+    },
+    {
+      "jahr": "2026",
+      "titel": "Freier Wille",
+      "art": {
+        "de": "Kurzfilm",
+        "en": "Short film"
+      },
+      "rolle": "Hannah",
+      "rollentyp": {
+        "de": "Nebenrolle",
+        "en": "Supporting role"
+      },
+      "regie": "Jonatan Maiwald",
+      "produktion": "Filmakademie Baden-Württemberg",
+      "inEntwicklung": true
+    },
+    {
+      "jahr": "2026",
+      "titel": "Quality Time (AT)",
+      "art": {
+        "de": "Kurzfilm",
+        "en": "Short film"
+      },
+      "rolle": "Mika",
+      "rollentyp": {
+        "de": "Hauptrolle",
+        "en": "Lead"
+      },
+      "regie": "Lejan Samuelson",
+      "produktion": "Filmakademie Baden-Württemberg",
+      "inEntwicklung": true
+    },
+    {
+      "jahr": "2026",
+      "titel": "Ballet Rivalry",
+      "art": {
+        "de": "Ausbildungsproduktion",
+        "en": "Training production"
+      },
+      "rolle": "Nathalie",
+      "rollentyp": {
+        "de": "Hauptrolle",
+        "en": "Lead"
+      },
+      "regie": "Alina Thiemann, Lina Agnes Nordhausen",
+      "produktion": "ADK, FABW"
+    },
+    {
+      "jahr": "2026",
+      "titel": "Zorge",
+      "art": {
+        "de": "Kurzfilm",
+        "en": "Short film"
+      },
+      "rolle": "Reisende",
+      "rollentyp": {
+        "de": "Hauptrolle",
+        "en": "Lead"
+      },
+      "regie": "Moritz Müßig, Noah Bösel",
+      "produktion": "Phil Albrecht"
+    },
+    {
+      "jahr": "2026",
+      "titel": "Holy Ship!",
+      "art": {
+        "de": "Kurzfilm",
+        "en": "Short film"
+      },
+      "rolle": "Erste Offizierin Constance Miller",
+      "rollentyp": {
+        "de": "Nebenrolle",
+        "en": "Supporting role"
+      },
+      "regie": "Vick Polok",
+      "produktion": "Filmakademie Baden-Württemberg"
+    },
+    {
+      "jahr": "2025–2026",
+      "titel": "TONI",
+      "art": {
+        "de": "Kurzfilm",
+        "en": "Short film"
+      },
+      "rolle": "Schiedsrichterin Toni",
+      "rollentyp": {
+        "de": "Hauptrolle",
+        "en": "Lead"
+      },
+      "regie": "Mauriz Thabo Röckle",
+      "produktion": "Nathalie Felkel"
+    },
+    {
+      "jahr": "2024–2025",
+      "titel": "Stammheim – Zeit des Terrors",
+      "art": {
+        "de": "Spielfilm",
+        "en": "Feature film"
+      },
+      "rolle": "Irmgard Möller",
+      "rollentyp": {
+        "de": "Nebenrolle",
+        "en": "Supporting role"
+      },
+      "regie": "Niki Stein",
+      "produktion": "Spiegel TV / SWR, ARD, NDR, rbb",
+      "link": "https://www.ardmediathek.de/video/stammheim-zeit-des-terrors/stammheim-zeit-des-terrors/swr/Y3JpZDovL3N3ci5kZS9hZXgvbzIyNDA5OTE"
+    },
+    {
+      "jahr": "2024",
+      "titel": "SOKO Stuttgart – Das Spukhaus",
+      "art": {
+        "de": "Serie",
+        "en": "Series"
+      },
+      "rolle": "Victoria Schäfer",
+      "rollentyp": {
+        "de": "Episodennebenrolle",
+        "en": "Episode supporting role"
+      },
+      "regie": "Daniel Helfer",
+      "produktion": "Bavaria Fiction / ZDF"
+    },
+    {
+      "jahr": "2024",
+      "titel": "Große Freiheit",
+      "art": {
+        "de": "Kurzfilm",
+        "en": "Short film"
+      },
+      "rolle": "Inhaftierte",
+      "rollentyp": {
+        "de": "Hauptrolle",
+        "en": "Lead"
+      },
+      "regie": "Leve Kühl",
+      "produktion": "ADK, Filmakademie Baden-Württemberg"
+    },
+    {
+      "jahr": "2024",
+      "titel": "Mountain of Miracle",
+      "art": {
+        "de": "Kurzfilm",
+        "en": "Short film"
+      },
+      "rolle": "Sonja Wischnewski",
+      "rollentyp": {
+        "de": "Nebenrolle",
+        "en": "Supporting role"
+      },
+      "regie": "Max Kubitschek",
+      "produktion": "Filmakademie Baden-Württemberg"
+    },
+    {
+      "jahr": "2023–2024",
+      "titel": "The Deep Above – First Hunt",
+      "art": {
+        "de": "Kurzfilm",
+        "en": "Short film"
+      },
+      "rolle": "Sinh",
+      "rollentyp": {
+        "de": "Hauptrolle",
+        "en": "Lead"
+      },
+      "regie": "Niklas Wolff",
+      "produktion": "Filmakademie Baden-Württemberg"
+    },
+    {
+      "jahr": "2023–2024",
+      "titel": "Feed Your Head",
+      "art": {
+        "de": "Kurzfilm",
+        "en": "Short film"
+      },
+      "rolle": "Crying Girl",
+      "rollentyp": {
+        "de": "Nebenrolle",
+        "en": "Supporting role"
+      },
+      "regie": "Bernhard Strobel",
+      "produktion": "FABW & KLITS FILM, Filmfestival Max Ophüls Preis"
+    }
   ],
   "theater": [
-    { "jahr": "2026", "titel": "15 Minutes of Fame", "rolle": { "de": "Gast", "en": "Guest" }, "regie": "Emma Scharff", "haus": "Schauspiel Stuttgart", "link": "https://www.schauspiel-stuttgart.de/spielplan/a-z/15-minutes-of-fame/" },
-    { "jahr": "2026", "titel": "Was das Nashorn sah, als es auf die andere Seite des Zauns schaute", "autor": "Jens Raschke", "rolle": { "de": "Gast", "en": "Guest" }, "regie": "Oda Zuschneid", "haus": "Staatstheater Regensburg, Jugendtheater", "link": "https://www.staatstheater-regensburg.de/produktionen/was-das-nashorn-sah-als-es-auf-die-andere-seite-des-zauns-schaute.html" },
-    { "jahr": "2025–2026", "titel": "Emil und die Detektive", "zusatz": { "de": "52 Vorstellungen", "en": "52 performances" }, "regie": "Kristo Šagor", "haus": "Ludwigsburger Theatersommer", "link": "https://www.theatersommer.net/emil/" },
-    { "jahr": "2025", "titel": "Performance zu „100 Jahre Sammlung, 20 Jahre Kunstmuseum“", "haus": "Kunstmuseum Stuttgart" },
-    { "jahr": "2024", "titel": "You Can't Do It", "rolle": { "de": "Elvira", "en": "Elvira" }, "regie": "Yana Eva Thönnes", "haus": "ADK Baden-Württemberg" }
+    {
+      "jahr": "2026",
+      "titel": "15 Minutes of Fame",
+      "rolle": {
+        "de": "Gast",
+        "en": "Guest"
+      },
+      "regie": "Emma Scharff",
+      "haus": "Schauspiel Stuttgart",
+      "link": "https://www.schauspiel-stuttgart.de/spielplan/a-z/15-minutes-of-fame/"
+    },
+    {
+      "jahr": "2026",
+      "titel": "Was das Nashorn sah, als es auf die andere Seite des Zauns schaute",
+      "autor": "Jens Raschke",
+      "rolle": {
+        "de": "Gast",
+        "en": "Guest"
+      },
+      "regie": "Oda Zuschneid",
+      "haus": "Staatstheater Regensburg, Jugendtheater",
+      "link": "https://www.staatstheater-regensburg.de/produktionen/was-das-nashorn-sah-als-es-auf-die-andere-seite-des-zauns-schaute.html"
+    },
+    {
+      "jahr": "2025–2026",
+      "titel": "Emil und die Detektive",
+      "zusatz": {
+        "de": "52 Vorstellungen",
+        "en": "52 performances"
+      },
+      "regie": "Kristo Šagor",
+      "haus": "Ludwigsburger Theatersommer",
+      "link": "https://www.theatersommer.net/emil/"
+    },
+    {
+      "jahr": "2025",
+      "titel": "Performance zu „100 Jahre Sammlung, 20 Jahre Kunstmuseum“",
+      "haus": "Kunstmuseum Stuttgart"
+    },
+    {
+      "jahr": "2024",
+      "titel": "You Can't Do It",
+      "rolle": {
+        "de": "Elvira",
+        "en": "Elvira"
+      },
+      "regie": "Yana Eva Thönnes",
+      "haus": "ADK Baden-Württemberg"
+    }
   ],
   "studium": [
-    { "rolle": "Mackie Messer", "stueck": "Die Dreigroschenoper", "autor": "Bertolt Brecht" },
-    { "rolle": "Natascha", "stueck": "Drei Schwestern", "autor": "Anton Tschechow" },
-    { "rolle": "Dirty Rich", "stueck": "Dirty Rich Modderfocker der Dritte", "autor": "Tom Lanoye, Luk Perceval" },
-    { "rolle": "Hamlet / Ophelia", "stueck": "Die Hamletmaschine", "autor": "Heiner Müller" },
-    { "rolle": "Penthesilea", "stueck": "Penthesilea", "autor": "Heinrich von Kleist" }
+    {
+      "rolle": "Mackie Messer",
+      "stueck": "Die Dreigroschenoper",
+      "autor": "Bertolt Brecht"
+    },
+    {
+      "rolle": "Natascha",
+      "stueck": "Drei Schwestern",
+      "autor": "Anton Tschechow"
+    },
+    {
+      "rolle": "Dirty Rich",
+      "stueck": "Dirty Rich Modderfocker der Dritte",
+      "autor": "Tom Lanoye, Luk Perceval"
+    },
+    {
+      "rolle": "Hamlet / Ophelia",
+      "stueck": "Die Hamletmaschine",
+      "autor": "Heiner Müller"
+    },
+    {
+      "rolle": "Penthesilea",
+      "stueck": "Penthesilea",
+      "autor": "Heinrich von Kleist"
+    }
   ],
   "hoerspiel": [
-    { "jahr": "2026", "titel": { "de": "SWR-Hörspielworkshop", "en": "SWR radio drama workshop" }, "rolle": "Ira", "regie": "Martin Buntz", "haus": "ADK Baden-Württemberg" }
+    {
+      "jahr": "2026",
+      "titel": {
+        "de": "SWR-Hörspielworkshop",
+        "en": "SWR radio drama workshop"
+      },
+      "rolle": "Ira",
+      "regie": "Martin Buntz",
+      "haus": "ADK Baden-Württemberg"
+    }
   ],
   "ausbildung": [
-    { "jahr": "2022–2026", "text": { "de": "Schauspiel, Akademie für Darstellende Kunst Baden-Württemberg, Ludwigsburg", "en": "Acting, Academy of Performing Arts Baden-Württemberg (ADK), Ludwigsburg" } },
-    { "jahr": "2018–2022", "text": { "de": "B.A. Kulturwissenschaften, Leuphana Universität Lüneburg (2021 Erasmus in Växjö, Schweden)", "en": "B.A. Cultural Studies, Leuphana University Lüneburg (2021 Erasmus in Växjö, Sweden)" } },
-    { "jahr": "2019–2022", "text": { "de": "Studierenden-Ensemble des Thalia Theaters Hamburg, Leitung: Alina Gregor", "en": "Student ensemble of Thalia Theater Hamburg, led by Alina Gregor" } }
+    {
+      "jahr": "2022–2026",
+      "text": {
+        "de": "Schauspiel, Akademie für Darstellende Kunst Baden-Württemberg, Ludwigsburg",
+        "en": "Acting, Academy of Performing Arts Baden-Württemberg (ADK), Ludwigsburg"
+      },
+      "link": "medien/bachelorarbeit-alina-thiemann.pdf",
+      "linktext": {
+        "de": "Bachelorarbeit (PDF)",
+        "en": "Bachelor’s thesis (PDF, German)"
+      },
+      "notiz": {
+        "de": "„Zwischen kritischem Reenactment und unbeabsichtigter Reproduktion“: Ich habe mich damit auseinandergesetzt, wie man faschistische Kontexte auf der Bühne zeigen kann, ohne sie zu reproduzieren.",
+        "en": "“Between critical re-enactment and unintended reproduction”: I explored how fascist contexts can be shown on stage without reproducing them."
+      }
+    },
+    {
+      "jahr": "2018–2022",
+      "text": {
+        "de": "B.A. Kulturwissenschaften, Leuphana Universität Lüneburg (2021 Erasmus in Växjö, Schweden)",
+        "en": "B.A. Cultural Studies, Leuphana University Lüneburg (2021 Erasmus in Växjö, Sweden)"
+      }
+    },
+    {
+      "jahr": "2019–2022",
+      "text": {
+        "de": "Studierenden-Ensemble des Thalia Theaters Hamburg, Leitung: Alina Gregor",
+        "en": "Student ensemble of Thalia Theater Hamburg, led by Alina Gregor"
+      }
+    }
   ],
   "weiterbildung": [
-    { "jahr": "2026", "text": { "de": "Screenacting-Workshop, Filmakademie Baden-Württemberg", "en": "Screen acting workshop, Filmakademie Baden-Württemberg" } },
-    { "jahr": "2023–2026", "text": { "de": "Chubbuck-Technik, Coaching bei Kai Ivo Baulitz", "en": "Chubbuck technique, coaching with Kai Ivo Baulitz" } },
-    { "jahr": "2023–2026", "text": { "de": "Meisner-Technik, Coaching bei Amélie Tambour", "en": "Meisner technique, coaching with Amélie Tambour" } }
+    {
+      "jahr": "2026",
+      "text": {
+        "de": "Screenacting-Workshop, Filmakademie Baden-Württemberg",
+        "en": "Screen acting workshop, Filmakademie Baden-Württemberg"
+      },
+      "link": "https://www.filmakademie.de/en/studies/study-programmes/workshop-screen-acting",
+      "linktext": {
+        "de": "Zum Workshop",
+        "en": "About the workshop"
+      }
+    },
+    {
+      "jahr": "2023–2026",
+      "text": {
+        "de": "Chubbuck-Technik, Coaching bei Kai Ivo Baulitz",
+        "en": "Chubbuck technique, coaching with Kai Ivo Baulitz"
+      }
+    },
+    {
+      "jahr": "2023–2026",
+      "text": {
+        "de": "Meisner-Technik, Coaching bei Amélie Tambour",
+        "en": "Meisner technique, coaching with Amélie Tambour"
+      }
+    }
   ],
   "preise": [
-    { "jahr": "2025", "titel": { "de": "Solopreis", "en": "Solo Prize" }, "text": { "de": "36. Bundeswettbewerb deutschsprachiger Schauspielstudierender, Salzburg", "en": "36th National Competition of German-speaking Drama Students, Salzburg" }, "link": "https://www.nachtkritik.de/meldungen/schauspielschultreffen-2025-in-salzburg-preise-vergeben" },
-    { "jahr": "2024", "titel": { "de": "Deutschlandstipendium", "en": "Deutschlandstipendium" }, "text": { "de": "", "en": "German national scholarship" } }
-  ]
+    {
+      "jahr": "2025",
+      "titel": {
+        "de": "Solopreis",
+        "en": "Solo Prize"
+      },
+      "text": {
+        "de": "36. Bundeswettbewerb deutschsprachiger Schauspielstudierender, Salzburg",
+        "en": "36th National Competition of German-speaking Drama Students, Salzburg"
+      },
+      "link": "https://www.nachtkritik.de/meldungen/schauspielschultreffen-2025-in-salzburg-preise-vergeben"
+    },
+    {
+      "jahr": "2024",
+      "titel": {
+        "de": "Deutschlandstipendium",
+        "en": "Deutschlandstipendium"
+      },
+      "text": {
+        "de": "",
+        "en": "German national scholarship"
+      }
+    }
+  ],
+  "_hinweis_ergaenzungen": "Felder 'link' und 'notiz' bei Ausbildung/Weiterbildung stehen nicht auf Filmmakers (Wunsch Alina, 15.11.2026). Beim späteren API-Abgleich erhalten."
 }
