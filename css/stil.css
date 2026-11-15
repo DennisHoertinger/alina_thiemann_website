@@ -71,11 +71,11 @@ body.mit-hero{padding-top:0}
 .spur figure{flex:0 0 100%;scroll-snap-align:center;position:relative}
 .spur img{object-fit:cover}
 /* Laufender Balken am unteren Bildrand: zeigt, wo man im Karussell ist */
-.balken{position:absolute;left:0;right:0;bottom:0;height:3px;overflow:hidden;pointer-events:none;color:#fff}
-.balken::before{content:"";position:absolute;inset:0;background:currentColor;opacity:.25}
+.balken{position:absolute;left:0;right:0;bottom:0;height:3px;overflow:hidden;pointer-events:none;color:var(--gruen)}
+.balken::before{content:"";position:absolute;inset:0;background:#fff;opacity:.45}
 .balken i{position:absolute;top:0;bottom:0;left:0;width:var(--anteil,33%);background:currentColor;transform:translateX(var(--stelle,0%));will-change:transform}
 .fotos .balken{left:var(--rand);right:var(--rand);bottom:auto;top:var(--balken-oben,0);color:var(--gruen)}
-.fotos .balken::before{opacity:.15}
+.fotos .balken::before{background:currentColor;opacity:.15}
 
 .hero .spur img{height:100svh;min-height:560px;object-position:50% 25%}
 .hero .zeile{position:absolute;left:0;right:0;bottom:52px;text-align:center;color:#fff;text-shadow:0 0 10px rgba(0,0,0,.45),0 0 2px rgba(0,0,0,.3);pointer-events:none}
