@@ -125,6 +125,7 @@ details.aufklapp .inhalt p{margin-top:14px}
 /* Video und Audio */
 .rahmen{position:relative;overflow:hidden;background:#000}
 .rahmen video{aspect-ratio:16/9;object-fit:cover}
+.rahmen video.film{object-fit:contain}  /* Filme im Originalformat, nicht beschneiden */
 .unterzeile{text-align:center;margin-top:12px;font-size:15px;line-height:1.35}
 .unterzeile small{display:block;color:var(--gruen);font-size:13px}
 audio{width:100%;max-width:34em;margin:0 auto;display:block}

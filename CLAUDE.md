@@ -27,7 +27,7 @@ Steckbrief, Film/TV, Theater, Rollen im Studium, Hörspiel, Ausbildung, Weiterbi
 - Mit den Secrets `FILMMAKERS_API_TOKEN` und `FILMMAKERS_PROFILE_ID` holt das Skript die Daten über die offizielle API (`https://www.filmmakers.eu/api/v1/actor_profiles/{id}`, Header `Authorization: Token token=…`). **Kein Scraping** (AGB §10).
 - Stand 14.11.2026: noch kein Key. `daten/filmmakers.json` ist der Snapshot aus `inhalte/website-inhalte.md`. Die Zuordnung API → JSON (`apiUmwandeln`) ist erst mit Key schreibbar; bis dahin protokolliert das Skript nur die Feldnamen und behält den Stand.
 - Vor jeder Rückfrage an Alina erst die Filmmakers-Daten prüfen.
-- Ergänzungen, die nicht auf Filmmakers stehen (`link`, `notiz`, `linktext` bei Ausbildung, `bild` bei Theater), bleiben beim API-Abgleich erhalten.
+- Ergänzungen, die nicht auf Filmmakers stehen (`link`, `notiz`, `linktext` bei Ausbildung, `bild` bei Theater, `video` bei Film), bleiben beim API-Abgleich erhalten.
 - **Aktuell (News)**: `daten/news.json` (nicht Filmmakers), eingesetzt vom selben Skript in den Block `news` auf der Startseite. Neueste Meldung oben.
 
 ## Vita-Seite (Dennis, 15.11.2026)
@@ -38,7 +38,7 @@ Für unterschiedliche Interessierte gebaut: Kopf mit Porträt, Eckdaten (`vita-k
 
 - Nur freigegebene Fotos aus `material/fotos/Freigegebne Bilder mit Credits /`, immer mit Credit („Foto: …“). Nicht freigegeben: serie-alina-t, serie-sw-img, s/w-Versionen, 0426_02.
 - Fotos liegen als WebP in `img/` in zwei Breiten (`-800`, `-1600`), Dateiname nach Fotograf:in und Nummer der freigegebenen Datei (z. B. `stella-butz-2026-15` = „Stella Butz 2026 15.jpeg“).
-- `medien/showreel-2026.mp4` (Theater-Showreel, 720p, ca. 9 MB), `medien/about-me-2026.mp4` (720p, ca. 26 MB) und `medien/hoerprobe.mp3` liegen selbst gehostet hier, laden erst beim Abspielen (`preload="none"`). Showreel Film/TV, Kurzfilme Zorge und Ballet Rivalry sowie Rollenvideos fehlen noch (Dateien oder Links offen).
+- `medien/showreel-2026.mp4` (Theater-Showreel, 720p, ca. 9 MB), `medien/about-me-2026.mp4` (720p, ca. 26 MB), die Kurzfilme `medien/zorge-2026.mp4` und `medien/ballet-rivalry-2026.mp4` (720p) und `medien/hoerprobe.mp3` liegen selbst gehostet hier, laden erst beim Abspielen (`preload="none"`). Videos bleiben unter 100 MB (GitHub-Grenze). Kurzfilme stehen auf Startseite, Medien und Vita (`#kurzfilme`, Anker `video-NAME`); in `daten/filmmakers.json` verweist das Feld `video` aus der Filmografie darauf. Showreel Film/TV und Rollenvideos fehlen noch.
 - `medien/bachelorarbeit-alina-thiemann.pdf`: Bachelorarbeit ohne private Daten (Deckblatt ohne Anschrift, E-Mail, Matrikelnummer; Seite mit Unterschrift entfernt). Nie das Original verlinken.
 - Originale und `material/` nie ins Repo.
 

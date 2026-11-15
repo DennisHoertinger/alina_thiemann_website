@@ -199,7 +199,8 @@
         "en": "Lead"
       },
       "regie": "Alina Thiemann, Lina Agnes Nordhausen",
-      "produktion": "ADK, FABW"
+      "produktion": "ADK, FABW",
+      "video": "ballet-rivalry"
     },
     {
       "jahr": "2026",
@@ -214,7 +215,8 @@
         "en": "Lead"
       },
       "regie": "Moritz Müßig, Noah Bösel",
-      "produktion": "Phil Albrecht"
+      "produktion": "Phil Albrecht",
+      "video": "zorge"
     },
     {
       "jahr": "2026",
@@ -516,5 +518,5 @@
       }
     }
   ],
-  "_hinweis_ergaenzungen": "Felder 'link'/'notiz'/'linktext' bei Ausbildung/Weiterbildung und 'bild' bei Theater stehen nicht auf Filmmakers (Wunsch Alina/Dennis, 15.11.2026). Beim späteren API-Abgleich erhalten."
+  "_hinweis_ergaenzungen": "Felder 'link'/'notiz'/'linktext' bei Ausbildung/Weiterbildung 'bild' bei Theater und 'video' bei Film (Anker video-NAME auf der Vita-Seite) stehen nicht auf Filmmakers (Wunsch Alina/Dennis, 15.11.2026). Beim späteren API-Abgleich erhalten."
 }
