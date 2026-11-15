@@ -32,7 +32,7 @@ Steckbrief, Film/TV, Theater, Rollen im Studium, Hörspiel, Ausbildung, Weiterbi
 
 ## Vita-Seite (Dennis, 15.11.2026)
 
-Für unterschiedliche Interessierte gebaut: Kopf mit Porträt, Eckdaten (`vita-kurz`) und Schnellzugriff; Wegweiser „Kamera“ (für Film/Casting, ohne Zielgruppen-Etikett auf der Seite (Dennis 15.11.): Steckbrief, Headshots, Filmografie mit Filter, About me) und „Bühne“ (für Regie/Intendanz: Theater mit wischbarer Reihe großer Bühnenfotos (`bilder`, `foto` in filmmakers.json), Showreel, gearbeitete Rollen als Kacheln, Hörspiel); Ausbildung/Weiterbildung/Preise in drei Spalten; Über mich am Ende. Listen links ausgerichtet, Jahr als eigene Spalte.
+Für unterschiedliche Interessierte gebaut: Kopf mit Porträt, Eckdaten (`vita-kurz`) und Schnellzugriff; Wegweiser „Kamera“ (für Film/Casting, ohne Zielgruppen-Etikett auf der Seite (Dennis 15.11.): Steckbrief, Headshots, Filmografie mit Filter, About me) und „Bühne“ (für Regie/Intendanz: Theater als Kacheln wie ein Produktraster (Dennis 15.11.: Bild 4:5 oben, wischbar bei mehreren Fotos aus `bilder`, Text zentriert „Jahr / Titel“, Credit aus `foto`; ohne Foto Platzhalter „Foto folgt“; 2 Spalten Handy, 3 Desktop), Showreel, gearbeitete Rollen als Kacheln, Hörspiel); Ausbildung/Weiterbildung/Preise in drei Spalten; Über mich am Ende. Listen links ausgerichtet, Jahr als eigene Spalte.
 
 ## Fotos und Medien
 
