@@ -129,6 +129,22 @@ details.aufklapp .inhalt p{margin-top:14px}
 .unterzeile small{display:block;color:var(--gruen);font-size:13px}
 audio{width:100%;max-width:34em;margin:0 auto;display:block}
 
+/* Videos auf der Startseite: alle direkt sichtbar, untereinander; ab Tablet nebeneinander */
+.videoliste{display:grid;gap:40px}
+.videoliste figure{margin:0}
+@media (min-width:760px){.videoliste{grid-template-columns:repeat(2,1fr);gap:24px}}
+
+/* Bühnenfotos: ganzes Bild, gleiche Höhe, Breite folgt dem Format */
+.fotos.buehne .spur figure{flex:0 0 auto;max-width:calc(100vw - 2 * var(--rand))}
+.fotos.buehne .spur img{aspect-ratio:auto;height:300px;width:auto;max-width:100%;object-fit:cover}
+@media (min-width:760px){.fotos.buehne .spur figure{flex-basis:auto}.fotos.buehne .spur img{height:440px}}
+@media (min-width:1100px){.fotos.buehne .spur figure{flex-basis:auto}.fotos.buehne .spur img{height:520px}}
+
+.fotos.buehne figcaption{width:0;min-width:100%}
+
+/* Bildnachweis auf der Coaching-Fläche */
+.coaching .nachweis{display:block;margin-top:28px;font-size:13px;color:var(--gruen-dunkel)}
+
 /* Vita */
 .vita{list-style:none;max-width:40em;margin:0 auto}
 .vita li{padding:22px 0;text-align:center}

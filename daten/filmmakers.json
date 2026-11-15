@@ -439,10 +439,6 @@
       "linktext": {
         "de": "Bachelorarbeit (PDF)",
         "en": "Bachelor’s thesis (PDF, German)"
-      },
-      "notiz": {
-        "de": "„Zwischen kritischem Reenactment und unbeabsichtigter Reproduktion“: Ich habe mich damit auseinandergesetzt, wie man faschistische Kontexte auf der Bühne zeigen kann, ohne sie zu reproduzieren.",
-        "en": "“Between critical re-enactment and unintended reproduction”: I explored how fascist contexts can be shown on stage without reproducing them."
       }
     },
     {
@@ -467,7 +463,7 @@
         "de": "Screenacting-Workshop, Filmakademie Baden-Württemberg",
         "en": "Screen acting workshop, Filmakademie Baden-Württemberg"
       },
-      "link": "https://www.filmakademie.de/en/studies/study-programmes/workshop-screen-acting",
+      "link": "https://www.screenacting-fabw.de",
       "linktext": {
         "de": "Zum Workshop",
         "en": "About the workshop"
@@ -485,6 +481,11 @@
       "text": {
         "de": "Meisner-Technik, Coaching bei Amélie Tambour",
         "en": "Meisner technique, coaching with Amélie Tambour"
+      },
+      "link": "https://studiotambour.com/acting/two-year-professional-acting-program/",
+      "linktext": {
+        "de": "Studio Tambour",
+        "en": "Studio Tambour"
       }
     }
   ],
