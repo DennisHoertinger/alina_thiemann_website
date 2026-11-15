@@ -74,7 +74,12 @@
   document.querySelectorAll(".karussell").forEach(function (wrap) {
     var spur = wrap.querySelector(".spur");
     var bilder = spur.children;
-    var punkte = wrap.querySelectorAll(".punkte i");
+    /* Laufender Balken am unteren Bildrand statt Punkten */
+    var balken = document.createElement("div");
+    balken.className = "balken";
+    balken.setAttribute("aria-hidden", "true");
+    balken.appendChild(document.createElement("i"));
+    wrap.appendChild(balken);
     var schritt = function () {
       var a = bilder[0].getBoundingClientRect(), b = bilder[1] ? bilder[1].getBoundingClientRect() : a;
       return (b.left - a.left) || a.width;
@@ -89,21 +94,29 @@
       if (i < 0) i = n;
       spur.scrollTo({ left: i * schritt(), behavior: ruhig ? "auto" : "smooth" });
     }
-    function punkteSetzen() {
-      var i = aktuell();
-      punkte.forEach(function (p, j) { p.classList.toggle("an", j === i); });
+    /* Breite = sichtbarer Anteil, Lage = Scrollposition; folgt dem Wischen fließend */
+    function balkenSetzen() {
+      var breit = spur.scrollWidth || 1, sicht = spur.clientWidth || 1;
+      balken.style.setProperty("--anteil", Math.min(100, sicht / breit * 100) + "%");
+      balken.style.setProperty("--stelle", (spur.scrollLeft / sicht * 100) + "%");
     }
-    /* Auf breiten Bildschirmen sind mehrere Bilder gleichzeitig sichtbar: überzählige Punkte ausblenden */
-    function punkteZaehlen() {
-      var n = letzte();
-      punkte.forEach(function (p, j) { p.style.display = j > n ? "none" : ""; });
+    /* Bei den Foto-Karussells sitzt der Balken direkt unter den Bildern (über der Bildunterschrift) */
+    var erstesBild = spur.querySelector("img");
+    function balkenLage() {
+      if (wrap.classList.contains("fotos") && erstesBild) {
+        var oben = erstesBild.getBoundingClientRect().bottom - wrap.getBoundingClientRect().top;
+        balken.style.setProperty("--balken-oben", oben + "px");
+      }
+      balkenSetzen();
     }
-    punkteZaehlen();
-    window.addEventListener("resize", punkteZaehlen);
+    balkenLage();
+    window.addEventListener("resize", balkenLage);
+    window.addEventListener("load", balkenLage);
+    if (erstesBild && !erstesBild.complete) erstesBild.addEventListener("load", balkenLage);
     var tick;
     spur.addEventListener("scroll", function () {
       cancelAnimationFrame(tick);
-      tick = requestAnimationFrame(punkteSetzen);
+      tick = requestAnimationFrame(balkenSetzen);
     }, { passive: true });
 
     var weiter = wrap.querySelector(".weiter"), zurueck = wrap.querySelector(".zurueck");
