@@ -27,6 +27,12 @@ Steckbrief, Film/TV, Theater, Rollen im Studium, Hörspiel, Ausbildung, Weiterbi
 - Mit den Secrets `FILMMAKERS_API_TOKEN` und `FILMMAKERS_PROFILE_ID` holt das Skript die Daten über die offizielle API (`https://www.filmmakers.eu/api/v1/actor_profiles/{id}`, Header `Authorization: Token token=…`). **Kein Scraping** (AGB §10).
 - Stand 14.11.2026: noch kein Key. `daten/filmmakers.json` ist der Snapshot aus `inhalte/website-inhalte.md`. Die Zuordnung API → JSON (`apiUmwandeln`) ist erst mit Key schreibbar; bis dahin protokolliert das Skript nur die Feldnamen und behält den Stand.
 - Vor jeder Rückfrage an Alina erst die Filmmakers-Daten prüfen.
+- Ergänzungen, die nicht auf Filmmakers stehen (`link`, `notiz`, `linktext` bei Ausbildung, `bild` bei Theater), bleiben beim API-Abgleich erhalten.
+- **Aktuell (News)**: `daten/news.json` (nicht Filmmakers), eingesetzt vom selben Skript in den Block `news` auf der Startseite. Neueste Meldung oben.
+
+## Vita-Seite (Dennis, 15.11.2026)
+
+Für unterschiedliche Interessierte gebaut: Kopf mit Porträt, Eckdaten (`vita-kurz`) und Schnellzugriff; Wegweiser „Kamera“ (Film/Casting: Steckbrief, Headshots, Filmografie mit Filter, About me) und „Bühne“ (Regie/Intendanz: Theater mit Bild, Showreel, gearbeitete Rollen als Kacheln, Hörspiel); Ausbildung/Weiterbildung/Preise in drei Spalten; Über mich am Ende. Listen links ausgerichtet, Jahr als eigene Spalte.
 
 ## Fotos und Medien
 

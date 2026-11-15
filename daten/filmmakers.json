@@ -348,7 +348,8 @@
       },
       "regie": "Emma Scharff",
       "haus": "Schauspiel Stuttgart",
-      "link": "https://www.schauspiel-stuttgart.de/spielplan/a-z/15-minutes-of-fame/"
+      "link": "https://www.schauspiel-stuttgart.de/spielplan/a-z/15-minutes-of-fame/",
+      "bild": "buehne-15-minutes-of-fame-05"
     },
     {
       "jahr": "2026",
@@ -386,7 +387,8 @@
         "en": "Elvira"
       },
       "regie": "Yana Eva Thönnes",
-      "haus": "ADK Baden-Württemberg"
+      "haus": "ADK Baden-Württemberg",
+      "bild": "buehne-you-cant-do-it-02"
     }
   ],
   "studium": [
@@ -514,5 +516,5 @@
       }
     }
   ],
-  "_hinweis_ergaenzungen": "Felder 'link' und 'notiz' bei Ausbildung/Weiterbildung stehen nicht auf Filmmakers (Wunsch Alina, 15.11.2026). Beim späteren API-Abgleich erhalten."
+  "_hinweis_ergaenzungen": "Felder 'link'/'notiz'/'linktext' bei Ausbildung/Weiterbildung und 'bild' bei Theater stehen nicht auf Filmmakers (Wunsch Alina/Dennis, 15.11.2026). Beim späteren API-Abgleich erhalten."
 }

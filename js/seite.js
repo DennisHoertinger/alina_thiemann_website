@@ -174,6 +174,22 @@
     }
   });
 
+  /* ---------- Filter der Filmografie (Vita) ---------- */
+  document.querySelectorAll(".filter").forEach(function (leiste) {
+    var liste = leiste.parentNode.querySelector("ul.vita");
+    if (!liste) return;
+    leiste.hidden = false;
+    leiste.addEventListener("click", function (e) {
+      var knopf = e.target.closest("button[data-filter]");
+      if (!knopf) return;
+      var f = knopf.getAttribute("data-filter");
+      leiste.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", String(b === knopf)); });
+      liste.querySelectorAll("li").forEach(function (li) {
+        li.hidden = f !== "alle" && li.getAttribute("data-art") !== f;
+      });
+    });
+  });
+
   /* ---------- Einblenden beim Scrollen ----------
      Inhalte sind immer sichtbar, solange das Einblenden nicht sicher läuft:
      Erst wenn der Beobachter steht, wird ausgeblendet. Sicherheitsnetz nach 2,5 s. */
