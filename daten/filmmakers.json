@@ -351,7 +351,8 @@
       "regie": "Emma Scharff",
       "haus": "Schauspiel Stuttgart",
       "link": "https://www.schauspiel-stuttgart.de/spielplan/a-z/15-minutes-of-fame/",
-      "bild": "buehne-15-minutes-of-fame-05"
+      "bilder": ["buehne-15-minutes-of-fame-05", "buehne-15-minutes-of-fame-02", "buehne-15-minutes-of-fame-08", "buehne-15-minutes-of-fame-10"],
+  "foto": "Björn Klein"
     },
     {
       "jahr": "2026",
@@ -390,7 +391,8 @@
       },
       "regie": "Yana Eva Thönnes",
       "haus": "ADK Baden-Württemberg",
-      "bild": "buehne-you-cant-do-it-02"
+      "bilder": ["buehne-you-cant-do-it-02", "buehne-you-cant-do-it-01", "buehne-you-cant-do-it-05", "buehne-you-cant-do-it-09"],
+  "foto": "Bahriye"
     }
   ],
   "studium": [
@@ -518,5 +520,5 @@
       }
     }
   ],
-  "_hinweis_ergaenzungen": "Felder 'link'/'notiz'/'linktext' bei Ausbildung/Weiterbildung 'bild' bei Theater und 'video' bei Film (Anker video-NAME auf der Vita-Seite) stehen nicht auf Filmmakers (Wunsch Alina/Dennis, 15.11.2026). Beim späteren API-Abgleich erhalten."
+  "_hinweis_ergaenzungen": "Felder 'link'/'notiz'/'linktext' bei Ausbildung/Weiterbildung 'bilder'/'foto' bei Theater (Bühnenfotos mit Credit) und 'video' bei Film (Anker video-NAME auf der Vita-Seite) stehen nicht auf Filmmakers (Wunsch Alina/Dennis, 15.11.2026). Beim späteren API-Abgleich erhalten."
 }
