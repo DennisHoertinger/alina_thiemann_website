@@ -85,7 +85,7 @@ body.mit-hero{padding-top:0}
 
 .hero .spur img{height:100svh;min-height:560px;object-position:50% 25%}
 /* Hochkant „schauspielerin“ links im Startbild, von unten nach oben zu lesen (Dennis, 15.11.2026) */
-.hero .beruf{position:absolute;left:calc(var(--rand) - 4px);top:50%;writing-mode:vertical-rl;transform:translateY(-35%) rotate(180deg);font-size:var(--text);line-height:1;letter-spacing:.06em;color:#fff;opacity:.85;text-shadow:0 0 8px rgba(0,0,0,.25);pointer-events:none;white-space:nowrap}
+.hero .beruf{position:absolute;left:calc(var(--rand) - 4px);top:50%;writing-mode:vertical-rl;transform:translateY(-35%) rotate(180deg);font-size:var(--text);line-height:1;letter-spacing:.01em;color:#fff;text-shadow:0 0 8px rgba(0,0,0,.25);pointer-events:none;white-space:nowrap}
 .hero .zeile{position:absolute;left:0;right:0;bottom:52px;text-align:center;color:#fff;text-shadow:0 0 10px rgba(0,0,0,.45),0 0 2px rgba(0,0,0,.3);pointer-events:none}
 /* Zwei Knöpfe im Startbild (Website-Analyse 16.11.2026) */
 .hero .aktionen{position:absolute;left:0;right:0;bottom:20px;display:flex;justify-content:center;gap:28px;padding:0 var(--rand);pointer-events:none}
