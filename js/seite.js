@@ -216,4 +216,14 @@
   } else {
     alleZeigen();
   }
+
+  /* Laufschrift „Aktuell“: Pause-Knopf */
+  document.querySelectorAll(".laufband").forEach(function (band) {
+    var knopf = band.querySelector(".laufband-pause");
+    if (!knopf) return;
+    knopf.addEventListener("click", function () {
+      var an = band.classList.toggle("angehalten");
+      knopf.setAttribute("aria-pressed", String(an));
+    });
+  });
 })();

@@ -316,12 +316,19 @@ nav.sprungleiste.seitentitel{margin-top:0;padding-top:40px}
 .filter button{background:none;border:1px solid var(--unterstrich);border-radius:20px;padding:6px 14px;color:var(--gruen);cursor:pointer;min-height:36px}
 .filter button[aria-pressed="true"]{background:var(--gruen);border-color:var(--gruen);color:var(--papier)}
 
-/* Theater mit Bühnenfotos: Bildreihe unter dem Eintrag, wischbar, auf dem Handy bis an den Rand */
-.buehnenbilder{margin:22px calc(-1 * var(--rand)) 4px 0;min-width:0}
-.buehnenbilder .reihe{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none;padding-right:var(--rand)}
-.buehnenbilder .reihe::-webkit-scrollbar{display:none}
-.buehnenbilder img{flex:none;height:280px;width:auto;max-width:none;scroll-snap-align:start;background:var(--gruen-hell)}
-.buehnenbilder .nachweis{margin-top:8px;font-size:13px;color:var(--grau)}
+/* Theater als Kacheln (Vorbild Produktraster): Bild 4:5 oben, Text zentriert darunter */
+.stuecke{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:44px 12px;max-width:var(--breite);margin:0 auto;padding:0}
+.stueck{text-align:center;min-width:0}
+.stueck-bild{aspect-ratio:4/5;background:var(--gruen-hell);overflow:hidden;margin-bottom:16px}
+.stueck-bild .reihe{display:flex;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none}
+.stueck-bild .reihe::-webkit-scrollbar{display:none}
+.stueck-bild img{flex:none;width:100%;height:100%;object-fit:cover;scroll-snap-align:start}
+.platzhalter{height:100%;display:flex;align-items:center;justify-content:center;color:var(--gruen);font-size:14px}
+.stueck-titel{font-size:18px;line-height:1.3;margin:0 4px;hyphens:auto;-webkit-hyphens:auto}
+.stueck-titel .jahr{color:inherit}
+.stueck .rolle{font-style:italic;font-size:16px;margin-top:8px}
+.stueck-info{font-size:14px;line-height:1.4;color:var(--grau);margin-top:8px}
+.stueck-fuss{font-size:13px;color:var(--grau);opacity:.8;margin-top:8px}
 
 .rollenraster{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:44em;margin:0 auto}
 .rollenraster li{background:var(--gruen-hell);padding:18px 16px;display:flex;flex-direction:column;gap:2px}
@@ -343,9 +350,8 @@ nav.sprungleiste.seitentitel{margin-top:0;padding-top:40px}
   .vita-seite .vita li{display:grid;grid-template-columns:8em 1fr;column-gap:20px}
   .vita-seite .vita li>*:not(.jahr){grid-column:2}
   .vita-seite .vita li .jahr{grid-row:1/span 4;padding-top:6px}
-  .vita-seite .vita li .buehnenbilder{grid-column:1/-1;margin-right:0}
-  .buehnenbilder .reihe{padding-right:0;gap:10px}
-  .buehnenbilder img{height:420px}
+  .stuecke{grid-template-columns:repeat(3,1fr);gap:64px 24px}
+  .stueck-titel{font-size:21px}
   .vita-seite .steckbrief{grid-template-columns:repeat(3,1fr)}
   .rollenraster{grid-template-columns:repeat(3,1fr)}
   .spalten{grid-template-columns:repeat(3,1fr)}
@@ -358,6 +364,29 @@ nav.sprungleiste.seitentitel{margin-top:0;padding-top:40px}
 .vita-seite .hinweis{justify-self:start;width:max-content}
 
 /* Aktuell (News) auf der Startseite: eine Zeile pro Meldung, Datum links */
+/* Aktuell als Laufschrift (Alina 16.11.2026) */
+main>section.aktuell{padding:0;margin-top:0}
+.laufband{display:flex;align-items:center;border-bottom:1px solid var(--haar);min-height:58px;font-size:18px;overflow:hidden}
+.laufband-titel{flex:none;padding:0 14px 0 var(--rand);color:var(--gruen);font-size:15px}
+.laufband-fenster{flex:1;min-width:0;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 24px),transparent);mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 24px),transparent)}
+.laufband-spur{display:flex;width:max-content;animation:laufen var(--dauer,40s) linear infinite}
+.laufband-teil{display:flex;align-items:baseline;white-space:nowrap}
+.laufband .meldung a{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px;text-decoration-color:var(--unterstrich)}
+.laufband .ort-zeile,.laufband .datum{color:var(--grau)}
+.laufband .trenner{margin:0 1.1em;color:var(--gruen)}
+.laufband:hover .laufband-spur,.laufband:focus-within .laufband-spur,.laufband.angehalten .laufband-spur{animation-play-state:paused}
+.laufband-pause{flex:none;position:relative;width:30px;height:30px;margin:0 var(--rand) 0 10px;border-radius:50%;border:1px solid var(--unterstrich);background:none;color:var(--gruen);cursor:pointer}
+.laufband-pause::before,.laufband-pause::after{content:"";position:absolute;top:9px;height:10px;border-left:1.5px solid currentColor}
+.laufband-pause::before{left:11px}.laufband-pause::after{left:16px}
+.laufband-pause[aria-pressed="true"]::before{left:11px;top:8px;height:0;border-left:8px solid currentColor;border-top:6px solid transparent;border-bottom:6px solid transparent}
+.laufband-pause[aria-pressed="true"]::after{display:none}
+@keyframes laufen{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){
+  .laufband-spur{animation:none}
+  .laufband-fenster{overflow-x:auto;-webkit-mask-image:none;mask-image:none}
+  .laufband-teil[aria-hidden]{display:none}
+  .laufband-pause{display:none}
+}
 .news{list-style:none;max-width:44em;margin:0 auto;border-top:1px solid var(--haar)}
 .news li{padding:20px 0;border-bottom:1px solid var(--haar);display:flex;flex-direction:column;gap:3px}
 .news .datum{font-size:14px;color:var(--gruen)}
