@@ -124,14 +124,21 @@ function bildungEintrag(a) {
   return `<li><span class="jahr">${esc(a.jahr)}</span><span class="details" style="font-size:17px;color:inherit">${t(a.text)}</span>${notiz}${verweis}</li>`;
 }
 
+// Aktuell als Laufschrift (Wunsch Alina 16.11.2026): Meldungen laufen als eine Zeile durch.
+// Die Spur steht zweimal hintereinander, damit die Bewegung nahtlos ist; die Kopie ist für Screenreader verborgen.
 function newsBlock(n) {
   if (!n || !n.eintraege || !n.eintraege.length) return "";
-  return `<ul class="news">\n` + n.eintraege.map((e) =>
-    `<li><span class="datum">${t(e.datum)}</span><span class="news-titel">${t(e.titel)}</span>` +
-    (e.ort ? `<span class="ort-zeile">${t(e.ort)}</span>` : "") +
-    (e.text ? `<span class="news-text">${t(e.text)}</span>` : "") +
-    (e.link ? `<a class="link" href="${esc(e.link)}" rel="noopener" target="_blank">${t(e.linktext || { de: "Mehr", en: "More" })}</a>` : "") +
-    `</li>`).join("\n") + `\n</ul>`;
+  const meldung = (e) => {
+    const vorne = /^\d{4}$/.test(e.datum?.de ?? "") ? "" : `<span class="datum">${t(e.datum)}</span> `;
+    const titel = e.link ? `<a href="${esc(e.link)}" rel="noopener" target="_blank">${t(e.titel)}</a>` : t(e.titel);
+    return `<span class="meldung">${vorne}${titel}${e.ort ? `, <span class="ort-zeile">${t(e.ort)}</span>` : ""}</span>`;
+  };
+  const zeile = n.eintraege.map(meldung).join('<span class="trenner" aria-hidden="true">·</span>') + '<span class="trenner" aria-hidden="true">·</span>';
+  const zeichen = n.eintraege.reduce((z, e) => z + String(e.titel?.de ?? "").length + String(e.ort?.de ?? "").length + 6, 0);
+  return `<div class="laufband" style="--dauer:${Math.max(18, Math.round(zeichen * 0.28))}s">` +
+    `<span class="laufband-titel"><span data-l="de">aktuell</span><span data-l="en">news</span></span>` +
+    `<div class="laufband-fenster"><div class="laufband-spur"><div class="laufband-teil">${zeile}</div><div class="laufband-teil" aria-hidden="true">${zeile}</div></div></div>` +
+    `<button class="laufband-pause" type="button" aria-pressed="false" aria-label="Laufschrift anhalten" data-aria-de="Laufschrift anhalten" data-aria-en="Pause ticker"></button></div>`;
 }
 
 function bloecke(d, news) {
