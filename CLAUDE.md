@@ -28,17 +28,17 @@ Steckbrief, Film/TV, Theater, Rollen im Studium, Hörspiel, Ausbildung, Weiterbi
 - Stand 14.11.2026: noch kein Key. `daten/filmmakers.json` ist der Snapshot aus `inhalte/website-inhalte.md`. Die Zuordnung API → JSON (`apiUmwandeln`) ist erst mit Key schreibbar; bis dahin protokolliert das Skript nur die Feldnamen und behält den Stand.
 - Vor jeder Rückfrage an Alina erst die Filmmakers-Daten prüfen.
 - Ergänzungen, die nicht auf Filmmakers stehen (`link`, `notiz`, `linktext` bei Ausbildung, `bilder`/`foto` bei Theater, `video` und `auswahl` bei Film), bleiben beim API-Abgleich erhalten.
-- **Aktuell (News)**: `daten/news.json` (nicht Filmmakers), eingesetzt vom selben Skript in den Block `news` auf der Startseite, als Laufschrift direkt unter den Startbildern (Alina 16.11.2026, mit Pause-Knopf, steht bei „Bewegung reduzieren“ still). Neueste Meldung oben.
+- **Aktuell (News)**: seit 16.11.2026 abends nicht mehr auf der Seite (Dennis). `daten/news.json` und der Block `news` im Skript bleiben für später, im CMS ist „Aktuell“ entfernt.
 
 ## Seitenstruktur (Dennis 16.11.2026, nach Website-Analyse)
 
 Menü als Einzelseiten ohne Unterpunkte: **Start, Vita, Film, Theater, Medien, Coaching, Kontakt**. Struktur darf optimiert werden; Fotos und Design entscheidet Alina. Die Vita-Struktur bleibt dabei unverändert (Dennis 16.11.2026: „Ich wollte nur das Menü ändern“): Vita ist Übersicht mit vier Karten zu Steckbrief, Film, Theater, Ausbildung; diese vier Seiten tragen oben und unten die Leiste `nav.unterseiten` (übersicht, steckbrief, film, theater, ausbildung).
 
-- Start: Startbild mit zwei unterstrichenen Links (keine Knöpfe, kein Pause-Knopf; Dennis 16.11.2026) „Showreel ansehen“ (springt zu `#videos`) und „Vita (PDF)“ (Filmmakers-PDF), Laufschrift „Aktuell“, About me und Theater-Showreel, Über mich ohne „Das mag ich spielen“/„Persönliches“, Stücktitel unter Bühnenfotos verlinkt.
+- Start: Startbild mit zwei unterstrichenen Links (keine Knöpfe, kein Pause-Knopf; Dennis 16.11.2026) „Showreel ansehen“ (springt zu `#videos`) und „Vita (PDF)“ (Filmmakers-PDF), About me und Theater-Showreel (Film-Showreel kommt dazu), Über mich ohne „Das mag ich spielen“/„Persönliches“, darunter die vier Wegweiser-Karten wie auf der Vita; kein „Aktuell“ und keine Kurz-Vita (Dennis 16.11.2026). Stücktitel unter Bühnenfotos verlinkt.
 - `vita.html`: Kopf mit Porträt, Eckdaten (`vita-kurz`), Schnellzugriff (Vita-PDF, Agentur, E-Mail); Über mich mit „Das mag ich spielen“ und „Persönliches“; dann die vier Wegweiser-Karten.
 - `steckbrief.html`: Steckbrief mit Headshots. `ausbildung.html`: Ausbildung, Weiterbildung, Preise in drei Spalten.
-- `film.html` (Filme als Kacheln genau wie Theater, Dennis 16.11.2026; Bild aus `bilder` oder das Standbild `img/VIDEO-standbild.webp`, sonst „Foto folgt“): „Ausgewählte Projekte“ (Block `film-auswahl`, Feld `auswahl: true` in `daten/filmmakers.json`), Filmografie mit Filter (ohne Projekte in Entwicklung), „In Entwicklung“ (Block `film-entwicklung`), Auswahl Kurzfilme (`#kurzfilme`, Anker `video-NAME`), About me.
-- `theater.html`: Theater als Kacheln wie ein Produktraster (Bild 4:5 oben, wischbar bei mehreren Fotos aus `bilder`, Text zentriert „Jahr / Titel“, Credit aus `foto`; ohne Foto Platzhalter „Foto folgt“, bleibt (Dennis 16.11.); 2 Spalten Handy, 3 Desktop), Theater-Showreel, gearbeitete Rollen, Hörspiel.
+- `film.html` (Filme als Kacheln genau wie Theater, Dennis 16.11.2026; Bild aus `bilder` oder das Standbild `img/VIDEO-standbild.webp`, sonst „Foto folgt“): eine einzige Filmografie (Block `film`), chronologisch, neueste oben, ohne Filter; „In Entwicklung“ als Vermerk an der Kachel. Hinterlegte Filme (`video`) liegen hinter der Kachel: Tippen spielt `medien/VIDEO-2026.mp4` groß ab (`a[data-video]`, Dialog in `js/seite.js`). Darunter About me.
+- `theater.html`: Theater als Kacheln wie ein Produktraster (Bild 4:5 oben, wischbar bei mehreren Fotos aus `bilder`, Text zentriert „Jahr / Titel“, Credit aus `foto`; ohne Foto Platzhalter „Foto folgt“, bleibt (Dennis 16.11.); 2 Spalten Handy, 3 Desktop), Theater-Showreel, Hörspiel (gearbeitete Rollen gestrichen, Dennis 16.11.2026).
 - `medien.html`: gegliedert in Theater, Film und Kamera, Stimme, Fotos. Videos immer mit Jahr und Laufzeit („2026 · 8:19 Min.“).
 - Fotos in Karussells (`.fotos .spur`) und Theaterkacheln öffnen sich beim Tippen groß (`dialog.gross` in `js/seite.js`), darin wischen, Esc schließt.
 - Kontakt: „Casting und Engagements“ → Agentur, „Coaching und Persönliches“ → E-Mail.
@@ -80,7 +80,7 @@ Schrift Newsreader (eine Familie, Kursiv nur für Rollennamen). Nur zwei Schrift
 ## CMS: Alina pflegt selbst (Sveltia, seit 16.11.2026)
 
 - `alinathiemann.de/admin/` lädt Sveltia CMS (`admin/index.html`, Version fest in der Script-URL; Konfiguration `admin/config.yml`). Speichern = Commit auf `main`.
-- Im CMS: **Aktuell** (`daten/news.json`), **Texte** (`daten/texte.json`: Über mich auf Start und Vita, Das mag ich spielen, Persönliches, Coaching-Text und Eckdaten), **Fotos** (`daten/fotos.json`: Startbilder, Fotostrecke Start, Fotos auf Medien; je Foto Pfad, Credit Pflicht, Alt-Text DE/EN, sichtbar). Filmmakers-Daten, Rechtstexte, Design nicht.
+- Im CMS: **Texte** (`daten/texte.json`: Über mich auf Start und Vita, Das mag ich spielen, Persönliches, Coaching-Text und Eckdaten), **Fotos** (`daten/fotos.json`: Startbilder, Fotostrecke Start, Fotos auf Medien; je Foto Pfad, Credit Pflicht, Alt-Text DE/EN, sichtbar). Filmmakers-Daten, Rechtstexte, Design nicht.
 - `skripte/filmmakers.mjs` setzt die Inhalte zwischen `<!-- cms:NAME -->` und `<!-- /cms:NAME -->` ein (Blöcke `ueber-mich`, `mag-ich-spielen`, `persoenliches`, `coaching`, `startbilder`, `fotos`, `fotos-medien`). Diese Bereiche nicht von Hand im HTML ändern, sondern im JSON.
 - Fließtext im CMS: Leerzeile = Absatz, `*kursiv*`, `[Text](https://…)`. Leeres Englisch = Deutsch wird übernommen.
 - Hochgeladene Fotos landen in `img/` als WebP (max. 1600 px, im Browser umgewandelt), ohne -800-Fassung; Fotos `img/NAME-1600.webp` mit -800 bekommen automatisch `srcset`.
