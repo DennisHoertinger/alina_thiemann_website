@@ -88,14 +88,10 @@ body.mit-hero{padding-top:0}
 .hero .beruf{position:absolute;left:calc(var(--rand) - 4px);top:50%;writing-mode:vertical-rl;transform:translateY(-35%) rotate(180deg);font-size:var(--text);line-height:1;letter-spacing:.06em;color:#fff;opacity:.85;text-shadow:0 0 8px rgba(0,0,0,.25);pointer-events:none;white-space:nowrap}
 .hero .zeile{position:absolute;left:0;right:0;bottom:52px;text-align:center;color:#fff;text-shadow:0 0 10px rgba(0,0,0,.45),0 0 2px rgba(0,0,0,.3);pointer-events:none}
 /* Zwei Knöpfe im Startbild (Website-Analyse 16.11.2026) */
-.hero .aktionen{position:absolute;left:0;right:0;bottom:20px;display:flex;justify-content:center;gap:10px;padding:0 64px;pointer-events:none}
-.hero .aktionen a{pointer-events:auto;display:inline-flex;align-items:center;min-height:40px;padding:0 16px;border:1px solid rgba(255,255,255,.85);border-radius:999px;color:#fff;background:rgba(0,0,0,.14);text-decoration:none;font-size:var(--klein);letter-spacing:.02em;white-space:nowrap;-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px)}
-.hero .aktionen a:hover,.hero .aktionen a:focus-visible{background:rgba(0,0,0,.3)}
-.pause{position:absolute;right:var(--rand);bottom:20px;width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.8);background:rgba(0,0,0,.12);color:#fff;cursor:pointer}
-.pause::before,.pause::after{content:"";position:absolute;top:12px;height:11px;border-left:1.5px solid currentColor}
-.pause::before{left:14px}.pause::after{left:19px}
-.pause[aria-pressed="true"]::before{left:14px;top:11px;height:0;border-left:9px solid currentColor;border-top:6px solid transparent;border-bottom:6px solid transparent}
-.pause[aria-pressed="true"]::after{display:none}
+.hero .aktionen{position:absolute;left:0;right:0;bottom:20px;display:flex;justify-content:center;gap:28px;padding:0 var(--rand);pointer-events:none}
+/* Startbild-Links: schlicht unterstrichen, keine Knöpfe (Dennis 16.11.2026) */
+.hero .aktionen a{pointer-events:auto;display:inline-flex;align-items:center;min-height:44px;color:#fff;font-size:var(--klein);white-space:nowrap;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px;text-decoration-color:rgba(255,255,255,.7);text-shadow:0 0 10px rgba(0,0,0,.45),0 0 2px rgba(0,0,0,.3)}
+.hero .aktionen a:hover,.hero .aktionen a:focus-visible{text-decoration-color:#fff}
 
 /* Kontakt oben */
 .schnell{padding:36px var(--rand) 0;text-align:center}
