@@ -448,3 +448,5 @@ dialog.gross::backdrop{background:#17130f}
 .stueck-bild .standbild{display:block;height:100%}
 .stueck-bild .standbild img{width:100%;height:100%;object-fit:cover}
 .stuecke>li[hidden]{display:none}
+/* Startseite: eine einzige Schriftgröße für alles (Dennis 16.11.2026); Ausnahmen nur Wortmarke und Menü */
+body.start{--klein:var(--text)}
