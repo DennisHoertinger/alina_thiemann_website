@@ -11,7 +11,7 @@ Kein Framework, kein Baukasten, kein Build-Schritt.
 - **HTML**: jede Unterseite ist eine eigene Datei im Stamm (`index.html`, `vita.html`, `medien.html`, `coaching.html`, `kontakt.html`, `impressum.html`, `datenschutz.html`, `404.html`). Kopf, Menü, Fuß und Consent-Banner stehen in jeder Datei gleich; bei Änderungen alle Dateien anpassen.
 - **CSS**: eine Datei `css/stil.css` mit Design-Tokens oben. Mobile first, größere Bildschirme über `min-width`.
 - **JavaScript** ohne Bibliotheken: `js/seite.js` (Sprachumschaltung, Menü, Karussells, Einblenden), `js/einwilligung.js` (Cookie-Banner, Google und Meta erst nach Einwilligung).
-- **Ausgeliefert über GitHub Pages** direkt aus `main` (Stamm). Eine Änderung ist nach etwa einer Minute online.
+- **Ausgeliefert über GitHub Pages** direkt aus `main` (Stamm) unter **alinathiemann.de** (Datei `CNAME`, umgestellt 16.11.2026 auf Dennis' Wunsch; DNS bei INWX). Eine Änderung ist nach etwa einer Minute online.
 - Keine Zusatzpakete, kein `package.json`. Das Filmmakers-Skript nutzt nur Node-Bordmittel.
 
 ## Zweisprachig DE/EN
