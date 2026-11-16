@@ -29,5 +29,5 @@ Vita-Abschnitte zwischen `<!-- filmmakers:… -->`-Markierungen nicht von Hand �
 1. **GitHub Pages**: Settings → Pages → Deploy from a branch → `main` / `(root)`. Für private Repos braucht GitHub Pages ein bezahltes Konto (GitHub Pro).
 2. **Filmmakers**: Secrets `FILMMAKERS_API_TOKEN` und `FILMMAKERS_PROFILE_ID` anlegen, sobald der Key da ist.
 3. **Tracking**: GA4-Mess-ID und Meta-Pixel-ID in `js/einwilligung.js` eintragen.
-4. **Domain (erst beim Umstellen, Dennis entscheidet)**: Datei `CNAME` mit `alinathiemann.de` anlegen. DNS bei INWX: A-Records für `@` auf 185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153; AAAA auf 2606:50c0:8000::153, 2606:50c0:8001::153, 2606:50c0:8002::153, 2606:50c0:8003::153; CNAME `www` auf `dennishoertinger.github.io`. Danach in Settings → Pages „Enforce HTTPS“.
+4. **Domain (umgestellt 16.11.2026)**: Datei `CNAME` mit `alinathiemann.de`. DNS bei INWX: A-Records für `@` auf 185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153; AAAA auf 2606:50c0:8000::153, 2606:50c0:8001::153, 2606:50c0:8002::153, 2606:50c0:8003::153; CNAME `www` auf `dennishoertinger.github.io`. Danach in Settings → Pages „Enforce HTTPS“.
 5. **Livegang**: `noindex` aus allen Seiten entfernen, `robots.txt` öffnen, Impressum und Datenschutz final prüfen lassen.
