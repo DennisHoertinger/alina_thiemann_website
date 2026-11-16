@@ -72,7 +72,7 @@ function filmEintrag(f) {
   const art = /Kurzfilm/.test(f.art?.de) ? "kurz" : /Ausbildung/.test(f.art?.de) ? "ausbildung" : "kino-tv";
   // "video" ist eine Ergänzung (nicht auf Filmmakers): Anker des Films auf der Vita-Seite
   const video = f.video
-    ? `<span class="details"><a class="link" href="vita.html#video-${esc(f.video)}">${beide("Film ansehen", "Watch the film")}</a></span>`
+    ? `<span class="details"><a class="link" href="kamera.html#video-${esc(f.video)}">${beide("Film ansehen", "Watch the film")}</a></span>`
     : "";
   return `<li data-art="${art}"><span class="jahr">${esc(f.jahr)}</span><span class="werk">${link(f.link, esc(f.titel))}</span>` +
     `<span class="rolle">${esc(f.rolle)}</span>` +

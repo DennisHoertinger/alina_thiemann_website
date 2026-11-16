@@ -8,7 +8,7 @@ Planung, Texte, Design-Entwürfe, Protokolle und Rohmaterial liegen **nicht** hi
 
 Kein Framework, kein Baukasten, kein Build-Schritt.
 
-- **HTML**: jede Unterseite ist eine eigene Datei im Stamm (`index.html`, `vita.html`, `medien.html`, `coaching.html`, `kontakt.html`, `impressum.html`, `datenschutz.html`, `404.html`). Kopf, Menü, Fuß und Consent-Banner stehen in jeder Datei gleich; bei Änderungen alle Dateien anpassen.
+- **HTML**: jede Unterseite ist eine eigene Datei im Stamm (`index.html`, `vita.html`, `steckbrief.html`, `kamera.html`, `buehne.html`, `ausbildung.html`, `medien.html`, `coaching.html`, `kontakt.html`, `impressum.html`, `datenschutz.html`, `404.html`). Kopf, Menü, Fuß und Consent-Banner stehen in jeder Datei gleich; bei Änderungen alle Dateien anpassen.
 - **CSS**: eine Datei `css/stil.css` mit Design-Tokens oben. Mobile first, größere Bildschirme über `min-width`.
 - **JavaScript** ohne Bibliotheken: `js/seite.js` (Sprachumschaltung, Menü, Karussells, Einblenden), `js/einwilligung.js` (Cookie-Banner, Google und Meta erst nach Einwilligung).
 - **Ausgeliefert über GitHub Pages** direkt aus `main` (Stamm) unter **alinathiemann.de** (Datei `CNAME`, umgestellt 16.11.2026 auf Dennis' Wunsch; DNS bei INWX). Eine Änderung ist nach etwa einer Minute online.
@@ -30,15 +30,22 @@ Steckbrief, Film/TV, Theater, Rollen im Studium, Hörspiel, Ausbildung, Weiterbi
 - Ergänzungen, die nicht auf Filmmakers stehen (`link`, `notiz`, `linktext` bei Ausbildung, `bilder`/`foto` bei Theater, `video` bei Film), bleiben beim API-Abgleich erhalten.
 - **Aktuell (News)**: `daten/news.json` (nicht Filmmakers), eingesetzt vom selben Skript in den Block `news` auf der Startseite, als Laufschrift direkt unter den Startbildern (Alina 16.11.2026, mit Pause-Knopf, steht bei „Bewegung reduzieren“ still). Neueste Meldung oben.
 
-## Vita-Seite (Dennis, 15.11.2026)
+## Vita und Unterseiten (Dennis 15.11., Alina 16.11.2026)
 
-Für unterschiedliche Interessierte gebaut: Kopf mit Porträt, Eckdaten (`vita-kurz`) und Schnellzugriff; direkt darunter Über mich mit „Das mag ich spielen“ und „Persönliches“ (Alina 16.11.2026, steht auch auf der Startseite); Wegweiser „Kamera“ (für Film/Casting, ohne Zielgruppen-Etikett auf der Seite (Dennis 15.11.): Steckbrief, Headshots, Filmografie mit Filter, About me) und „Bühne“ (für Regie/Intendanz: Theater als Kacheln wie ein Produktraster (Dennis 15.11.: Bild 4:5 oben, wischbar bei mehreren Fotos aus `bilder`, Text zentriert „Jahr / Titel“, Credit aus `foto`; ohne Foto Platzhalter „Foto folgt“; 2 Spalten Handy, 3 Desktop), Showreel, gearbeitete Rollen als Kacheln, Hörspiel); Ausbildung/Weiterbildung/Preise in drei Spalten. Kurzfilme als „Auswahl Kurzfilme“ nur auf der Vita (und Medien); auf der Startseite nur About me und Theater-Showreel (Dennis 16.11.2026). Listen links ausgerichtet, Jahr als eigene Spalte.
+`vita.html` ist nur noch die Übersicht: Kopf mit Porträt, Eckdaten (`vita-kurz`) und Schnellzugriff, Über mich mit „Das mag ich spielen“ und „Persönliches“ (nur hier, nicht auf der Startseite), dann vier Wegweiser-Karten zu eigenen Seiten:
+
+- `steckbrief.html`: Steckbrief, Headshots.
+- `kamera.html`: Filmografie mit Filter, „Auswahl Kurzfilme“ (`#kurzfilme`, Anker `video-NAME`), About me. Ohne Zielgruppen-Etikett.
+- `buehne.html`: Theater als Kacheln wie ein Produktraster (Bild 4:5 oben, wischbar bei mehreren Fotos aus `bilder`, Text zentriert „Jahr / Titel“, Credit aus `foto`; ohne Foto Platzhalter „Foto folgt“; 2 Spalten Handy, 3 Desktop), Showreel, gearbeitete Rollen als Kacheln, Hörspiel.
+- `ausbildung.html`: Ausbildung/Weiterbildung/Preise in drei Spalten.
+
+Jede Unterseite hat oben und unten die Leiste `nav.unterseiten` (übersicht, steckbrief, kamera, bühne, ausbildung). Im Menü stehen die vier Unterseiten klein unter „vita“ (`span.unter`), in allen HTML-Dateien gleich; `aria-current` markiert die aktuelle Seite. Startseite: nur About me und Theater-Showreel, Stücktitel unter Bühnenfotos verlinkt, wo es eine Seite gibt. Listen links ausgerichtet, Jahr als eigene Spalte.
 
 ## Fotos und Medien
 
 - Nur freigegebene Fotos aus `material/fotos/Freigegebne Bilder mit Credits /`, immer mit Credit („Foto: …“). Nicht freigegeben: serie-alina-t, serie-sw-img, s/w-Versionen, 0426_02.
 - Fotos liegen als WebP in `img/` in zwei Breiten (`-800`, `-1600`), Dateiname nach Fotograf:in und Nummer der freigegebenen Datei (z. B. `stella-butz-2026-15` = „Stella Butz 2026 15.jpeg“).
-- `medien/showreel-2026.mp4` (Theater-Showreel, 720p, ca. 9 MB), `medien/about-me-2026.mp4` (720p, ca. 26 MB), die Kurzfilme `medien/zorge-2026.mp4` und `medien/ballet-rivalry-2026.mp4` (720p) und `medien/hoerprobe.mp3` liegen selbst gehostet hier, laden erst beim Abspielen (`preload="none"`). Videos bleiben unter 100 MB (GitHub-Grenze). Kurzfilme stehen auf Medien und Vita (`#kurzfilme`, Anker `video-NAME`); in `daten/filmmakers.json` verweist das Feld `video` aus der Filmografie darauf. Showreel Film/TV und Rollenvideos fehlen noch.
+- `medien/showreel-2026.mp4` (Theater-Showreel, 720p, ca. 9 MB), `medien/about-me-2026.mp4` (720p, ca. 26 MB), die Kurzfilme `medien/zorge-2026.mp4` und `medien/ballet-rivalry-2026.mp4` (720p) und `medien/hoerprobe.mp3` liegen selbst gehostet hier, laden erst beim Abspielen (`preload="none"`). Videos bleiben unter 100 MB (GitHub-Grenze). Kurzfilme stehen auf Medien und Kamera (`kamera.html#kurzfilme`, Anker `video-NAME`); in `daten/filmmakers.json` verweist das Feld `video` aus der Filmografie darauf. Showreel Film/TV und Rollenvideos fehlen noch.
 - `medien/bachelorarbeit-alina-thiemann.pdf`: Bachelorarbeit ohne private Daten (Deckblatt ohne Anschrift, E-Mail, Matrikelnummer; Seite mit Unterschrift entfernt). Nie das Original verlinken.
 - Originale und `material/` nie ins Repo.
 
