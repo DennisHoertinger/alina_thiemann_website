@@ -301,6 +301,12 @@ nav.sprungleiste.seitentitel{margin-top:0;padding-top:40px}
 /* Vita-Unterseiten (Alina 16.11.2026): Übersicht vita.html, eigene Seiten für Steckbrief, Kamera, Bühne, Ausbildung */
 .wegweiser.vier .weg img{aspect-ratio:4/3}
 .vita-seite .seitentitel{text-align:center;padding:96px var(--rand) 0}
+.vita-seite .seitentitel .oberzeile{color:var(--gruen);margin-bottom:6px}
+.unterseiten{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 20px;max-width:40em;margin:22px auto 0;padding:0 var(--rand)}
+.unterseiten a[aria-current="page"]{color:var(--tinte);text-decoration:none}
+.unterseiten.unten{margin-top:var(--luft)}
+.unterseiten+.bereich{padding-top:24px}
+.unterseiten+.bereich>section:first-of-type{padding-top:32px}
 
 .bereich{padding:var(--luft) 0 0}
 .bereich-kopf{padding:0 var(--rand);max-width:var(--breite);margin:0 auto;border-top:1px solid var(--gruen);padding-top:18px;display:flex;justify-content:space-between;align-items:baseline;gap:12px;color:var(--gruen)}

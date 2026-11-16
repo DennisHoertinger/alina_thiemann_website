@@ -8,7 +8,7 @@ Planung, Texte, Design-Entwürfe, Protokolle und Rohmaterial liegen **nicht** hi
 
 Kein Framework, kein Baukasten, kein Build-Schritt.
 
-- **HTML**: jede Unterseite ist eine eigene Datei im Stamm (`index.html`, `vita.html`, `film.html`, `theater.html`, `medien.html`, `coaching.html`, `kontakt.html`, `impressum.html`, `datenschutz.html`, `404.html`). `kamera.html`, `buehne.html`, `steckbrief.html`, `ausbildung.html` sind nur noch Weiterleitungen auf die neuen Adressen (für alte Links). Kopf, Menü, Fuß und Consent-Banner stehen in jeder Datei gleich; bei Änderungen alle Dateien anpassen.
+- **HTML**: jede Unterseite ist eine eigene Datei im Stamm (`index.html`, `vita.html`, `steckbrief.html`, `film.html`, `theater.html`, `ausbildung.html`, `medien.html`, `coaching.html`, `kontakt.html`, `impressum.html`, `datenschutz.html`, `404.html`). `kamera.html` und `buehne.html` sind nur noch Weiterleitungen auf die neuen Adressen (für alte Links). Kopf, Menü, Fuß und Consent-Banner stehen in jeder Datei gleich; bei Änderungen alle Dateien anpassen.
 - **CSS**: eine Datei `css/stil.css` mit Design-Tokens oben. Mobile first, größere Bildschirme über `min-width`.
 - **JavaScript** ohne Bibliotheken: `js/seite.js` (Sprachumschaltung, Menü, Karussells, Einblenden), `js/einwilligung.js` (Cookie-Banner, Google und Meta erst nach Einwilligung).
 - **Ausgeliefert über GitHub Pages** direkt aus `main` (Stamm) unter **alinathiemann.de** (Datei `CNAME`, umgestellt 16.11.2026 auf Dennis' Wunsch; DNS bei INWX). Eine Änderung ist nach etwa einer Minute online.
@@ -32,10 +32,11 @@ Steckbrief, Film/TV, Theater, Rollen im Studium, Hörspiel, Ausbildung, Weiterbi
 
 ## Seitenstruktur (Dennis 16.11.2026, nach Website-Analyse)
 
-Menü als Einzelseiten ohne Unterpunkte: **Start, Vita, Film, Theater, Medien, Coaching, Kontakt**. Struktur darf optimiert werden; Fotos und Design entscheidet Alina.
+Menü als Einzelseiten ohne Unterpunkte: **Start, Vita, Film, Theater, Medien, Coaching, Kontakt**. Struktur darf optimiert werden; Fotos und Design entscheidet Alina. Die Vita-Struktur bleibt dabei unverändert (Dennis 16.11.2026: „Ich wollte nur das Menü ändern“): Vita ist Übersicht mit vier Karten zu Steckbrief, Film, Theater, Ausbildung; diese vier Seiten tragen oben und unten die Leiste `nav.unterseiten` (übersicht, steckbrief, film, theater, ausbildung).
 
 - Start: Startbild mit zwei Knöpfen „Showreel ansehen“ (springt zu `#videos`) und „Vita (PDF)“ (Filmmakers-PDF), Laufschrift „Aktuell“, About me und Theater-Showreel, Über mich ohne „Das mag ich spielen“/„Persönliches“, Stücktitel unter Bühnenfotos verlinkt.
-- `vita.html`: Kopf mit Porträt, Eckdaten (`vita-kurz`), Schnellzugriff (Vita-PDF, Agentur, E-Mail); Über mich mit „Das mag ich spielen“ und „Persönliches“; Steckbrief mit Headshots (`#steckbrief`); Ausbildung, Weiterbildung, Preise in drei Spalten (`#ausbildung`).
+- `vita.html`: Kopf mit Porträt, Eckdaten (`vita-kurz`), Schnellzugriff (Vita-PDF, Agentur, E-Mail); Über mich mit „Das mag ich spielen“ und „Persönliches“; dann die vier Wegweiser-Karten.
+- `steckbrief.html`: Steckbrief mit Headshots. `ausbildung.html`: Ausbildung, Weiterbildung, Preise in drei Spalten.
 - `film.html`: „Ausgewählte Projekte“ (Block `film-auswahl`, Feld `auswahl: true` in `daten/filmmakers.json`), Filmografie mit Filter (ohne Projekte in Entwicklung), „In Entwicklung“ (Block `film-entwicklung`), Auswahl Kurzfilme (`#kurzfilme`, Anker `video-NAME`), About me.
 - `theater.html`: Theater als Kacheln wie ein Produktraster (Bild 4:5 oben, wischbar bei mehreren Fotos aus `bilder`, Text zentriert „Jahr / Titel“, Credit aus `foto`; ohne Foto Platzhalter „Foto folgt“, bleibt (Dennis 16.11.); 2 Spalten Handy, 3 Desktop), Theater-Showreel, gearbeitete Rollen, Hörspiel.
 - `medien.html`: gegliedert in Theater, Film und Kamera, Stimme, Fotos. Videos immer mit Jahr und Laufzeit („2026 · 8:19 Min.“).
