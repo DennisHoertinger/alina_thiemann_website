@@ -85,6 +85,10 @@ body.mit-hero{padding-top:0}
 /* Hochkant „schauspielerin“ links im Startbild, von unten nach oben zu lesen (Dennis, 15.11.2026) */
 .hero .beruf{position:absolute;left:calc(var(--rand) - 4px);top:50%;writing-mode:vertical-rl;transform:translateY(-35%) rotate(180deg);font-size:17px;line-height:1;letter-spacing:.06em;color:#fff;opacity:.85;text-shadow:0 0 8px rgba(0,0,0,.25);pointer-events:none;white-space:nowrap}
 .hero .zeile{position:absolute;left:0;right:0;bottom:52px;text-align:center;color:#fff;text-shadow:0 0 10px rgba(0,0,0,.45),0 0 2px rgba(0,0,0,.3);pointer-events:none}
+/* Zwei Knöpfe im Startbild (Website-Analyse 16.11.2026) */
+.hero .aktionen{position:absolute;left:0;right:0;bottom:20px;display:flex;justify-content:center;gap:10px;padding:0 64px;pointer-events:none}
+.hero .aktionen a{pointer-events:auto;display:inline-flex;align-items:center;min-height:40px;padding:0 16px;border:1px solid rgba(255,255,255,.85);border-radius:999px;color:#fff;background:rgba(0,0,0,.14);text-decoration:none;font-size:15px;letter-spacing:.02em;white-space:nowrap;-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px)}
+.hero .aktionen a:hover,.hero .aktionen a:focus-visible{background:rgba(0,0,0,.3)}
 .pause{position:absolute;right:var(--rand);bottom:20px;width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.8);background:rgba(0,0,0,.12);color:#fff;cursor:pointer}
 .pause::before,.pause::after{content:"";position:absolute;top:12px;height:11px;border-left:1.5px solid currentColor}
 .pause::before{left:14px}.pause::after{left:19px}
@@ -297,15 +301,6 @@ nav.sprungleiste.seitentitel{margin-top:0;padding-top:40px}
 /* Vita-Unterseiten (Alina 16.11.2026): Übersicht vita.html, eigene Seiten für Steckbrief, Kamera, Bühne, Ausbildung */
 .wegweiser.vier .weg img{aspect-ratio:4/3}
 .vita-seite .seitentitel{text-align:center;padding:96px var(--rand) 0}
-.vita-seite .seitentitel .oberzeile{color:var(--gruen);margin-bottom:6px}
-.unterseiten{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 20px;max-width:40em;margin:22px auto 0;padding:0 var(--rand)}
-.unterseiten a[aria-current="page"]{color:var(--tinte);text-decoration:none}
-.unterseiten.unten{margin-top:var(--luft)}
-.unterseiten+.bereich{padding-top:24px}
-.unterseiten+.bereich>section:first-of-type{padding-top:32px}
-.menue .unter{display:flex;flex-wrap:wrap;justify-content:center;gap:2px 16px;max-width:20em;margin:-4px 0 10px}
-.menue .unter a{font-size:18px;line-height:1.6;color:var(--grau)}
-.menue .unter a[aria-current="page"]{color:var(--gruen)}
 
 .bereich{padding:var(--luft) 0 0}
 .bereich-kopf{padding:0 var(--rand);max-width:var(--breite);margin:0 auto;border-top:1px solid var(--gruen);padding-top:18px;display:flex;justify-content:space-between;align-items:baseline;gap:12px;color:var(--gruen)}
@@ -412,3 +407,28 @@ main>section.aktuell{padding:0;margin-top:0}
   .news li>*{grid-column:2}
   .news .datum{grid-column:1;grid-row:1/span 5;padding-top:5px}
 }
+
+/* Unterseite (Film, Theater): erster Abschnitt nah am Titel */
+.unterseite .seitentitel+.bereich{padding-top:24px}
+
+/* Fotos groß ansehen */
+img.vergroesserbar{cursor:zoom-in}
+dialog.gross{position:fixed;inset:0;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border:0;background:#17130f;color:#fff;overflow:hidden}
+dialog.gross::backdrop{background:#17130f}
+.gross-spur{display:flex;height:100%;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior:contain}
+.gross-spur::-webkit-scrollbar{display:none}
+.gross-spur figure{flex:0 0 100%;height:100%;scroll-snap-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:60px 12px 24px}
+.gross-spur img{max-width:100%;max-height:calc(100% - 64px);object-fit:contain}
+.gross-spur figcaption{font-size:14px;line-height:1.5;text-align:center;color:rgba(255,255,255,.8);max-width:36em}
+.gross-spur figcaption a{color:inherit}
+.gross button{position:absolute;width:44px;height:44px;border:0;background:none;color:#fff;cursor:pointer}
+.gross-zu{top:10px;right:10px}
+.gross-zu::before,.gross-zu::after{content:"";position:absolute;left:11px;top:21px;width:22px;border-top:1.5px solid currentColor;transform:rotate(45deg)}
+.gross-zu::after{transform:rotate(-45deg)}
+.gross-vor,.gross-nach{top:50%;margin-top:-22px;display:none}
+.gross-vor{left:6px}.gross-nach{right:6px}
+.gross-vor::after,.gross-nach::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:12px;border-top:1.5px solid currentColor;border-right:1.5px solid currentColor}
+.gross-vor::after{transform:translate(-30%,-50%) rotate(-135deg)}
+.gross-nach::after{transform:translate(-70%,-50%) rotate(45deg)}
+@media (hover:hover) and (pointer:fine){.gross-vor,.gross-nach{display:block}}
+.gross.einzeln .gross-vor,.gross.einzeln .gross-nach{display:none}
