@@ -58,6 +58,10 @@ Jede Unterseite hat oben und unten die Leiste `nav.unterseiten` (übersicht, ste
 - Bis zum Livegang: `<meta name="robots" content="noindex, nofollow">` in jeder Seite und `robots.txt` mit `Disallow: /`.
 - Keine privaten Daten aus Lebenslauf/Bachelorarbeit (Telefon, Anschrift, Geburtsdatum), die Schule der Theater-AG nicht nennen.
 
+## SEO (16.11.2026)
+
+Jede Seite hat eine eigene `description` (gleich in `og:description`), `canonical` und `og:url` mit `https://alinathiemann.de/…`, Teilen-Bild `img/teilen-1200.jpg` (1200×630), `favicon.svg`. Die Startseite trägt JSON-LD `Person` (mit Filmmakers- und Agentur-Link). `sitemap.xml` ist vorbereitet (ohne Impressum/Datenschutz). Neue Seite: Beschreibung, Canonical und Sitemap-Eintrag nicht vergessen. Beim Livegang: `noindex` aus allen Seiten, `robots.txt` auf `Allow: /` plus `Sitemap:`-Zeile, dann Seite in der Google Search Console anmelden.
+
 ## Gestaltung (Entwurf 7)
 
 Schrift Newsreader (eine Familie, Kursiv nur für Rollennamen). Papier `#fbf9f4`, Tinte `#2a2118`, PANTONE 18-0425 TSX Commander Green `#6b6c45`, hell `#e9e9dc`, Coaching `#d2d3b6`. Wortmarke „alina — thiemann“ klein in Grün. Kopfleiste fest oben und immer durchsichtig (Dennis, 15.11.2026): Menü, Name und Sprache werden einzeln weiß über Fotos/Videos und schwarz (Tinte) über Papier (`js/seite.js` prüft per `elementsFromPoint`). Alles klein geschrieben per CSS (`body{text-transform:lowercase}`, Wunsch Alina 15.11.2026), keine Pfeil-Zeichen, Links fein unterstrichen. Karussells mit Wischen, Pfeilknöpfen, Punkten; Startbilder laufen von selbst (Pause-Knopf, „Bewegung reduzieren“ wird respektiert).

@@ -1,3 +1,4 @@
 User-agent: *
 Disallow: /
 # Bis zum Livegang gesperrt. Beim Start ersetzen durch: Allow: /
+# und diese Zeile ergänzen: Sitemap: https://alinathiemann.de/sitemap.xml
