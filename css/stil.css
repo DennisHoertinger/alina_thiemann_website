@@ -90,7 +90,7 @@ body.mit-hero{padding-top:0}
 /* Zwei Knöpfe im Startbild (Website-Analyse 16.11.2026) */
 .hero .aktionen{position:absolute;left:0;right:0;bottom:20px;display:flex;justify-content:center;gap:28px;padding:0 var(--rand);pointer-events:none}
 /* Startbild-Links: schlicht unterstrichen, keine Knöpfe (Dennis 16.11.2026) */
-.hero .aktionen a{pointer-events:auto;display:inline-flex;align-items:center;min-height:44px;color:#fff;font-size:var(--klein);white-space:nowrap;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px;text-decoration-color:rgba(255,255,255,.7);text-shadow:0 0 10px rgba(0,0,0,.45),0 0 2px rgba(0,0,0,.3)}
+.hero .aktionen a{pointer-events:auto;display:inline-flex;align-items:center;min-height:44px;color:#fff;font-size:var(--klein);white-space:nowrap;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px;text-decoration-color:rgba(255,255,255,.7);text-shadow:none}
 .hero .aktionen a:hover,.hero .aktionen a:focus-visible{text-decoration-color:#fff}
 
 /* Kontakt oben */
