@@ -18,6 +18,8 @@
   --rand:20px;
   --luft:88px;
   --breite:1120px;
+  --text:18px;             /* eine Größe für Fließtext und Titel (Dennis 16.11.2026) */
+  --klein:14px;            /* eine kleine Größe für Angaben, Credits, Etiketten */
   --serif:"Textschrift","Iowan Old Style","Times New Roman",serif;
 }
 
@@ -27,14 +29,14 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:76px}
 html,body{overflow-x:hidden}
-body{background:var(--papier);color:var(--tinte);font:400 17px/1.55 var(--serif);-webkit-font-smoothing:antialiased}
+body{background:var(--papier);color:var(--tinte);font:400 var(--text)/1.55 var(--serif);-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 img,video{display:block;width:100%;height:auto}
 button{font:inherit;color:inherit;text-transform:inherit;letter-spacing:inherit}
 .consent h2:focus{outline:none}
 :focus-visible{outline:2px solid var(--gruen);outline-offset:3px}
 .unsichtbar{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-.kaps{font-size:15px;letter-spacing:.01em;text-transform:lowercase}
+.kaps{font-size:var(--klein);letter-spacing:.01em;text-transform:lowercase}
 .link{color:var(--gruen);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px;text-decoration-color:var(--unterstrich)}
 .link:hover{text-decoration-color:currentColor}
 .sprung{position:absolute;left:-999px;top:0}
@@ -83,11 +85,11 @@ body.mit-hero{padding-top:0}
 
 .hero .spur img{height:100svh;min-height:560px;object-position:50% 25%}
 /* Hochkant „schauspielerin“ links im Startbild, von unten nach oben zu lesen (Dennis, 15.11.2026) */
-.hero .beruf{position:absolute;left:calc(var(--rand) - 4px);top:50%;writing-mode:vertical-rl;transform:translateY(-35%) rotate(180deg);font-size:17px;line-height:1;letter-spacing:.06em;color:#fff;opacity:.85;text-shadow:0 0 8px rgba(0,0,0,.25);pointer-events:none;white-space:nowrap}
+.hero .beruf{position:absolute;left:calc(var(--rand) - 4px);top:50%;writing-mode:vertical-rl;transform:translateY(-35%) rotate(180deg);font-size:var(--text);line-height:1;letter-spacing:.06em;color:#fff;opacity:.85;text-shadow:0 0 8px rgba(0,0,0,.25);pointer-events:none;white-space:nowrap}
 .hero .zeile{position:absolute;left:0;right:0;bottom:52px;text-align:center;color:#fff;text-shadow:0 0 10px rgba(0,0,0,.45),0 0 2px rgba(0,0,0,.3);pointer-events:none}
 /* Zwei Knöpfe im Startbild (Website-Analyse 16.11.2026) */
 .hero .aktionen{position:absolute;left:0;right:0;bottom:20px;display:flex;justify-content:center;gap:10px;padding:0 64px;pointer-events:none}
-.hero .aktionen a{pointer-events:auto;display:inline-flex;align-items:center;min-height:40px;padding:0 16px;border:1px solid rgba(255,255,255,.85);border-radius:999px;color:#fff;background:rgba(0,0,0,.14);text-decoration:none;font-size:15px;letter-spacing:.02em;white-space:nowrap;-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px)}
+.hero .aktionen a{pointer-events:auto;display:inline-flex;align-items:center;min-height:40px;padding:0 16px;border:1px solid rgba(255,255,255,.85);border-radius:999px;color:#fff;background:rgba(0,0,0,.14);text-decoration:none;font-size:var(--klein);letter-spacing:.02em;white-space:nowrap;-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px)}
 .hero .aktionen a:hover,.hero .aktionen a:focus-visible{background:rgba(0,0,0,.3)}
 .pause{position:absolute;right:var(--rand);bottom:20px;width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.8);background:rgba(0,0,0,.12);color:#fff;cursor:pointer}
 .pause::before,.pause::after{content:"";position:absolute;top:12px;height:11px;border-left:1.5px solid currentColor}
@@ -98,21 +100,21 @@ body.mit-hero{padding-top:0}
 /* Kontakt oben */
 .schnell{padding:36px var(--rand) 0;text-align:center}
 .schnell .haupt{display:flex;justify-content:center;gap:28px}
-.profile{margin-top:16px;display:flex;flex-wrap:wrap;justify-content:center;gap:6px 18px;font-size:15px}
+.profile{margin-top:16px;display:flex;flex-wrap:wrap;justify-content:center;gap:6px 18px;font-size:var(--klein)}
 
 /* Abschnitte */
 main>section,.abschnitt{padding:var(--luft) var(--rand) 0}
 .seitentitel{padding-top:48px}
 .titel{text-align:center;margin-bottom:30px;color:var(--gruen);font-weight:400}
-h1.titel{font-size:15px}
-h2.titel,h3.titel{font-size:15px}
-.untertitel{max-width:calc(31em * 19 / 15);margin:72px auto 20px;text-align:left;color:var(--gruen);font-size:15px;font-weight:400;text-transform:lowercase}
+h1.titel{font-size:var(--text)}
+h2.titel,h3.titel{font-size:var(--text)}
+.untertitel{max-width:calc(31em * 19 / 15);margin:72px auto 20px;text-align:left;color:var(--gruen);font-size:var(--klein);font-weight:400;text-transform:lowercase}
 /* Fließtext: größer, ruhiger, kurze Absätze mit Luft dazwischen */
-.text{max-width:31em;margin:0 auto;font-size:19px;line-height:1.5;hyphens:auto;-webkit-hyphens:auto;hyphenate-limit-chars:10 4 4;text-wrap:pretty}
+.text{max-width:31em;margin:0 auto;font-size:var(--text);line-height:1.5;hyphens:auto;-webkit-hyphens:auto;hyphenate-limit-chars:10 4 4;text-wrap:pretty}
 .text p+p{margin-top:1.1em}
 .text ul{list-style:none}
 .text li+li{margin-top:1.1em}
-.eigenschaften .etikett{display:block;font-size:15px;color:var(--gruen)}
+.eigenschaften .etikett{display:block;font-size:var(--klein);color:var(--gruen)}
 .mehr{display:block;text-align:center;margin-top:36px}
 .ort{text-align:center;margin-top:40px;color:var(--gruen)}
 
@@ -130,8 +132,8 @@ details.aufklapp .inhalt p{margin-top:14px}
 .rahmen{position:relative;overflow:hidden;background:#000}
 .rahmen video{aspect-ratio:16/9;object-fit:cover}
 .rahmen video.film{object-fit:contain}  /* Filme im Originalformat, nicht beschneiden */
-.unterzeile{text-align:center;margin-top:12px;font-size:15px;line-height:1.35}
-.unterzeile small{display:block;color:var(--gruen);font-size:13px}
+.unterzeile{text-align:center;margin-top:12px;font-size:var(--klein);line-height:1.35}
+.unterzeile small{display:block;color:var(--gruen);font-size:var(--klein)}
 audio{width:100%;max-width:34em;margin:0 auto;display:block}
 
 /* Videos auf der Startseite: alle direkt sichtbar, untereinander; ab Tablet nebeneinander */
@@ -148,29 +150,29 @@ audio{width:100%;max-width:34em;margin:0 auto;display:block}
 .fotos.buehne figcaption{width:0;min-width:100%}
 
 /* Bildnachweis auf der Coaching-Fläche */
-.coaching .nachweis{display:block;margin-top:28px;font-size:13px;color:var(--gruen-dunkel)}
+.coaching .nachweis{display:block;margin-top:28px;font-size:var(--klein);color:var(--gruen-dunkel)}
 
 /* Vita */
 .vita{list-style:none;max-width:40em;margin:0 auto}
 .vita li{padding:22px 0;text-align:center}
 .vita li+li{border-top:1px solid var(--haar)}
-.vita .jahr{display:block;font-size:14px;color:var(--gruen)}
-.vita .werk{display:block;font-size:21px;line-height:1.25;margin-top:4px}
+.vita .jahr{display:block;font-size:var(--klein);color:var(--gruen)}
+.vita .werk{display:block;font-size:var(--text);line-height:1.25;margin-top:4px}
 .vita .rolle{display:block;font-style:italic;margin-top:2px}
-.vita .details{display:block;font-size:14px;color:var(--grau);margin-top:4px;line-height:1.4}
-.hinweis{display:inline-block;margin-top:10px;padding:3px 9px;border-radius:20px;background:var(--gruen-hell);color:var(--gruen);font-size:13px}
+.vita .details{display:block;font-size:var(--klein);color:var(--grau);margin-top:4px;line-height:1.4}
+.hinweis{display:inline-block;margin-top:10px;padding:3px 9px;border-radius:20px;background:var(--gruen-hell);color:var(--gruen);font-size:var(--klein)}
 .steckbrief{max-width:34em;margin:0 auto}
 .steckbrief div{display:grid;grid-template-columns:1fr;padding:10px 0;text-align:center}
 .steckbrief div+div{border-top:1px solid var(--haar)}
-.steckbrief dt{font-size:14px;color:var(--gruen);text-transform:lowercase}
-.quelle{text-align:center;font-size:13px;color:var(--grau);margin-top:40px}
+.steckbrief dt{font-size:var(--klein);color:var(--gruen);text-transform:lowercase}
+.quelle{text-align:center;font-size:var(--klein);color:var(--grau);margin-top:40px}
 
 /* Fotos: Karussell zum Durchklicken */
 .fotos{padding-left:0!important;padding-right:0!important}
 .fotos .spur{padding:0 var(--rand);gap:10px;scroll-padding:0 var(--rand)}
 .fotos .spur img{aspect-ratio:4/5}
 .fotos+.fotos{padding-top:64px}
-.fotos figcaption{text-align:center;margin-top:10px;font-size:13px;color:var(--gruen);line-height:1.4}
+.fotos figcaption{text-align:center;margin-top:10px;font-size:var(--klein);color:var(--gruen);line-height:1.4}
 .steuerung{display:flex;justify-content:flex-end;align-items:center;gap:12px;padding:14px var(--rand) 0;color:var(--gruen)}
 .steuerung button{flex:none;background:none;border:1px solid var(--unterstrich);border-radius:50%;width:44px;height:44px;color:inherit;cursor:pointer;position:relative}
 .steuerung button::after{content:"";position:absolute;left:50%;top:50%;width:8px;height:8px;border-top:1px solid currentColor;border-right:1px solid currentColor}
@@ -182,26 +184,26 @@ audio{width:100%;max-width:34em;margin:0 auto;display:block}
 .coaching img{aspect-ratio:4/5;object-fit:cover}
 .coaching .innen{padding:28px var(--rand) 0;text-align:center;max-width:34em;margin:0 auto}
 .coaching .kaps{display:block;margin-bottom:14px;color:var(--gruen-dunkel)}
-.coaching .innen>div{text-align:left;font-size:19px;line-height:1.5;hyphens:auto;-webkit-hyphens:auto;hyphenate-limit-chars:10 4 4;text-wrap:pretty}
+.coaching .innen>div{text-align:left;font-size:var(--text);line-height:1.5;hyphens:auto;-webkit-hyphens:auto;hyphenate-limit-chars:10 4 4;text-wrap:pretty}
 .coaching p+p{margin-top:1.1em}
 .coaching .mehr{color:var(--gruen-dunkel);text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px;text-decoration-color:rgba(74,75,47,.5)}
 .eckdaten{list-style:none;margin-top:24px}
 .eckdaten li{padding:8px 0}
 .eckdaten li+li{border-top:1px solid rgba(74,75,47,.2)}
-.eckdaten span{display:block;font-size:14px;color:var(--gruen-dunkel);text-transform:lowercase}
+.eckdaten span{display:block;font-size:var(--klein);color:var(--gruen-dunkel);text-transform:lowercase}
 
 /* Kontakt */
 .liste{list-style:none;text-align:center}
 .liste li{padding:11px 0}
-.liste .kaps{display:block;color:var(--gruen);font-size:14px;margin-bottom:2px}
-.liste a{font-size:18px}
+.liste .kaps{display:block;color:var(--gruen);font-size:var(--klein);margin-bottom:2px}
+.liste a{font-size:var(--text)}
 
 /* Fuß */
 /* Fuß: schlichte Linkgruppen mit viel Luft, Pfeil nur bei Aufklappbarem */
 .fuss{margin-top:var(--luft);padding:72px var(--rand) calc(48px + env(safe-area-inset-bottom));border-top:1px solid var(--haar);color:var(--gruen)}
 .fuss-innen{max-width:var(--breite);margin:0 auto}
 .fuss ul{list-style:none}
-.fuss .gruppe{font-size:22px;line-height:1.25}
+.fuss .gruppe{font-size:var(--text);line-height:1.25}
 .fuss .gruppe+.gruppe{margin-top:56px}
 .fuss .gruppe>li+li{margin-top:12px}
 .fuss a,.fuss button,.fuss summary{display:inline-block;padding:2px 0}
@@ -211,14 +213,14 @@ audio{width:100%;max-width:34em;margin:0 auto;display:block}
 .klapp summary::-webkit-details-marker{display:none}
 .klapp summary::after{content:"";display:inline-block;width:6px;height:6px;margin-left:12px;border-top:1.5px solid currentColor;border-right:1.5px solid currentColor;transform:translateY(-3px) rotate(45deg);transition:transform .2s}
 .klapp[open] summary::after{transform:translateY(-5px) rotate(135deg)}
-.klapp ul{margin:10px 0 4px 18px;font-size:18px}
+.klapp ul{margin:10px 0 4px 18px;font-size:var(--text)}
 .klapp li+li{margin-top:6px}
-.fuss-marke{margin-top:72px;font-size:15px}
+.fuss-marke{margin-top:72px;font-size:var(--klein)}
 
 /* Rechtstexte */
 .recht-text{max-width:38em;margin:0 auto}
-.recht-text h2{font-size:19px;font-weight:500;margin:36px 0 10px}
-.recht-text h3{font-size:17px;font-weight:500;margin:22px 0 6px}
+.recht-text h2{font-size:var(--text);font-weight:500;margin:36px 0 10px}
+.recht-text h3{font-size:var(--text);font-weight:500;margin:22px 0 6px}
 .recht-text p,.recht-text ul{margin-top:10px}
 .recht-text ul{padding-left:1.2em}
 .offen{background:var(--gruen-hell);color:var(--gruen-dunkel);padding:1px 6px}
@@ -227,16 +229,16 @@ audio{width:100%;max-width:34em;margin:0 auto;display:block}
 .consent{position:fixed;left:0;right:0;bottom:0;z-index:40;background:var(--papier);border-top:1px solid var(--haar);box-shadow:0 -8px 30px rgba(42,33,24,.08);padding:20px var(--rand) calc(20px + env(safe-area-inset-bottom));max-height:90svh;overflow:auto}
 .consent[hidden]{display:none}
 .consent .innen{max-width:40em;margin:0 auto}
-.consent h2{font-size:17px;font-weight:500;margin-bottom:8px}
-.consent p{font-size:15px;line-height:1.45}
+.consent h2{font-size:var(--text);font-weight:500;margin-bottom:8px}
+.consent p{font-size:var(--klein);line-height:1.45}
 .consent .knoepfe{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
-.consent .knopf{min-height:46px;padding:10px 12px;border:1px solid var(--gruen);background:var(--papier);color:var(--gruen);cursor:pointer;font-size:16px}
+.consent .knopf{min-height:46px;padding:10px 12px;border:1px solid var(--gruen);background:var(--papier);color:var(--gruen);cursor:pointer;font-size:var(--klein)}
 .consent .knopf.voll{background:var(--gruen);color:var(--papier)}
 .consent .einstellen{grid-column:1/-1;background:none;border:0;color:var(--gruen);text-decoration:underline;text-underline-offset:4px;cursor:pointer;min-height:40px}
 .consent fieldset{border:0;margin-top:16px}
-.consent label{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--haar);font-size:15px;line-height:1.4}
+.consent label{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--haar);font-size:var(--klein);line-height:1.4}
 .consent input{margin-top:3px;width:20px;height:20px;accent-color:var(--gruen);flex:none}
-.consent label small{display:block;color:var(--grau);font-size:13px}
+.consent label small{display:block;color:var(--grau);font-size:var(--klein)}
 
 /* Bewegung: Einblenden beim Scrollen, nur wenn erwünscht */
 @media (prefers-reduced-motion:no-preference){
@@ -253,7 +255,7 @@ audio{width:100%;max-width:34em;margin:0 auto;display:block}
   .coaching{display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:0}
   .coaching img{height:100%}
   .coaching .innen{padding:56px var(--rand)}
-  .text,.coaching .innen>div{font-size:20px}
+  .text,.coaching .innen>div{font-size:var(--text)}
   .fuss-innen{display:grid;grid-template-columns:repeat(3,1fr);gap:0 40px;align-items:start}
   .fuss .gruppe+.gruppe{margin-top:0}
   .fuss-marke{grid-column:1/-1}
@@ -278,15 +280,15 @@ nav.sprungleiste.seitentitel{margin-top:0;padding-top:40px}
 /* ===== Vita-Seite (Dennis, 15.11.2026): Wegweiser für Casting/Film und Regie/Intendanz ===== */
 .vita-seite .vita-kopf{padding-top:0;display:grid;gap:28px}
 .vita-kopf .kopfbild img{aspect-ratio:4/5;object-fit:cover}
-.vita-kopf .nachweis{display:block;margin-top:8px;font-size:13px;color:var(--gruen)}
+.vita-kopf .nachweis{display:block;margin-top:8px;font-size:var(--klein);color:var(--gruen)}
 .vita-kopf .kopftext{text-align:left}
 .vita-kopf .titel{text-align:left;margin-bottom:10px}
-.vita-kopf .name{font-size:34px;line-height:1.1}
-.vita-kopf .beruf-zeile{margin-top:8px;color:var(--grau);font-size:16px}
+.vita-kopf .name{font-size:var(--text);line-height:1.1}
+.vita-kopf .beruf-zeile{margin-top:8px;color:var(--grau);font-size:var(--klein)}
 .kurzdaten{display:grid;grid-template-columns:1fr 1fr;gap:0 20px;margin-top:24px;border-top:1px solid var(--haar)}
 .kurzdaten div{padding:12px 0;border-bottom:1px solid var(--haar)}
-.kurzdaten dt{font-size:14px;color:var(--gruen)}
-.kurzdaten dd{font-size:18px}
+.kurzdaten dt{font-size:var(--klein);color:var(--gruen)}
+.kurzdaten dd{font-size:var(--text)}
 .schnellzugriff{list-style:none;display:flex;flex-wrap:wrap;gap:10px 24px;margin-top:24px}
 
 .wegweiser{display:grid;gap:14px;padding:var(--luft) var(--rand) 0;max-width:var(--breite);margin:0 auto}
@@ -295,8 +297,8 @@ nav.sprungleiste.seitentitel{margin-top:0;padding-top:40px}
 .weg:hover img{transform:scale(1.03)}
 .weg::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55),rgba(0,0,0,0) 65%)}
 .weg-text{position:absolute;left:20px;right:20px;bottom:18px;z-index:1;display:flex;flex-direction:column;gap:2px}
-.weg-titel{font-size:32px;line-height:1.1}
-.weg-inhalt{font-size:15px;opacity:.9}
+.weg-titel{font-size:var(--text);line-height:1.1}
+.weg-inhalt{font-size:var(--klein);opacity:.9}
 .vita-seite .sprungleiste{margin-top:36px}
 /* Vita-Unterseiten (Alina 16.11.2026): Übersicht vita.html, eigene Seiten für Steckbrief, Kamera, Bühne, Ausbildung */
 .wegweiser.vier .weg img{aspect-ratio:4/3}
@@ -310,9 +312,9 @@ nav.sprungleiste.seitentitel{margin-top:0;padding-top:40px}
 
 .bereich{padding:var(--luft) 0 0}
 .bereich-kopf{padding:0 var(--rand);max-width:var(--breite);margin:0 auto;border-top:1px solid var(--gruen);padding-top:18px;display:flex;justify-content:space-between;align-items:baseline;gap:12px;color:var(--gruen)}
-.bereich-titel{font-size:34px;font-weight:400;line-height:1.1;color:var(--tinte)}
+.bereich-titel{font-size:var(--text);font-weight:400;line-height:1.1;color:var(--tinte)}
 .bereich>section{padding-top:56px}
-.bereich h3.titel{font-size:15px}
+.bereich h3.titel{font-size:var(--text)}
 
 /* Listen auf der Vita-Seite: links ausgerichtet, Jahr als eigene Spalte */
 .vita-seite .vita{max-width:44em}
@@ -322,7 +324,7 @@ nav.sprungleiste.seitentitel{margin-top:0;padding-top:40px}
 .vita-seite .steckbrief{display:grid;grid-template-columns:1fr 1fr;column-gap:20px;border-top:1px solid var(--haar)}
 .vita-seite .steckbrief div{text-align:left;padding:12px 0;border-top:0!important;border-bottom:1px solid var(--haar)}
 .vita-seite .steckbrief div.lang{grid-column:1/-1}
-.vita-seite .steckbrief dd{font-size:17px}
+.vita-seite .steckbrief dd{font-size:var(--text)}
 
 .filter{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:-10px auto 18px;max-width:44em}
 .filter[hidden]{display:none}
@@ -336,18 +338,18 @@ nav.sprungleiste.seitentitel{margin-top:0;padding-top:40px}
 .stueck-bild .reihe{display:flex;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none}
 .stueck-bild .reihe::-webkit-scrollbar{display:none}
 .stueck-bild img{flex:none;width:100%;height:100%;object-fit:cover;scroll-snap-align:start}
-.platzhalter{height:100%;display:flex;align-items:center;justify-content:center;color:var(--gruen);font-size:14px}
-.stueck-titel{font-size:18px;line-height:1.3;margin:0 4px;hyphens:auto;-webkit-hyphens:auto}
+.platzhalter{height:100%;display:flex;align-items:center;justify-content:center;color:var(--gruen);font-size:var(--klein)}
+.stueck-titel{font-size:var(--text);line-height:1.3;margin:0 4px;hyphens:auto;-webkit-hyphens:auto}
 .stueck-titel .jahr{color:inherit}
-.stueck .rolle{font-style:italic;font-size:16px;margin-top:8px}
-.stueck-info{font-size:14px;line-height:1.4;color:var(--grau);margin-top:8px}
-.stueck-fuss{font-size:13px;color:var(--grau);opacity:.8;margin-top:8px}
+.stueck .rolle{font-style:italic;font-size:var(--klein);margin-top:8px}
+.stueck-info{font-size:var(--klein);line-height:1.4;color:var(--grau);margin-top:8px}
+.stueck-fuss{font-size:var(--klein);color:var(--grau);opacity:.8;margin-top:8px}
 
 .rollenraster{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:44em;margin:0 auto}
 .rollenraster li{background:var(--gruen-hell);padding:18px 16px;display:flex;flex-direction:column;gap:2px}
-.rollenraster .rolle{font-style:italic;font-size:21px;line-height:1.2}
-.rollenraster .werk{font-size:15px}
-.rollenraster .details{font-size:13px;color:var(--grau)}
+.rollenraster .rolle{font-style:italic;font-size:var(--text);line-height:1.2}
+.rollenraster .werk{font-size:var(--klein)}
+.rollenraster .details{font-size:var(--klein);color:var(--grau)}
 
 .rahmen.schmal{max-width:44em;margin:0 auto}
 .headshots .spur img{aspect-ratio:4/5}
@@ -358,19 +360,19 @@ nav.sprungleiste.seitentitel{margin-top:0;padding-top:40px}
 
 @media (min-width:760px){
   .vita-seite .vita-kopf{grid-template-columns:5fr 6fr;align-items:end;gap:48px;max-width:var(--breite);margin:0 auto}
-  .vita-kopf .name{font-size:48px}
+  .vita-kopf .name{font-size:var(--text)}
   .wegweiser{grid-template-columns:1fr 1fr;gap:20px}
   .wegweiser.vier .weg img{aspect-ratio:3/2}
   .vita-seite .vita li{display:grid;grid-template-columns:8em 1fr;column-gap:20px}
   .vita-seite .vita li>*:not(.jahr){grid-column:2}
   .vita-seite .vita li .jahr{grid-row:1/span 4;padding-top:6px}
   .stuecke{grid-template-columns:repeat(3,1fr);gap:64px 24px}
-  .stueck-titel{font-size:21px}
+  .stueck-titel{font-size:var(--text)}
   .vita-seite .steckbrief{grid-template-columns:repeat(3,1fr)}
   .rollenraster{grid-template-columns:repeat(3,1fr)}
   .spalten{grid-template-columns:repeat(3,1fr)}
   .spalten .vita li{display:block!important}
-  .bereich-titel{font-size:44px}
+  .bereich-titel{font-size:var(--text)}
 }
 .vita-seite .steckbrief div{display:block}
 .vita-seite .steckbrief dt{margin-bottom:2px}
@@ -380,8 +382,8 @@ nav.sprungleiste.seitentitel{margin-top:0;padding-top:40px}
 /* Aktuell (News) auf der Startseite: eine Zeile pro Meldung, Datum links */
 /* Aktuell als Laufschrift (Alina 16.11.2026) */
 main>section.aktuell{padding:0;margin-top:0}
-.laufband{display:flex;align-items:center;border-bottom:1px solid var(--haar);min-height:58px;font-size:18px;overflow:hidden}
-.laufband-titel{flex:none;padding:0 14px 0 var(--rand);color:var(--gruen);font-size:15px}
+.laufband{display:flex;align-items:center;border-bottom:1px solid var(--haar);min-height:58px;font-size:var(--text);overflow:hidden}
+.laufband-titel{flex:none;padding:0 14px 0 var(--rand);color:var(--gruen);font-size:var(--klein)}
 .laufband-fenster{flex:1;min-width:0;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 24px),transparent);mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 24px),transparent)}
 .laufband-spur{display:flex;width:max-content;animation:laufen var(--dauer,40s) linear infinite}
 .laufband-teil{display:flex;align-items:baseline;white-space:nowrap}
@@ -403,11 +405,11 @@ main>section.aktuell{padding:0;margin-top:0}
 }
 .news{list-style:none;max-width:44em;margin:0 auto;border-top:1px solid var(--haar)}
 .news li{padding:20px 0;border-bottom:1px solid var(--haar);display:flex;flex-direction:column;gap:3px}
-.news .datum{font-size:14px;color:var(--gruen)}
-.news .news-titel{font-size:21px;line-height:1.25}
-.news .ort-zeile{font-size:15px;color:var(--grau)}
+.news .datum{font-size:var(--klein);color:var(--gruen)}
+.news .news-titel{font-size:var(--text);line-height:1.25}
+.news .ort-zeile{font-size:var(--klein);color:var(--grau)}
 .news .news-text{margin-top:6px}
-.news .link{align-self:flex-start;margin-top:6px;font-size:15px}
+.news .link{align-self:flex-start;margin-top:6px;font-size:var(--klein)}
 @media (min-width:760px){
   .news li{display:grid;grid-template-columns:9em 1fr;column-gap:20px}
   .news li>*{grid-column:2}
@@ -425,7 +427,7 @@ dialog.gross::backdrop{background:#17130f}
 .gross-spur::-webkit-scrollbar{display:none}
 .gross-spur figure{flex:0 0 100%;height:100%;scroll-snap-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:60px 12px 24px}
 .gross-spur img{max-width:100%;max-height:calc(100% - 64px);object-fit:contain}
-.gross-spur figcaption{font-size:14px;line-height:1.5;text-align:center;color:rgba(255,255,255,.8);max-width:36em}
+.gross-spur figcaption{font-size:var(--klein);line-height:1.5;text-align:center;color:rgba(255,255,255,.8);max-width:36em}
 .gross-spur figcaption a{color:inherit}
 .gross button{position:absolute;width:44px;height:44px;border:0;background:none;color:#fff;cursor:pointer}
 .gross-zu{top:10px;right:10px}
@@ -438,3 +440,15 @@ dialog.gross::backdrop{background:#17130f}
 .gross-nach::after{transform:translate(-70%,-50%) rotate(45deg)}
 @media (hover:hover) and (pointer:fine){.gross-vor,.gross-nach{display:block}}
 .gross.einzeln .gross-vor,.gross.einzeln .gross-nach{display:none}
+
+/* ===== Typografie vereinheitlicht (Dennis 16.11.2026) =====
+   Nur zwei Schriftgrößen: --text für Fließtext und alle Titel, --klein für Angaben.
+   Titel stehen in Versalien, genauso groß wie der Fließtext (Vorbild: Produktseite mit „DESCRIPTION“). */
+.titel,.untertitel,.bereich-titel,.weg-titel,.vita-kopf .name,.stueck-titel,.vita .werk,.news .news-titel,
+.laufband-titel,.recht-text h1,.recht-text h2,.recht-text h3,.consent h2{
+  text-transform:uppercase;letter-spacing:.04em;font-size:var(--text);font-weight:400;line-height:1.35}
+.stueck-titel .jahr{letter-spacing:.04em}
+/* Film-Kacheln: Standbild des Films füllt das Bildfeld, Tipp springt zum Film */
+.stueck-bild .standbild{display:block;height:100%}
+.stueck-bild .standbild img{width:100%;height:100%;object-fit:cover}
+.stuecke>li[hidden]{display:none}

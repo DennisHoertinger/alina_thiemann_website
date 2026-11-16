@@ -176,7 +176,7 @@
 
   /* ---------- Filter der Filmografie (Vita) ---------- */
   document.querySelectorAll(".filter").forEach(function (leiste) {
-    var liste = leiste.parentNode.querySelector("ul.vita");
+    var liste = leiste.parentNode.querySelector("ul.vita, ul.stuecke");
     if (!liste) return;
     leiste.hidden = false;
     leiste.addEventListener("click", function (e) {
@@ -184,7 +184,7 @@
       if (!knopf) return;
       var f = knopf.getAttribute("data-filter");
       leiste.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", String(b === knopf)); });
-      liste.querySelectorAll("li").forEach(function (li) {
+      liste.querySelectorAll(":scope > li").forEach(function (li) {
         li.hidden = f !== "alle" && li.getAttribute("data-art") !== f;
       });
     });
