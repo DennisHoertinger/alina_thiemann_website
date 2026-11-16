@@ -11,7 +11,7 @@ Kein Framework, kein Baukasten, kein Build-Schritt.
 - **HTML**: jede Unterseite ist eine eigene Datei im Stamm (`index.html`, `vita.html`, `steckbrief.html`, `film.html`, `theater.html`, `ausbildung.html`, `medien.html`, `coaching.html`, `kontakt.html`, `impressum.html`, `datenschutz.html`, `404.html`). `kamera.html` und `buehne.html` sind nur noch Weiterleitungen auf die neuen Adressen (für alte Links). Kopf, Menü, Fuß und Consent-Banner stehen in jeder Datei gleich; bei Änderungen alle Dateien anpassen.
 - **CSS**: eine Datei `css/stil.css` mit Design-Tokens oben. Mobile first, größere Bildschirme über `min-width`.
 - **JavaScript** ohne Bibliotheken: `js/seite.js` (Sprachumschaltung, Menü, Karussells, Einblenden), `js/einwilligung.js` (Cookie-Banner, Google und Meta erst nach Einwilligung).
-- **Ausgeliefert über GitHub Pages** direkt aus `main` (Stamm) unter **alinathiemann.de** (Datei `CNAME`, umgestellt 16.11.2026 auf Dennis' Wunsch; DNS bei INWX). Eine Änderung ist nach etwa einer Minute online.
+- **Ausgeliefert über GitHub Pages** aus dem Repo `alina-thiemann/alina_thiemann_website` (Organisation seit 16.11.2026), direkt aus `main` (Stamm) unter **alinathiemann.de** (Datei `CNAME`, umgestellt 16.11.2026 auf Dennis' Wunsch; DNS bei INWX). Eine Änderung ist nach etwa einer Minute online.
 - Keine Zusatzpakete, kein `package.json`. Das Filmmakers-Skript nutzt nur Node-Bordmittel.
 
 ## Zweisprachig DE/EN
@@ -37,7 +37,7 @@ Menü als Einzelseiten ohne Unterpunkte: **Start, Vita, Film, Theater, Medien, C
 - Start: Startbild mit zwei Knöpfen „Showreel ansehen“ (springt zu `#videos`) und „Vita (PDF)“ (Filmmakers-PDF), Laufschrift „Aktuell“, About me und Theater-Showreel, Über mich ohne „Das mag ich spielen“/„Persönliches“, Stücktitel unter Bühnenfotos verlinkt.
 - `vita.html`: Kopf mit Porträt, Eckdaten (`vita-kurz`), Schnellzugriff (Vita-PDF, Agentur, E-Mail); Über mich mit „Das mag ich spielen“ und „Persönliches“; dann die vier Wegweiser-Karten.
 - `steckbrief.html`: Steckbrief mit Headshots. `ausbildung.html`: Ausbildung, Weiterbildung, Preise in drei Spalten.
-- `film.html`: „Ausgewählte Projekte“ (Block `film-auswahl`, Feld `auswahl: true` in `daten/filmmakers.json`), Filmografie mit Filter (ohne Projekte in Entwicklung), „In Entwicklung“ (Block `film-entwicklung`), Auswahl Kurzfilme (`#kurzfilme`, Anker `video-NAME`), About me.
+- `film.html` (Filme als Kacheln genau wie Theater, Dennis 16.11.2026; Bild aus `bilder` oder das Standbild `img/VIDEO-standbild.webp`, sonst „Foto folgt“): „Ausgewählte Projekte“ (Block `film-auswahl`, Feld `auswahl: true` in `daten/filmmakers.json`), Filmografie mit Filter (ohne Projekte in Entwicklung), „In Entwicklung“ (Block `film-entwicklung`), Auswahl Kurzfilme (`#kurzfilme`, Anker `video-NAME`), About me.
 - `theater.html`: Theater als Kacheln wie ein Produktraster (Bild 4:5 oben, wischbar bei mehreren Fotos aus `bilder`, Text zentriert „Jahr / Titel“, Credit aus `foto`; ohne Foto Platzhalter „Foto folgt“, bleibt (Dennis 16.11.); 2 Spalten Handy, 3 Desktop), Theater-Showreel, gearbeitete Rollen, Hörspiel.
 - `medien.html`: gegliedert in Theater, Film und Kamera, Stimme, Fotos. Videos immer mit Jahr und Laufzeit („2026 · 8:19 Min.“).
 - Fotos in Karussells (`.fotos .spur`) und Theaterkacheln öffnen sich beim Tippen groß (`dialog.gross` in `js/seite.js`), darin wischen, Esc schließt.
@@ -68,7 +68,7 @@ Jede Seite hat eine eigene `description` (gleich in `og:description`), `canonica
 
 ## Gestaltung (Entwurf 7)
 
-Schrift Newsreader (eine Familie, Kursiv nur für Rollennamen). Papier `#fbf9f4`, Tinte `#2a2118`, PANTONE 18-0425 TSX Commander Green `#6b6c45`, hell `#e9e9dc`, Coaching `#d2d3b6`. Wortmarke „alina — thiemann“ klein in Grün. Kopfleiste fest oben und immer durchsichtig (Dennis, 15.11.2026): Menü, Name und Sprache werden einzeln weiß über Fotos/Videos und schwarz (Tinte) über Papier (`js/seite.js` prüft per `elementsFromPoint`). Alles klein geschrieben per CSS (`body{text-transform:lowercase}`, Wunsch Alina 15.11.2026), keine Pfeil-Zeichen, Links fein unterstrichen. Karussells mit Wischen, Pfeilknöpfen, Punkten; Startbilder laufen von selbst (Pause-Knopf, „Bewegung reduzieren“ wird respektiert).
+Schrift Newsreader (eine Familie, Kursiv nur für Rollennamen). Nur zwei Schriftgrößen (Dennis 16.11.2026): `--text` (18 px) für Fließtext und alle Titel, `--klein` (14 px) für Angaben und Credits; Ausnahmen nur Wortmarke und Menü. Titel immer in Versalien, so groß wie der Fließtext. Papier `#fbf9f4`, Tinte `#2a2118`, PANTONE 18-0425 TSX Commander Green `#6b6c45`, hell `#e9e9dc`, Coaching `#d2d3b6`. Wortmarke „alina — thiemann“ klein in Grün. Kopfleiste fest oben und immer durchsichtig (Dennis, 15.11.2026): Menü, Name und Sprache werden einzeln weiß über Fotos/Videos und schwarz (Tinte) über Papier (`js/seite.js` prüft per `elementsFromPoint`). Alles klein geschrieben per CSS (`body{text-transform:lowercase}`, Wunsch Alina 15.11.2026), keine Pfeil-Zeichen, Links fein unterstrichen. Karussells mit Wischen, Pfeilknöpfen, Punkten; Startbilder laufen von selbst (Pause-Knopf, „Bewegung reduzieren“ wird respektiert).
 
 ## Arbeitsweise
 

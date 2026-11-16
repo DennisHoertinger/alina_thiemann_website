@@ -113,6 +113,35 @@ function theaterKarte(e) {
     (fuss.length ? `<p class="stueck-fuss">${fuss.join(" · ")}</p>` : "") + `</li>`;
 }
 
+// Film auf der Film-Seite als Kacheln, genau wie Theater (Dennis 16.11.2026).
+// Bild: "bilder" (Ergänzung) oder das Standbild des Films, wenn er auf der Seite läuft; sonst Platzhalter.
+function filmKarte(f) {
+  const art = /Kurzfilm/.test(f.art?.de) ? "kurz" : /Ausbildung/.test(f.art?.de) ? "ausbildung" : "kino-tv";
+  const alt = (de, en) => `alt="${esc(de)}" data-alt-de="${esc(de)}" data-alt-en="${esc(en)}"`;
+  const altText = alt(`Alina Thiemann in „${f.titel}“`, `Alina Thiemann in “${f.titel}”`);
+  const bilder = f.bilder || [];
+  let bild;
+  if (bilder.length) {
+    bild = `<div class="reihe" tabindex="0" aria-label="${esc(f.titel)}">` +
+      bilder.map((b) => `<img src="img/${esc(b)}-800.webp" srcset="img/${esc(b)}-800.webp 800w, img/${esc(b)}-1600.webp 1600w" sizes="(min-width:1100px) 360px, (min-width:760px) 33vw, 50vw" width="800" height="1000" ${altText} loading="lazy" decoding="async">`).join("") +
+      `</div>`;
+  } else if (f.video) {
+    bild = `<a class="standbild" href="film.html#video-${esc(f.video)}"><img src="img/${esc(f.video)}-standbild.webp" ${altText} loading="lazy" decoding="async"></a>`;
+  } else {
+    bild = `<div class="platzhalter" aria-hidden="true"><span>${beide("Foto folgt", "Photo to come")}</span></div>`;
+  }
+  const info = [t(f.art), t(f.rollentyp), `${beide("Regie", "Dir.")} ${esc(f.regie)}`];
+  const fuss = [];
+  if (f.video) fuss.push(`<a class="link" href="film.html#video-${esc(f.video)}">${beide("Film ansehen", "Watch the film")}</a>`);
+  if (bilder.length > 1) fuss.push(beide(`${bilder.length} Fotos`, `${bilder.length} photos`));
+  if (f.foto) fuss.push(beide("Foto: " + f.foto, "Photo: " + f.foto));
+  return `<li class="stueck" data-art="${art}"><div class="stueck-bild">${bild}</div>` +
+    `<p class="stueck-titel"><span class="jahr">${esc(f.jahr)}</span> / ${link(f.link, esc(f.titel))}</p>` +
+    (f.rolle ? `<p class="rolle">${esc(f.rolle)}</p>` : "") +
+    `<p class="stueck-info">${info.join(" · ")}<br>${esc(f.produktion)}</p>` +
+    (fuss.length ? `<p class="stueck-fuss">${fuss.join(" · ")}</p>` : "") + `</li>`;
+}
+
 function preisEintrag(p) {
   const text = p.text && (p.text.de || p.text.en) ? `<span class="details">${t(p.text)}</span>` : "";
   return `<li><span class="jahr">${esc(p.jahr)}</span><span class="werk">${link(p.link, t(p.titel))}</span>${text}</li>`;
@@ -124,7 +153,7 @@ function bildungEintrag(a) {
   const verweis = a.link
     ? `<span class="details"><a class="link" href="${esc(a.link)}" rel="noopener" target="_blank">${t(a.linktext || { de: "Mehr", en: "More" })}</a></span>`
     : "";
-  return `<li><span class="jahr">${esc(a.jahr)}</span><span class="details" style="font-size:17px;color:inherit">${t(a.text)}</span>${notiz}${verweis}</li>`;
+  return `<li><span class="jahr">${esc(a.jahr)}</span><span class="details" style="font-size:var(--text);color:inherit">${t(a.text)}</span>${notiz}${verweis}</li>`;
 }
 
 // Aktuell als Laufschrift (Wunsch Alina 16.11.2026): Meldungen laufen als eine Zeile durch.
@@ -146,6 +175,7 @@ function newsBlock(n) {
 
 function bloecke(d, news) {
   const liste = (eintraege) => `<ul class="vita">\n${eintraege.join("\n")}\n</ul>`;
+  const kacheln = (eintraege) => `<ul class="stuecke">\n${eintraege.join("\n")}\n</ul>`;
   const datum = new Date(d.stand + "T12:00:00Z");
   const standDe = datum.toLocaleDateString("de-DE", { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Berlin" });
   const standEn = datum.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Berlin" });
@@ -168,10 +198,10 @@ function bloecke(d, news) {
       d.studium.map((s) => `<li><span class="rolle">${esc(s.rolle)}</span><span class="werk">${esc(s.stueck)}</span><span class="details">${esc(s.autor)}</span></li>`).join("\n") +
       `\n</ul>`,
     // Film-Seite: Auswahl oben ("auswahl": true, Ergänzung), Projekte in Entwicklung getrennt, darunter die Filmografie
-    "film-auswahl": liste(d.film.filter((f) => f.auswahl && !f.inEntwicklung).map(filmEintrag)),
-    "film-entwicklung": liste(d.film.filter((f) => f.inEntwicklung).map(filmEintrag)),
-    film: liste(d.film.filter((f) => !f.inEntwicklung).map(filmEintrag)),
-    theater: `<ul class="stuecke">\n${d.theater.map(theaterKarte).join("\n")}\n</ul>`,
+    "film-auswahl": kacheln(d.film.filter((f) => f.auswahl && !f.inEntwicklung).map(filmKarte)),
+    "film-entwicklung": kacheln(d.film.filter((f) => f.inEntwicklung).map(filmKarte)),
+    film: kacheln(d.film.filter((f) => !f.inEntwicklung).map(filmKarte)),
+    theater: kacheln(d.theater.map(theaterKarte)),
     studium: liste(d.studium.map((s) =>
       `<li><span class="werk">${esc(s.stueck)}</span><span class="rolle">${esc(s.rolle)}</span><span class="details">${esc(s.autor)}</span></li>`)),
     hoerspiel: liste(d.hoerspiel.map((h) =>
