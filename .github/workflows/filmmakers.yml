@@ -1,4 +1,5 @@
 # Holt täglich die Profildaten von Filmmakers und setzt sie in die HTML-Seiten ein.
+# Läuft außerdem, sobald Alina im CMS (/admin) etwas speichert (daten/news.json, texte.json, fotos.json).
 # Geheimnisse (Settings → Secrets and variables → Actions):
 #   FILMMAKERS_API_TOKEN   API-Key von Filmmakers (nie ins Repo schreiben)
 #   FILMMAKERS_PROFILE_ID  Profil-ID von Alina bei Filmmakers
@@ -14,6 +15,8 @@ on:
     paths:
       - "daten/filmmakers.json"
       - "daten/news.json"
+      - "daten/texte.json"
+      - "daten/fotos.json"
       - "skripte/filmmakers.mjs"
 
 permissions:
@@ -45,5 +48,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898333+github-actions[bot]@users.noreply.github.com"
           git add -A daten *.html
-          git commit -m "Filmmakers-Daten aktualisiert"
-          git push
+          git commit -m "Inhalte eingesetzt (Filmmakers/CMS)"
+          # Hat Alina inzwischen weiter gespeichert, erst deren Stand holen, dann senden
+          for versuch in 1 2 3; do
+            git pull --rebase -q origin main && git push && exit 0
+            sleep 5
+          done
+          exit 1

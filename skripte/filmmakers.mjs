@@ -1,5 +1,5 @@
 // Holt Alinas Profildaten von Filmmakers und setzt sie in die HTML-Seiten ein.
-// Läuft als GitHub Action (täglich und bei Änderungen), ohne Zusatzpakete (Node 20+).
+// Läuft als GitHub Action (täglich, bei Änderungen und nach jedem Speichern im CMS), ohne Zusatzpakete (Node 20+).
 //
 //   node skripte/filmmakers.mjs
 //
@@ -10,8 +10,11 @@
 // 2. Ohne Token oder bei einem Fehler bleibt der letzte Stand in daten/filmmakers.json.
 // 3. Aus daten/filmmakers.json entstehen HTML-Blöcke, die zwischen den Markierungen
 //    <!-- filmmakers:NAME --> … <!-- /filmmakers:NAME --> in allen *.html-Dateien ersetzt werden.
+// 4. Genauso setzt es die Inhalte ein, die Alina im CMS pflegt (Sveltia CMS unter /admin):
+//    daten/news.json, daten/texte.json, daten/fotos.json → Markierungen <!-- cms:NAME -->.
 
 import { readFile, writeFile, readdir } from "node:fs/promises";
+import { existsSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -19,6 +22,9 @@ const WURZEL = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DATEI = join(WURZEL, "daten", "filmmakers.json");
 // Aktuelles (News) pflegt Alina/Dennis selbst, nicht Filmmakers. Gleicher Einsetz-Mechanismus.
 const NEWS = join(WURZEL, "daten", "news.json");
+// Texte und Fotos aus dem CMS (admin/config.yml)
+const TEXTE = join(WURZEL, "daten", "texte.json");
+const FOTOS = join(WURZEL, "daten", "fotos.json");
 
 // ---------- 1. Daten holen ----------
 
@@ -59,8 +65,10 @@ const esc = (s) =>
 function t(wert) {
   if (wert == null) return "";
   if (typeof wert === "string") return esc(wert);
-  if (wert.de === wert.en) return esc(wert.de);
-  return `<span data-l="de">${esc(wert.de)}</span><span data-l="en">${esc(wert.en)}</span>`;
+  // Leeres Englisch (z. B. im CMS nicht ausgefüllt) → Deutsch in beiden Sprachen
+  const en = wert.en || wert.de;
+  if (wert.de === en) return esc(wert.de);
+  return `<span data-l="de">${esc(wert.de)}</span><span data-l="en">${esc(en)}</span>`;
 }
 const beide = (de, en) => t({ de, en });
 const link = (url, inhalt) =>
@@ -159,11 +167,14 @@ function bildungEintrag(a) {
 // Aktuell als Laufschrift (Wunsch Alina 16.11.2026): Meldungen laufen als eine Zeile durch.
 // Die Spur steht zweimal hintereinander, damit die Bewegung nahtlos ist; die Kopie ist für Screenreader verborgen.
 function newsBlock(n) {
-  if (!n || !n.eintraege || !n.eintraege.length) return "";
+  if (!n || !n.eintraege) return "";
+  n = { ...n, eintraege: n.eintraege.filter((e) => e && e.titel?.de) };
+  if (!n.eintraege.length) return "";
   const meldung = (e) => {
-    const vorne = /^\d{4}$/.test(e.datum?.de ?? "") ? "" : `<span class="datum">${t(e.datum)}</span> `;
+    const datum = e.datum?.de ?? "";
+    const vorne = !datum || /^\d{4}$/.test(datum) ? "" : `<span class="datum">${t(e.datum)}</span> `;
     const titel = e.link ? `<a href="${esc(e.link)}" rel="noopener" target="_blank">${t(e.titel)}</a>` : t(e.titel);
-    return `<span class="meldung">${vorne}${titel}${e.ort ? `, <span class="ort-zeile">${t(e.ort)}</span>` : ""}</span>`;
+    return `<span class="meldung">${vorne}${titel}${e.ort?.de ? `, <span class="ort-zeile">${t(e.ort)}</span>` : ""}</span>`;
   };
   const zeile = n.eintraege.map(meldung).join('<span class="trenner" aria-hidden="true">·</span>') + '<span class="trenner" aria-hidden="true">·</span>';
   const zeichen = n.eintraege.reduce((z, e) => z + String(e.titel?.de ?? "").length + String(e.ort?.de ?? "").length + 6, 0);
@@ -216,6 +227,80 @@ function bloecke(d, news) {
   };
 }
 
+
+// ---------- CMS-Blöcke (Texte und Fotos, die Alina selbst pflegt) ----------
+
+// Fließtext aus dem CMS: Leerzeile = neuer Absatz, einfacher Zeilenumbruch = <br>.
+// *so* wird kursiv (z. B. Rollennamen), [Text](https://…) wird ein Link. Sonst kein HTML.
+function absaetze(text) {
+  return String(text ?? "")
+    .replace(/\r\n/g, "\n")
+    .split(/\n\s*\n/)
+    .map((a) => a.trim())
+    .filter(Boolean)
+    .map((a) => {
+      let h = esc(a);
+      h = h.replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+|mailto:[^)\s]+)\)/g, (_, txt, url) =>
+        `<a class="link" href="${url}"${url.startsWith("http") ? ' rel="noopener" target="_blank"' : ""}>${txt}</a>`);
+      h = h.replace(/\*([^*\n]+)\*/g, "<em>$1</em>");
+      return `<p>${h.replace(/\n/g, "<br>")}</p>`;
+    })
+    .join("\n");
+}
+const zweiSprachen = (wert) =>
+  `<div data-l="de">\n${absaetze(wert?.de)}\n</div>\n<div data-l="en">\n${absaetze(wert?.en || wert?.de)}\n</div>`;
+
+// Foto: "img/NAME-1600.webp" mit vorhandener -800-Fassung bekommt srcset, sonst (z. B. hochgeladen
+// nach img/cms/) wird die Datei direkt genutzt. Pfade immer relativ zum Stamm.
+function fotoImg(f, sizes, extra) {
+  const pfad = String(f.bild ?? "").replace(/^\//, "");
+  const m = pfad.match(/^img\/(.+)-1600\.webp$/);
+  const quelle = m && existsSync(join(WURZEL, "img", `${m[1]}-800.webp`))
+    ? `src="img/${esc(m[1])}-800.webp" srcset="img/${esc(m[1])}-800.webp 800w, img/${esc(m[1])}-1600.webp 1600w" sizes="${sizes}"`
+    : `src="${esc(pfad)}"`;
+  const de = f.alt?.de || "Alina Thiemann";
+  const en = f.alt?.en || de;
+  return `<img ${quelle} alt="${esc(de)}" data-alt-de="${esc(de)}" data-alt-en="${esc(en)}" ${extra}>`;
+}
+const sichtbare = (liste) => (liste || []).filter((f) => f && f.bild && f.sichtbar !== false);
+
+// Fotostrecke mit Credit unter jedem Foto (Start und Medien)
+const fotoSpur = (liste) =>
+  `  <div class="spur" tabindex="0" aria-label="Fotos" data-aria-de="Fotos" data-aria-en="Photos">\n` +
+  sichtbare(liste).map((f) =>
+    `    <figure>${fotoImg(f, "(min-width:1100px) 33vw, (min-width:760px) 50vw, 100vw", 'loading="lazy" decoding="async"')}` +
+    (f.credit ? `<figcaption>${beide("Foto: " + f.credit, "Photo: " + f.credit)}</figcaption>` : "") + `</figure>`).join("\n") +
+  `\n  </div>`;
+
+function cmsBloecke(texte, fotos) {
+  const b = {};
+  if (texte) {
+    b["ueber-mich"] = `  <div class="text">\n${zweiSprachen(texte.ueberMich)}\n  </div>`;
+    b["mag-ich-spielen"] = `  <div class="text">\n${zweiSprachen(texte.magIchSpielen)}\n  </div>`;
+    const eig = (l) => `    <ul class="eigenschaften" data-l="${l}">\n` +
+      (texte.persoenliches || []).map((p) => `      <li><span class="etikett">${esc(p.etikett?.[l] || p.etikett?.de)}</span>${esc(p.text?.[l] || p.text?.de)}</li>`).join("\n") +
+      `\n    </ul>`;
+    b.persoenliches = `  <div class="text">\n${eig("de")}\n${eig("en")}\n  </div>`;
+    const c = texte.coaching || {};
+    b.coaching =
+      `    <span class="kaps">${t(c.untertitel)}</span>\n${zweiSprachen(c.text)}\n` +
+      `    <ul class="eckdaten">\n` +
+      (c.eckdaten || []).map((e) => `      <li><span>${beide(e.etikett?.de, e.etikett?.en || e.etikett?.de)}</span>` +
+        `<span data-l="de">${esc(e.text?.de)}</span><span data-l="en">${esc(e.text?.en || e.text?.de)}</span></li>`).join("\n") +
+      `\n    </ul>`;
+  }
+  if (fotos) {
+    // Startbilder ohne Credit-Zeile (wie bisher); das erste lädt sofort, die übrigen später
+    b.startbilder = `  <div class="spur">\n` +
+      sichtbare(fotos.start).map((f, i) =>
+        `    <figure>${fotoImg(f, "(min-width:1100px) 50vw, 100vw", i === 0 ? 'fetchpriority="high"' : 'loading="lazy" decoding="async"')}</figure>`).join("\n") +
+      `\n  </div>`;
+    b.fotos = fotoSpur(fotos.fotos);
+    b["fotos-medien"] = fotoSpur(fotos.medien);
+  }
+  return b;
+}
+
 // ---------- 3. In die Seiten einsetzen ----------
 
 async function htmlDateien(ordner) {
@@ -245,13 +330,19 @@ async function main() {
 
   let news = null;
   try { news = JSON.parse(await readFile(NEWS, "utf8")); } catch { console.log("Keine daten/news.json gefunden."); }
-  const b = bloecke(daten, news);
+  const lesen = async (pfad) => {
+    try { return JSON.parse(await readFile(pfad, "utf8")); } catch (fehler) {
+      if (fehler.code !== "ENOENT") throw new Error(`${pfad} ist kein gültiges JSON: ${fehler.message}`);
+      return null;
+    }
+  };
+  const b = { ...bloecke(daten, news), ...cmsBloecke(await lesen(TEXTE), await lesen(FOTOS)) };
   let geaendert = 0;
   for (const datei of await htmlDateien(WURZEL)) {
     const alt = await readFile(datei, "utf8");
     const neu = alt.replace(
-      /(<!-- filmmakers:([a-z-]+) -->)[\s\S]*?(<!-- \/filmmakers:\2 -->)/g,
-      (ganz, auf, name, zu) => {
+      /(<!-- (filmmakers|cms):([a-z-]+) -->)[\s\S]*?(<!-- \/\2:\3 -->)/g,
+      (ganz, auf, art, name, zu) => {
         if (!(name in b)) { console.warn(`Unbekannter Block "${name}" in ${datei}`); return ganz; }
         return `${auf}\n${b[name]}\n${zu}`;
       }

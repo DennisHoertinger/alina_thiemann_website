@@ -1,0 +1,208 @@
+# Sveltia CMS für alinathiemann.de (aufrufen unter https://alinathiemann.de/admin/)
+# Alina pflegt hier Aktuelles, Texte und Fotos. Gespeichert wird als JSON in daten/,
+# skripte/filmmakers.mjs setzt die Inhalte per GitHub Action in die HTML-Seiten ein.
+# Was auf Filmmakers steht (Steckbrief, Film, Theater, Ausbildung, Preise) gehört NICHT hierher.
+# Doku: https://sveltiacms.app/en/docs
+
+backend:
+  name: github
+  repo: alina-thiemann/alina_thiemann_website
+  branch: main
+  # Anmelde-Dienst (Sveltia CMS Authenticator als Cloudflare Worker), sobald eingerichtet:
+  # base_url: https://sveltia-cms-auth.NAME.workers.dev
+  commit_messages:
+    update: "CMS: {{collection}} „{{slug}}“ geändert ({{author-name}})"
+    uploadMedia: "CMS: Foto „{{path}}“ hochgeladen ({{author-name}})"
+    deleteMedia: "CMS: Foto „{{path}}“ gelöscht ({{author-name}})"
+
+site_url: https://alinathiemann.de
+display_url: https://alinathiemann.de
+
+# Fotos liegen in img/. Hochgeladene Fotos werden im Browser auf höchstens 1600 px Breite
+# verkleinert und als WebP gespeichert (iPhone-Originale haben bis zu 20 MB).
+media_folder: img
+public_folder: img
+media_libraries:
+  default:
+    config:
+      transformations:
+        raster_image:
+          format: webp
+          quality: 82
+          width: 1600
+
+slug:
+  encoding: ascii
+  clean_accents: true
+
+editor:
+  preview: false
+
+collections:
+  - name: website
+    label: Website
+    description: Aktuelles, Texte und Fotos. Steckbrief, Film, Theater und Ausbildung kommen automatisch von Filmmakers.
+    icon: edit_note
+    files:
+      # ---------------------------------------------------------------- Aktuell
+      - name: aktuell
+        label: Aktuell (Laufschrift auf der Startseite)
+        file: daten/news.json
+        format: json
+        fields:
+          - name: eintraege
+            label: Meldungen
+            label_singular: Meldung
+            hint: Neueste Meldung nach oben ziehen. Gibt es keine Meldung, verschwindet die Laufschrift.
+            widget: list
+            add_to_top: true
+            collapsed: true
+            summary: "{{fields.titel.de}}"
+            fields:
+              - name: titel
+                label: Titel
+                widget: object
+                fields:
+                  - { name: de, label: Deutsch, widget: string }
+                  - { name: en, label: Englisch, widget: string, required: false, hint: "Leer lassen, wenn gleich wie Deutsch." }
+              - name: ort
+                label: Ort / Haus
+                widget: object
+                required: false
+                fields:
+                  - { name: de, label: Deutsch, widget: string, required: false }
+                  - { name: en, label: Englisch, widget: string, required: false }
+              - name: datum
+                label: Datum
+                hint: Frei, z. B. „Dezember 2026“ oder „Premiere 12.12.“. Nur eine Jahreszahl wird in der Laufschrift nicht angezeigt.
+                widget: object
+                required: false
+                fields:
+                  - { name: de, label: Deutsch, widget: string, required: false }
+                  - { name: en, label: Englisch, widget: string, required: false }
+              - name: text
+                label: Kurzer Text (für später, erscheint derzeit nicht in der Laufschrift)
+                widget: object
+                required: false
+                fields:
+                  - { name: de, label: Deutsch, widget: text, required: false }
+                  - { name: en, label: Englisch, widget: text, required: false }
+              - { name: link, label: Link (z. B. Spielplan), widget: string, required: false, pattern: ['^(https?://.+)?$', 'Bitte mit https:// beginnen'] }
+              - name: linktext
+                label: Linktext
+                widget: object
+                required: false
+                fields:
+                  - { name: de, label: Deutsch, widget: string, required: false }
+                  - { name: en, label: Englisch, widget: string, required: false }
+
+      # ---------------------------------------------------------------- Texte
+      - name: texte
+        label: Texte (Über mich, Coaching)
+        file: daten/texte.json
+        format: json
+        fields:
+          - name: ueberMich
+            label: Über mich (Startseite und Vita)
+            widget: object
+            hint: Absätze mit einer Leerzeile trennen. *Sternchen* macht kursiv, [Text](https://…) wird ein Link.
+            fields:
+              - { name: de, label: Deutsch, widget: text }
+              - { name: en, label: Englisch, widget: text }
+          - name: magIchSpielen
+            label: Das mag ich spielen (Vita)
+            widget: object
+            fields:
+              - { name: de, label: Deutsch, widget: text }
+              - { name: en, label: Englisch, widget: text }
+          - name: persoenliches
+            label: Persönliches (Vita)
+            label_singular: Angabe
+            widget: list
+            summary: "{{fields.etikett.de}}"
+            fields:
+              - name: etikett
+                label: Überschrift (z. B. Lieblingsfilm)
+                widget: object
+                fields:
+                  - { name: de, label: Deutsch, widget: string }
+                  - { name: en, label: Englisch, widget: string }
+              - name: text
+                label: Text
+                widget: object
+                fields:
+                  - { name: de, label: Deutsch, widget: text }
+                  - { name: en, label: Englisch, widget: text }
+          - name: coaching
+            label: Coaching (Seite Coaching)
+            widget: object
+            fields:
+              - name: untertitel
+                label: Untertitel
+                widget: object
+                fields:
+                  - { name: de, label: Deutsch, widget: string }
+                  - { name: en, label: Englisch, widget: string }
+              - name: text
+                label: Text
+                hint: Absätze mit einer Leerzeile trennen.
+                widget: object
+                fields:
+                  - { name: de, label: Deutsch, widget: text }
+                  - { name: en, label: Englisch, widget: text }
+              - name: eckdaten
+                label: Eckdaten
+                label_singular: Eckdatum
+                widget: list
+                summary: "{{fields.etikett.de}}: {{fields.text.de}}"
+                fields:
+                  - name: etikett
+                    label: Überschrift (z. B. Wie)
+                    widget: object
+                    fields:
+                      - { name: de, label: Deutsch, widget: string }
+                      - { name: en, label: Englisch, widget: string }
+                  - name: text
+                    label: Angabe
+                    widget: object
+                    fields:
+                      - { name: de, label: Deutsch, widget: string }
+                      - { name: en, label: Englisch, widget: string }
+
+      # ---------------------------------------------------------------- Fotos
+      - name: fotos
+        label: Fotos
+        file: daten/fotos.json
+        format: json
+        fields:
+          - name: start
+            label: Startbilder (laufen oben auf der Startseite)
+            label_singular: Startbild
+            hint: Reihenfolge durch Ziehen ändern. Das erste Bild erscheint zuerst.
+            widget: list
+            collapsed: true
+            summary: "{{fields.alt.de}}"
+            fields: &foto
+              - { name: bild, label: Foto, widget: image, hint: Nur freigegebene Fotos verwenden. }
+              - { name: credit, label: Credit (Fotograf:in und Jahr), widget: string, hint: "z. B. Stella Butz, 2026. Erscheint als „Foto: …“." }
+              - name: alt
+                label: Bildbeschreibung (für Blinde und Suchmaschinen)
+                widget: object
+                fields:
+                  - { name: de, label: Deutsch, widget: string }
+                  - { name: en, label: Englisch, widget: string }
+              - { name: sichtbar, label: Auf der Website zeigen, widget: boolean, default: true }
+          - name: fotos
+            label: Fotostrecke auf der Startseite
+            label_singular: Foto
+            widget: list
+            collapsed: true
+            summary: "{{fields.alt.de}}"
+            fields: *foto
+          - name: medien
+            label: Fotos auf der Seite Medien
+            label_singular: Foto
+            widget: list
+            collapsed: true
+            summary: "{{fields.alt.de}}"
+            fields: *foto

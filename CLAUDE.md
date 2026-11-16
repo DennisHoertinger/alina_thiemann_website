@@ -76,4 +76,14 @@ Schrift Newsreader (eine Familie, Kursiv nur für Rollennamen). Nur zwei Schrift
 - Änderungen über Branches und Pull Requests. Dennis (14.11.2026): jede gewünschte Änderung sofort umsetzen, testen und selbst mergen.
 - Bei jeder Änderung an CSS oder JS die Version `?v=JJJJMMTT-HHMM` an den Links in allen HTML-Dateien hochzählen (GitHub Pages lässt Browser bis zu 10 Minuten zwischenspeichern).
 - Erst auf dem Handy (ca. 375 px) prüfen, dann Desktop. Nichts darf waagerecht überlaufen.
-- CMS (Sveltia) kommt in einem zweiten Schritt: Texte und Fotos als JSON, eingesetzt vom selben Skript-Prinzip wie Filmmakers.
+
+## CMS: Alina pflegt selbst (Sveltia, seit 16.11.2026)
+
+- `alinathiemann.de/admin/` lädt Sveltia CMS (`admin/index.html`, Version fest in der Script-URL; Konfiguration `admin/config.yml`). Speichern = Commit auf `main`.
+- Im CMS: **Aktuell** (`daten/news.json`), **Texte** (`daten/texte.json`: Über mich auf Start und Vita, Das mag ich spielen, Persönliches, Coaching-Text und Eckdaten), **Fotos** (`daten/fotos.json`: Startbilder, Fotostrecke Start, Fotos auf Medien; je Foto Pfad, Credit Pflicht, Alt-Text DE/EN, sichtbar). Filmmakers-Daten, Rechtstexte, Design nicht.
+- `skripte/filmmakers.mjs` setzt die Inhalte zwischen `<!-- cms:NAME -->` und `<!-- /cms:NAME -->` ein (Blöcke `ueber-mich`, `mag-ich-spielen`, `persoenliches`, `coaching`, `startbilder`, `fotos`, `fotos-medien`). Diese Bereiche nicht von Hand im HTML ändern, sondern im JSON.
+- Fließtext im CMS: Leerzeile = Absatz, `*kursiv*`, `[Text](https://…)`. Leeres Englisch = Deutsch wird übernommen.
+- Hochgeladene Fotos landen in `img/` als WebP (max. 1600 px, im Browser umgewandelt), ohne -800-Fassung; Fotos `img/NAME-1600.webp` mit -800 bekommen automatisch `srcset`.
+- Die Action läuft bei jeder Änderung an `daten/*.json` und committet die HTML-Seiten (mit `pull --rebase`, falls Alina schnell hintereinander speichert).
+- Anmeldung: GitHub-Konto mit Schreibrecht aufs Repo. „Mit Zugriffstoken anmelden“ geht sofort; „Mit GitHub anmelden“ braucht den Anmelde-Dienst (Sveltia CMS Authenticator als Cloudflare Worker, `base_url` in `admin/config.yml`).
+- Beim Livegang: `Disallow: /admin/` in `robots.txt` behalten.
