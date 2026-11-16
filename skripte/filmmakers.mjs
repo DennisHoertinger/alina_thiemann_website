@@ -70,9 +70,9 @@ function filmEintrag(f) {
   const hinweis = f.inEntwicklung ? `<span class="hinweis">${beide("In Entwicklung", "In development")}</span>` : "";
   // data-art: für den Filter auf der Vita-Seite (Kino/TV, Kurzfilm, Ausbildung)
   const art = /Kurzfilm/.test(f.art?.de) ? "kurz" : /Ausbildung/.test(f.art?.de) ? "ausbildung" : "kino-tv";
-  // "video" ist eine Ergänzung (nicht auf Filmmakers): Anker des Films auf der Vita-Seite
+  // "video" ist eine Ergänzung (nicht auf Filmmakers): Anker des Films auf der Film-Seite
   const video = f.video
-    ? `<span class="details"><a class="link" href="kamera.html#video-${esc(f.video)}">${beide("Film ansehen", "Watch the film")}</a></span>`
+    ? `<span class="details"><a class="link" href="film.html#video-${esc(f.video)}">${beide("Film ansehen", "Watch the film")}</a></span>`
     : "";
   return `<li data-art="${art}"><span class="jahr">${esc(f.jahr)}</span><span class="werk">${link(f.link, esc(f.titel))}</span>` +
     `<span class="rolle">${esc(f.rolle)}</span>` +
@@ -167,7 +167,10 @@ function bloecke(d, news) {
       `<ul class="rollenraster">\n` +
       d.studium.map((s) => `<li><span class="rolle">${esc(s.rolle)}</span><span class="werk">${esc(s.stueck)}</span><span class="details">${esc(s.autor)}</span></li>`).join("\n") +
       `\n</ul>`,
-    film: liste(d.film.map(filmEintrag)),
+    // Film-Seite: Auswahl oben ("auswahl": true, Ergänzung), Projekte in Entwicklung getrennt, darunter die Filmografie
+    "film-auswahl": liste(d.film.filter((f) => f.auswahl && !f.inEntwicklung).map(filmEintrag)),
+    "film-entwicklung": liste(d.film.filter((f) => f.inEntwicklung).map(filmEintrag)),
+    film: liste(d.film.filter((f) => !f.inEntwicklung).map(filmEintrag)),
     theater: `<ul class="stuecke">\n${d.theater.map(theaterKarte).join("\n")}\n</ul>`,
     studium: liste(d.studium.map((s) =>
       `<li><span class="werk">${esc(s.stueck)}</span><span class="rolle">${esc(s.rolle)}</span><span class="details">${esc(s.autor)}</span></li>`)),

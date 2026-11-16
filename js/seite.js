@@ -226,4 +226,82 @@
       knopf.setAttribute("aria-pressed", String(an));
     });
   });
+  /* Fotos groß ansehen (Website-Analyse, Dennis 16.11.2026): Tipp auf ein Foto öffnet es bildschirmfüllend, darin wischen */
+  var gruppen = [];
+  document.querySelectorAll(".fotos .spur, .stueck-bild .reihe").forEach(function (g) {
+    var b = Array.prototype.slice.call(g.querySelectorAll("img"));
+    if (b.length) gruppen.push(b);
+  });
+  if (gruppen.length && window.HTMLDialogElement) {
+    var dlg = document.createElement("dialog");
+    dlg.className = "gross";
+    dlg.innerHTML = '<div class="gross-spur"></div>' +
+      '<button type="button" class="gross-zu" data-aria-de="Schließen" data-aria-en="Close"></button>' +
+      '<button type="button" class="gross-vor" data-aria-de="Vorheriges Foto" data-aria-en="Previous photo"></button>' +
+      '<button type="button" class="gross-nach" data-aria-de="Nächstes Foto" data-aria-en="Next photo"></button>';
+    document.body.appendChild(dlg);
+    var gSpur = dlg.querySelector(".gross-spur");
+    var sprachAria = function () {
+      var s = document.documentElement.getAttribute("data-sprache") || "de";
+      dlg.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-label", b.getAttribute("data-aria-" + s)); });
+    };
+    var gross = function (img) {
+      var set = img.getAttribute("srcset");
+      return set ? set.split(",").pop().trim().split(" ")[0] : img.getAttribute("src");
+    };
+    var unterschrift = function (img) {
+      var fig = img.closest("figure");
+      var cap = fig && fig.querySelector("figcaption");
+      if (cap) return cap.innerHTML;
+      var li = img.closest("li");
+      var fuss = li && li.querySelector(".stueck-fuss");
+      var titel = li && li.querySelector(".stueck-titel");
+      return (titel ? titel.innerHTML : "") + (fuss ? "<br>" + fuss.innerHTML : "");
+    };
+    var gZeige = function (i) {
+      var n = gSpur.children.length;
+      i = Math.max(0, Math.min(n - 1, i));
+      gSpur.scrollTo({ left: i * gSpur.clientWidth, behavior: "smooth" });
+    };
+    var gAktuell = function () { return Math.round(gSpur.scrollLeft / gSpur.clientWidth); };
+    var gOeffnen = function (bilder, i) {
+      gSpur.innerHTML = "";
+      bilder.forEach(function (img) {
+        var fig = document.createElement("figure");
+        var neu = document.createElement("img");
+        neu.src = gross(img);
+        neu.alt = img.alt;
+        neu.decoding = "async";
+        var cap = document.createElement("figcaption");
+        cap.innerHTML = unterschrift(img);
+        cap.querySelectorAll("a").forEach(function (a) { a.setAttribute("tabindex", "-1"); });
+        fig.appendChild(neu);
+        fig.appendChild(cap);
+        gSpur.appendChild(fig);
+      });
+      dlg.classList.toggle("einzeln", bilder.length < 2);
+      sprachAria();
+      dlg.showModal();
+      gSpur.scrollLeft = i * gSpur.clientWidth;
+    };
+    gruppen.forEach(function (bilder) {
+      bilder.forEach(function (img, i) {
+        img.classList.add("vergroesserbar");
+        img.setAttribute("tabindex", "0");
+        img.setAttribute("role", "button");
+        img.addEventListener("click", function () { gOeffnen(bilder, i); });
+        img.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " ") { e.preventDefault(); gOeffnen(bilder, i); }
+        });
+      });
+    });
+    dlg.querySelector(".gross-zu").addEventListener("click", function () { dlg.close(); });
+    dlg.querySelector(".gross-vor").addEventListener("click", function () { gZeige(gAktuell() - 1); });
+    dlg.querySelector(".gross-nach").addEventListener("click", function () { gZeige(gAktuell() + 1); });
+    dlg.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowRight") gZeige(gAktuell() + 1);
+      if (e.key === "ArrowLeft") gZeige(gAktuell() - 1);
+    });
+    dlg.addEventListener("close", function () { gSpur.innerHTML = ""; });
+  }
 })();
