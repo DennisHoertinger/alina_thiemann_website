@@ -1,0 +1,84 @@
+{
+  "ueberMich": {
+    "de": "Alina Thiemann wird 1999 in der Lüneburger Heide geboren. Sie studiert zunächst Kulturwissenschaften und spielt mehrere Jahre im Jugendclub des Thalia Theaters in Hamburg.\n\nNach ihrem Bachelor entscheidet sie sich dafür, Schauspiel zu studieren, und studiert von 2022 bis 2026 an der Akademie für Darstellende Kunst Baden-Württemberg in Ludwigsburg, wo sie 2026 ihren Abschluss macht. Während ihrer Ausbildung erhält sie das Deutschlandstipendium und 2025 den Solopreis beim Bundeswettbewerb deutschsprachiger Schauspielstudierender in Salzburg.\n\nSie arbeitet in dieser Zeit unter anderem mit Yana Eva Thönnes sowie Kristo Šagor zusammen und gastiert am Staatstheater Regensburg, dem Schauspiel Stuttgart sowie dem Ludwigsburger Theatersommer.\n\nVor der Kamera ist sie in ARD- und ZDF-Formaten zu sehen, darunter Stammheim – Zeit des Terrors und SOKO Stuttgart.",
+    "en": "Alina Thiemann was born in 1999 on the Lüneburg Heath. She first studied cultural studies and spent several years performing in the youth club of Thalia Theater Hamburg.\n\nAfter her bachelor’s degree she decided to study acting and studied at the Academy of Performing Arts Baden-Württemberg in Ludwigsburg from 2022 to 2026, graduating in 2026. During her training she received the Deutschlandstipendium and, in 2025, the Solo Prize at the National Competition of German-speaking Drama Students in Salzburg.\n\nDuring this time she worked with Yana Eva Thönnes and Kristo Šagor, among others, and appeared as a guest at Staatstheater Regensburg, Schauspiel Stuttgart and the Ludwigsburger Theatersommer.\n\nOn screen she can be seen in ARD and ZDF productions, including Stammheim – Zeit des Terrors and SOKO Stuttgart."
+  },
+  "magIchSpielen": {
+    "de": "Ich habe besonders Lust auf historische Formate und auf starke Frauenfiguren. Ich interessiere mich für politische Stoffe, Dogma und Improvisation.",
+    "en": "I am especially drawn to period pieces and strong female characters. I am interested in political material, Dogme and improvisation."
+  },
+  "persoenliches": [
+    {
+      "etikett": {
+        "de": "Lieblingsfilm",
+        "en": "Favourite film"
+      },
+      "text": {
+        "de": "Der schlimmste Mensch der Welt von Joachim Trier",
+        "en": "The Worst Person in the World by Joachim Trier"
+      }
+    },
+    {
+      "etikett": {
+        "de": "Lieblingsserie",
+        "en": "Favourite series"
+      },
+      "text": {
+        "de": "Dark von Baran bo Odar und Jantje Friese",
+        "en": "Dark by Baran bo Odar and Jantje Friese"
+      }
+    },
+    {
+      "etikett": {
+        "de": "Wenn ich nicht spiele",
+        "en": "When I’m not acting"
+      },
+      "text": {
+        "de": "Leite ich eine Theater-AG an einer Schule, spiele Fußball, gehe ins Kino und ins Theater, mache gerne Sport und lade Freund:innen zum Essen ein.",
+        "en": "I run a school drama club, play football, go to the cinema and the theatre, enjoy doing sports and invite friends over for dinner."
+      }
+    }
+  ],
+  "coaching": {
+    "untertitel": {
+      "de": "Vorbereitung auf die Bewerbung an Schauspielschulen",
+      "en": "Preparing for drama school applications"
+    },
+    "text": {
+      "de": "Du bewirbst dich an einer Schauspielschule? Ich unterstütze dich dabei, die richtigen Rollen und Texte zu finden und sie zu erarbeiten.\n\nOnline oder in Berlin.\n\nWie lange, wie oft und zu welchem Preis besprechen wir gemeinsam, je nachdem, was du brauchst.\n\nSchreib mir einfach.",
+      "en": "Applying to drama school? I’ll help you find the right roles and texts and work on them.\n\nOnline or in Berlin.\n\nHow long, how often and at what price is something we decide together, depending on what you need.\n\nJust write to me."
+    },
+    "eckdaten": [
+      {
+        "etikett": {
+          "de": "Für wen",
+          "en": "For whom"
+        },
+        "text": {
+          "de": "Bewerbung an Schauspielschulen",
+          "en": "Drama school applications"
+        }
+      },
+      {
+        "etikett": {
+          "de": "Wie",
+          "en": "How"
+        },
+        "text": {
+          "de": "online oder in Berlin",
+          "en": "online or in Berlin"
+        }
+      },
+      {
+        "etikett": {
+          "de": "Dauer und Preis",
+          "en": "Duration and fee"
+        },
+        "text": {
+          "de": "nach Absprache",
+          "en": "by arrangement"
+        }
+      }
+    ]
+  }
+}
