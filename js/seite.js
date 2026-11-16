@@ -304,4 +304,36 @@
     });
     dlg.addEventListener("close", function () { gSpur.innerHTML = ""; });
   }
+
+  /* Filme hinter den Kacheln (Dennis 16.11.2026): Tipp auf eine Film-Kachel spielt den Film groß ab.
+     Ohne JavaScript öffnet der Link einfach die Videodatei. */
+  var filmLinks = document.querySelectorAll("a[data-video]");
+  if (filmLinks.length && window.HTMLDialogElement) {
+    var fDlg = document.createElement("dialog");
+    fDlg.className = "gross film-gross";
+    fDlg.innerHTML = '<div class="film-buehne"></div><button type="button" class="gross-zu" data-aria-de="Schließen" data-aria-en="Close"></button>';
+    document.body.appendChild(fDlg);
+    var buehne = fDlg.querySelector(".film-buehne");
+    var zu = fDlg.querySelector(".gross-zu");
+    filmLinks.forEach(function (a) {
+      a.addEventListener("click", function (e) {
+        e.preventDefault();
+        var v = document.createElement("video");
+        v.controls = true;
+        v.playsInline = true;
+        v.preload = "auto";
+        v.poster = a.getAttribute("data-poster") || "";
+        v.src = a.getAttribute("data-video");
+        buehne.innerHTML = "";
+        buehne.appendChild(v);
+        var s = document.documentElement.getAttribute("data-sprache") || "de";
+        zu.setAttribute("aria-label", zu.getAttribute("data-aria-" + s));
+        fDlg.showModal();
+        var p = v.play();
+        if (p && p.catch) p.catch(function () {});
+      });
+    });
+    zu.addEventListener("click", function () { fDlg.close(); });
+    fDlg.addEventListener("close", function () { buehne.innerHTML = ""; });
+  }
 })();

@@ -1,5 +1,5 @@
 # Sveltia CMS für alinathiemann.de (aufrufen unter https://alinathiemann.de/admin/)
-# Alina pflegt hier Aktuelles, Texte und Fotos. Gespeichert wird als JSON in daten/,
+# Alina pflegt hier Texte und Fotos. Gespeichert wird als JSON in daten/,
 # skripte/filmmakers.mjs setzt die Inhalte per GitHub Action in die HTML-Seiten ein.
 # Was auf Filmmakers steht (Steckbrief, Film, Theater, Ausbildung, Preise) gehört NICHT hierher.
 # Doku: https://sveltiacms.app/en/docs
@@ -41,61 +41,9 @@ editor:
 collections:
   - name: website
     label: Website
-    description: Aktuelles, Texte und Fotos. Steckbrief, Film, Theater und Ausbildung kommen automatisch von Filmmakers.
+    description: Texte und Fotos. Steckbrief, Film, Theater und Ausbildung kommen automatisch von Filmmakers.
     icon: edit_note
     files:
-      # ---------------------------------------------------------------- Aktuell
-      - name: aktuell
-        label: Aktuell (Laufschrift auf der Startseite)
-        file: daten/news.json
-        format: json
-        fields:
-          - name: eintraege
-            label: Meldungen
-            label_singular: Meldung
-            hint: Neueste Meldung nach oben ziehen. Gibt es keine Meldung, verschwindet die Laufschrift.
-            widget: list
-            add_to_top: true
-            collapsed: true
-            summary: "{{fields.titel.de}}"
-            fields:
-              - name: titel
-                label: Titel
-                widget: object
-                fields:
-                  - { name: de, label: Deutsch, widget: string }
-                  - { name: en, label: Englisch, widget: string, required: false, hint: "Leer lassen, wenn gleich wie Deutsch." }
-              - name: ort
-                label: Ort / Haus
-                widget: object
-                required: false
-                fields:
-                  - { name: de, label: Deutsch, widget: string, required: false }
-                  - { name: en, label: Englisch, widget: string, required: false }
-              - name: datum
-                label: Datum
-                hint: Frei, z. B. „Dezember 2026“ oder „Premiere 12.12.“. Nur eine Jahreszahl wird in der Laufschrift nicht angezeigt.
-                widget: object
-                required: false
-                fields:
-                  - { name: de, label: Deutsch, widget: string, required: false }
-                  - { name: en, label: Englisch, widget: string, required: false }
-              - name: text
-                label: Kurzer Text (für später, erscheint derzeit nicht in der Laufschrift)
-                widget: object
-                required: false
-                fields:
-                  - { name: de, label: Deutsch, widget: text, required: false }
-                  - { name: en, label: Englisch, widget: text, required: false }
-              - { name: link, label: Link (z. B. Spielplan), widget: string, required: false, pattern: ['^(https?://.+)?$', 'Bitte mit https:// beginnen'] }
-              - name: linktext
-                label: Linktext
-                widget: object
-                required: false
-                fields:
-                  - { name: de, label: Deutsch, widget: string, required: false }
-                  - { name: en, label: Englisch, widget: string, required: false }
-
       # ---------------------------------------------------------------- Texte
       - name: texte
         label: Texte (Über mich, Coaching)
