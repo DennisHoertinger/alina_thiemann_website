@@ -172,7 +172,7 @@ collections:
         label: Videos (YouTube-Links)
         file: daten/videos.json
         format: json
-        description: Showreels und About me. Neues Video bei YouTube hochladen, Link hier eintragen, speichern. Nach etwa zwei Minuten ist es überall auf der Website.
+        description: Showreels, About me und weitere Videos. Neues Video bei YouTube hochladen, Link hier eintragen, speichern. Nach etwa zwei Minuten ist es überall auf der Website.
         fields:
           - name: filmShowreel
             label: Film-Showreel (Start, Film, Medien)
@@ -195,6 +195,24 @@ collections:
             label: About me (Start, Film, Medien)
             widget: object
             fields: *video
+          - name: weitere
+            label: Weitere Videos (Seite Medien)
+            label_singular: Video
+            widget: list
+            required: false
+            hint: Beliebig viele zusätzliche Videos. Sie erscheinen auf der Seite Medien unter „Weitere Videos“, in der Reihenfolge dieser Liste.
+            summary: "{{fields.titel.de}}"
+            fields:
+              - { name: youtube, label: YouTube-Link, widget: string, hint: "Teilen-Link aus YouTube, z. B. https://youtu.be/… Das Video muss öffentlich oder „nicht gelistet“ sein und Einbetten erlauben." }
+              - name: titel
+                label: Titel
+                widget: object
+                fields:
+                  - { name: de, label: Deutsch, widget: string }
+                  - { name: en, label: Englisch, widget: string, required: false }
+              - { name: angabe, label: "Jahr und Länge", widget: string, required: false, hint: "z. B. 2026 · 4:11 Min." }
+              - { name: standbild, label: Standbild (erscheint vor dem Abspielen), widget: image, hint: "Querformat 16:9. Bis zum Tippen lädt nichts von YouTube, deshalb braucht es ein eigenes Bild." }
+              - { name: sichtbar, label: Auf der Website zeigen, widget: boolean, default: true, required: false }
 
       # ---------------------------------------------------------------- Kacheln Film und Theater
       - name: kacheln
