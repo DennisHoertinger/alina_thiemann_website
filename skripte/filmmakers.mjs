@@ -124,6 +124,7 @@ function theaterKarte(e) {
 // Film auf der Film-Seite als Kacheln, genau wie Theater (Dennis 16.11.2026).
 // Bild: "bilder" (Ergänzung) oder das Standbild des Films, wenn er hinterlegt ist; sonst Platzhalter.
 // Hinterlegte Filme ("video", Ergänzung) liegen hinter der Kachel: Tippen spielt medien/VIDEO-2026.mp4 groß ab.
+// "plakat" (Ergänzung): Filmplakat img/PLAKAT-800/-1600.webp als Kachelbild; "videotext" ersetzt „Film ansehen“ (z. B. Trailer).
 function filmKarte(f) {
   const alt = (de, en) => `alt="${esc(de)}" data-alt-de="${esc(de)}" data-alt-en="${esc(en)}"`;
   const altText = alt(`Alina Thiemann in „${f.titel}“`, `Alina Thiemann in “${f.titel}”`);
@@ -132,7 +133,10 @@ function filmKarte(f) {
   const filmLink = (inhalt, klasse) =>
     `<a class="${klasse}" href="${datei}" data-video="${datei}" data-poster="img/${esc(f.video)}-standbild.webp">${inhalt}</a>`;
   let bild;
-  if (bilder.length) {
+  if (f.plakat) {
+    const plakat = `<img class="plakat" src="img/${esc(f.plakat)}-800.webp" srcset="img/${esc(f.plakat)}-800.webp 800w, img/${esc(f.plakat)}-1600.webp 1600w" sizes="(min-width:1100px) 360px, (min-width:760px) 33vw, 50vw" ${alt(`Filmplakat „${f.titel}“`, `Film poster “${f.titel}”`)} loading="lazy" decoding="async">`;
+    bild = f.video ? filmLink(plakat, "standbild") : plakat;
+  } else if (bilder.length) {
     bild = `<div class="reihe" tabindex="0" aria-label="${esc(f.titel)}">` +
       bilder.map((b) => `<img src="img/${esc(b)}-800.webp" srcset="img/${esc(b)}-800.webp 800w, img/${esc(b)}-1600.webp 1600w" sizes="(min-width:1100px) 360px, (min-width:760px) 33vw, 50vw" width="800" height="1000" ${altText} loading="lazy" decoding="async">`).join("") +
       `</div>`;
@@ -143,7 +147,8 @@ function filmKarte(f) {
   }
   const info = [t(f.art), t(f.rollentyp), `${beide("Regie", "Dir.")} ${esc(f.regie)}`];
   const fuss = [];
-  if (f.video) fuss.push(filmLink(beide("Film ansehen", "Watch the film"), "link"));
+  const videotext = f.videotext || { de: "Film ansehen", en: "Watch the film" };
+  if (f.video) fuss.push(filmLink(beide(videotext.de, videotext.en), "link"));
   if (bilder.length > 1) fuss.push(beide(`${bilder.length} Fotos`, `${bilder.length} photos`));
   if (f.foto) fuss.push(beide("Foto: " + f.foto, "Photo: " + f.foto));
   return `<li class="stueck"><div class="stueck-bild">${bild}</div>` +
