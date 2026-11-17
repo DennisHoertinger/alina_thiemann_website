@@ -2,3 +2,9 @@
 material/
 node_modules/
 *.log
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12

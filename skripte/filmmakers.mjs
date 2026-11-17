@@ -74,8 +74,18 @@ function t(wert) {
   return `<span data-l="de">${esc(wert.de)}</span><span data-l="en">${esc(en)}</span>`;
 }
 const beide = (de, en) => t({ de, en });
-const link = (url, inhalt) =>
-  url ? `<a class="link" href="${esc(url)}" rel="noopener" target="_blank">${inhalt}</a>` : inhalt;
+// Sicherheitsbericht 17.11.2026: Links nur mit https:, http: oder mailto: (oder relativ), nie javascript: o. Ä.
+function sicherUrl(url) {
+  const u = String(url ?? "").trim();
+  if (!u) return "";
+  if (/^(https?:|mailto:)/i.test(u)) return u;
+  if (/^[a-z][a-z0-9+.-]*:/i.test(u) || u.startsWith("//")) { console.warn(`Link verworfen (Protokoll nicht erlaubt): ${u}`); return ""; }
+  return u; // relativer Pfad
+}
+const link = (url, inhalt) => {
+  const u = sicherUrl(url);
+  return u ? `<a class="link" href="${esc(u)}" rel="noopener" target="_blank">${inhalt}</a>` : inhalt;
+};
 
 function filmEintrag(f) {
   const hinweis = f.inEntwicklung ? `<span class="hinweis">${beide("In Entwicklung", "In development")}</span>` : "";
@@ -218,8 +228,8 @@ function preisEintrag(p) {
 // Ausbildung/Weiterbildung; "notiz" und "link" sind Ergänzungen, die nicht auf Filmmakers stehen
 function bildungEintrag(a) {
   const notiz = a.notiz ? `<span class="details">${t(a.notiz)}</span>` : "";
-  const verweis = a.link
-    ? `<span class="details"><a class="link" href="${esc(a.link)}" rel="noopener" target="_blank">${t(a.linktext || { de: "Mehr", en: "More" })}</a></span>`
+  const verweis = sicherUrl(a.link)
+    ? `<span class="details"><a class="link" href="${esc(sicherUrl(a.link))}" rel="noopener" target="_blank">${t(a.linktext || { de: "Mehr", en: "More" })}</a></span>`
     : "";
   return `<li><span class="jahr">${esc(a.jahr)}</span><span class="details" style="font-size:var(--text);color:inherit">${t(a.text)}</span>${notiz}${verweis}</li>`;
 }
@@ -233,7 +243,7 @@ function newsBlock(n) {
   const meldung = (e) => {
     const datum = e.datum?.de ?? "";
     const vorne = !datum || /^\d{4}$/.test(datum) ? "" : `<span class="datum">${t(e.datum)}</span> `;
-    const titel = e.link ? `<a href="${esc(e.link)}" rel="noopener" target="_blank">${t(e.titel)}</a>` : t(e.titel);
+    const titel = sicherUrl(e.link) ? `<a href="${esc(sicherUrl(e.link))}" rel="noopener" target="_blank">${t(e.titel)}</a>` : t(e.titel);
     return `<span class="meldung">${vorne}${titel}${e.ort?.de ? `, <span class="ort-zeile">${t(e.ort)}</span>` : ""}</span>`;
   };
   const zeile = n.eintraege.map(meldung).join('<span class="trenner" aria-hidden="true">·</span>') + '<span class="trenner" aria-hidden="true">·</span>';
