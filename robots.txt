@@ -1,4 +1,6 @@
 User-agent: *
-Disallow: /
-# Bis zum Livegang gesperrt. Beim Start ersetzen durch: Allow: /
-# und diese Zeilen ergänzen: Disallow: /admin/ und Sitemap: https://alinathiemann.de/sitemap.xml
+Allow: /
+Disallow: /admin/
+Disallow: /vergleich/
+
+Sitemap: https://alinathiemann.de/sitemap.xml
