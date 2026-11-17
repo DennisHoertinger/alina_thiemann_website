@@ -381,6 +381,18 @@ function youtubeId(link) {
   const m = s.match(/(?:youtu\.be\/|[?&]v=|\/embed\/|\/shorts\/|\/live\/)([A-Za-z0-9_-]{11})/) || s.match(/^([A-Za-z0-9_-]{11})$/);
   return m ? m[1] : null;
 }
+function videoKnopf(v, id) {
+  const de = v.titel?.de || "Video", en = v.titel?.en || de;
+  const bild = String(v.standbild ?? "").replace(/^\//, "");
+  return `<button type="button" class="yt-start" data-yt="${esc(id)}" data-titel="${esc(de)}" aria-label="${esc(de)} abspielen (lädt YouTube)" ` +
+    `data-aria-de="${esc(de)} abspielen (lädt YouTube)" data-aria-en="Play ${esc(en)} (loads YouTube)">` +
+    (bild ? `<img src="${esc(bild)}" alt="" loading="lazy" decoding="async">` : "") +
+    `<span class="yt-play" aria-hidden="true"></span></button>`;
+}
+function videoAngabe(v) {
+  const de = v.titel?.de || "Video", en = v.titel?.en || de;
+  return (de === en ? esc(de) : beide(de, en)) + (v.angabe ? `<small>${esc(v.angabe)}</small>` : "");
+}
 function videoBloecke(videos) {
   const b = {};
   const plaetze = { "film-showreel": "filmShowreel", "theater-showreel": "theaterShowreel", "about-me": "aboutMe" };
@@ -389,15 +401,20 @@ function videoBloecke(videos) {
     if (!v) continue;
     const id = youtubeId(v.youtube);
     if (!id) { console.warn(`Video „${feld}“: kein gültiger YouTube-Link (${v.youtube}), Block bleibt unverändert.`); continue; }
-    const de = v.titel?.de || "Video", en = v.titel?.en || de;
-    const bild = String(v.standbild ?? "").replace(/^\//, "");
-    b[`video-${name}`] =
-      `<button type="button" class="yt-start" data-yt="${esc(id)}" data-titel="${esc(de)}" aria-label="${esc(de)} abspielen (lädt YouTube)" ` +
-      `data-aria-de="${esc(de)} abspielen (lädt YouTube)" data-aria-en="Play ${esc(en)} (loads YouTube)">` +
-      (bild ? `<img src="${esc(bild)}" alt="" loading="lazy" decoding="async">` : "") +
-      `<span class="yt-play" aria-hidden="true"></span></button>`;
-    b[`videoangabe-${name}`] = (de === en ? esc(de) : beide(de, en)) + (v.angabe ? `<small>${esc(v.angabe)}</small>` : "");
+    b[`video-${name}`] = videoKnopf(v, id);
+    b[`videoangabe-${name}`] = videoAngabe(v);
   }
+  // Weitere Videos (Dennis 17.11.2026): beliebig viele, auf Medien als eigener Abschnitt; leer = Abschnitt entfällt
+  const weitere = (videos.weitere || []).filter((v) => v && v.sichtbar !== false).map((v) => {
+    const id = youtubeId(v.youtube);
+    if (!id) { console.warn(`Weiteres Video „${v.titel?.de}“: kein gültiger YouTube-Link (${v.youtube}), wird ausgelassen.`); return null; }
+    return `    <figure>\n      <div class="rahmen yt">${videoKnopf(v, id)}</div>\n      <figcaption class="unterzeile">${videoAngabe(v)}</figcaption>\n    </figure>`;
+  }).filter(Boolean);
+  b["videos-weitere"] = weitere.length
+    ? `<section class="einblenden" id="weitere-videos">\n  <h2 class="titel kaps">${beide("Weitere Videos", "More videos")}</h2>\n  <div class="videoliste">\n${weitere.join("\n")}\n  </div>\n` +
+      `  <p class="yt-hinweis">${beide("Die Videos laden erst beim Abspielen von YouTube (Google).", "Videos load from YouTube (Google) only when you press play.")} ` +
+      `<a class="link" href="datenschutz.html#youtube">${beide("Datenschutz", "Privacy")}</a></p>\n</section>`
+    : "";
   return b;
 }
 
