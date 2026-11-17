@@ -375,4 +375,23 @@
     reihe.addEventListener("scroll", stand, { passive: true });
     stand();
   });
+
+  /* YouTube mit Zwei-Klick-Lösung (Dennis 17.11.2026): Bis zum Tippen wird nichts von YouTube geladen.
+     Danach youtube-nocookie.com, ohne fremde Vorschläge am Ende (rel=0). */
+  document.querySelectorAll(".rahmen.yt").forEach(function (r) {
+    var knopf = r.querySelector(".yt-start");
+    if (!knopf) return;
+    knopf.addEventListener("click", function () {
+      var f = document.createElement("iframe");
+      f.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(r.getAttribute("data-yt")) +
+        "?autoplay=1&rel=0&playsinline=1&modestbranding=1";
+      f.title = r.getAttribute("data-titel") || "Video";
+      f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+      f.allowFullscreen = true;
+      f.referrerPolicy = "strict-origin-when-cross-origin";
+      r.innerHTML = "";
+      r.appendChild(f);
+      f.focus();
+    });
+  });
 })();
