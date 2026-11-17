@@ -138,6 +138,61 @@
       "sichtbar": true
     }
   ],
+  "vitaKopf": {
+    "bild": "/img/stella-butz-2026-02-1600.webp",
+    "credit": "Stella Butz, 2026",
+    "alt": {
+      "de": "Alina Thiemann, Headshot",
+      "en": "Alina Thiemann, headshot"
+    }
+  },
+  "headshots": [
+    {
+      "bild": "img/annette-hauschild-2025-00-1600.webp",
+      "credit": "Annette Hauschild, 2025",
+      "alt": {
+        "de": "Alina Thiemann, Headshot vor dunklem Hintergrund",
+        "en": "Alina Thiemann, headshot on a dark background"
+      },
+      "sichtbar": true
+    },
+    {
+      "bild": "/img/stella-butz-2026-03-1600.webp",
+      "credit": "Stella Butz, 2026",
+      "alt": {
+        "de": "Alina Thiemann, im hellblauen Hemd",
+        "en": "Alina Thiemann, in a light blue shirt"
+      },
+      "sichtbar": true
+    },
+    {
+      "bild": "/img/stella-butz-2026-04-1600.webp",
+      "credit": "Annette Hauschild, 2025",
+      "alt": {
+        "de": "Alina Thiemann, Headshot vor dunklem Hintergrund",
+        "en": "Alina Thiemann, headshot on a dark background"
+      },
+      "sichtbar": true
+    },
+    {
+      "bild": "/img/stella-butz-2026-12-1600.webp",
+      "credit": "Stella Butz, 2026",
+      "alt": {
+        "de": "Alina Thiemann, in geblümter Bluse",
+        "en": "Alina Thiemann, in a floral blouse"
+      },
+      "sichtbar": true
+    },
+    {
+      "bild": "/img/stella-butz-2026-09-1600.webp",
+      "credit": "Stella Butz, 2026",
+      "alt": {
+        "de": "Alina Thiemann, vor weißer Wand, Ganzkörper",
+        "en": "Alina Thiemann, against a white wall, full length"
+      },
+      "sichtbar": true
+    }
+  ],
   "vorschau": {
     "vita": "/img/stella-butz-2026-01-1600.webp",
     "film": "img/zorge-standbild.webp",
@@ -367,70 +422,6 @@
       "alt": {
         "de": "Alina Thiemann am Kostümschrank",
         "en": "Alina Thiemann at a costume rail"
-      },
-      "sichtbar": true
-    }
-  ],
-  "vitaKopf": {
-    "bild": "img/annette-hauschild-2025-00-1600.webp",
-    "credit": "Annette Hauschild, 2025",
-    "alt": {
-      "de": "Alina Thiemann, Headshot",
-      "en": "Alina Thiemann, headshot"
-    }
-  },
-  "headshots": [
-    {
-      "bild": "img/annette-hauschild-2025-00-1600.webp",
-      "credit": "Annette Hauschild, 2025",
-      "alt": {
-        "de": "Alina Thiemann, Headshot vor dunklem Hintergrund",
-        "en": "Alina Thiemann, headshot on a dark background"
-      },
-      "sichtbar": true
-    },
-    {
-      "bild": "img/annette-hauschild-2025-01-1600.webp",
-      "credit": "Annette Hauschild, 2025",
-      "alt": {
-        "de": "Alina Thiemann, Headshot vor hellem Hintergrund",
-        "en": "Alina Thiemann, headshot on a light background"
-      },
-      "sichtbar": true
-    },
-    {
-      "bild": "img/stella-butz-2026-15-1600.webp",
-      "credit": "Stella Butz, 2026",
-      "alt": {
-        "de": "Alina Thiemann, im hellblauen Hemd",
-        "en": "Alina Thiemann, in a light blue shirt"
-      },
-      "sichtbar": true
-    },
-    {
-      "bild": "img/annette-hauschild-2025-03-1600.webp",
-      "credit": "Annette Hauschild, 2025",
-      "alt": {
-        "de": "Alina Thiemann, Headshot vor dunklem Hintergrund",
-        "en": "Alina Thiemann, headshot on a dark background"
-      },
-      "sichtbar": true
-    },
-    {
-      "bild": "img/stella-butz-2026-13-1600.webp",
-      "credit": "Stella Butz, 2026",
-      "alt": {
-        "de": "Alina Thiemann, in geblümter Bluse",
-        "en": "Alina Thiemann, in a floral blouse"
-      },
-      "sichtbar": true
-    },
-    {
-      "bild": "img/annette-hauschild-2025-07-1600.webp",
-      "credit": "Annette Hauschild, 2025",
-      "alt": {
-        "de": "Alina Thiemann, vor weißer Wand, Ganzkörper",
-        "en": "Alina Thiemann, against a white wall, full length"
       },
       "sichtbar": true
     }
