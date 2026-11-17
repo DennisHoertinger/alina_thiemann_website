@@ -167,6 +167,35 @@ collections:
             summary: "{{fields.alt.de}}"
             fields: *foto
 
+      # ---------------------------------------------------------------- Videos (YouTube)
+      - name: videos
+        label: Videos (YouTube-Links)
+        file: daten/videos.json
+        format: json
+        description: Showreels und About me. Neues Video bei YouTube hochladen, Link hier eintragen, speichern. Nach etwa zwei Minuten ist es überall auf der Website.
+        fields:
+          - name: filmShowreel
+            label: Film-Showreel (Start, Film, Medien)
+            widget: object
+            fields: &video
+              - { name: youtube, label: YouTube-Link, widget: string, hint: "z. B. https://youtu.be/PDxR_VmuQr8 (Teilen-Link aus YouTube). Das Video muss öffentlich oder „nicht gelistet“ sein und Einbetten erlauben." }
+              - name: titel
+                label: Titel
+                widget: object
+                fields:
+                  - { name: de, label: Deutsch, widget: string }
+                  - { name: en, label: Englisch, widget: string, required: false }
+              - { name: angabe, label: "Jahr und Länge", widget: string, required: false, hint: "z. B. 2026 · 4:11 Min." }
+              - { name: standbild, label: Standbild (erscheint vor dem Abspielen), widget: image, hint: "Querformat 16:9. Bis zum Tippen lädt nichts von YouTube, deshalb braucht es ein eigenes Bild." }
+          - name: theaterShowreel
+            label: Theater-Showreel (Start, Theater, Medien)
+            widget: object
+            fields: *video
+          - name: aboutMe
+            label: About me (Start, Film, Medien)
+            widget: object
+            fields: *video
+
       # ---------------------------------------------------------------- Kacheln Film und Theater
       - name: kacheln
         label: Bilder der Film- und Theaterkacheln (Titel, Rolle, Regie kommen von Filmmakers)

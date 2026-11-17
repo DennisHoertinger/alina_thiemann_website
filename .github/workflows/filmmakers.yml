@@ -18,6 +18,7 @@ on:
       - "daten/texte.json"
       - "daten/fotos.json"
       - "daten/kacheln.json"
+      - "daten/videos.json"
       - "skripte/filmmakers.mjs"
 
 permissions:
