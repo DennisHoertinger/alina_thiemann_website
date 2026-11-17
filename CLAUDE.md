@@ -67,7 +67,7 @@ Listen links ausgerichtet, Jahr als eigene Spalte.
 
 ## SEO (16.11.2026)
 
-Jede Seite hat eine eigene `description` (gleich in `og:description`), `canonical` und `og:url` mit `https://alinathiemann.de/…`, Teilen-Bild `img/teilen-1200.jpg` (1200×630), `favicon.svg`. Die Startseite trägt JSON-LD `Person` (mit Filmmakers- und Agentur-Link). `sitemap.xml` ist vorbereitet (ohne Impressum/Datenschutz). Neue Seite: Beschreibung, Canonical und Sitemap-Eintrag nicht vergessen. Beim Livegang: `noindex` aus allen Seiten, `robots.txt` auf `Allow: /` plus `Sitemap:`-Zeile, dann Seite in der Google Search Console anmelden.
+Jede Seite hat eine eigene `description` (gleich in `og:description`), `canonical` und `og:url` mit `https://alinathiemann.de/…`, Teilen-Bild `img/teilen-1200.jpg` (1200×630; Alina wählt es im CMS unter Fotos → Teilen-Bild, `fotos.teilen`; das Skript schneidet es per ImageMagick zu, merkt die Quelle in `img/teilen-quelle.txt` und hängt `?v=Prüfsumme` an `og:image`), `favicon.svg`. Die Startseite trägt JSON-LD `Person` (mit Filmmakers- und Agentur-Link). `sitemap.xml` ist vorbereitet (ohne Impressum/Datenschutz). Neue Seite: Beschreibung, Canonical und Sitemap-Eintrag nicht vergessen. Beim Livegang: `noindex` aus allen Seiten, `robots.txt` auf `Allow: /` plus `Sitemap:`-Zeile, dann Seite in der Google Search Console anmelden.
 
 ## Gestaltung (Entwurf 7)
 

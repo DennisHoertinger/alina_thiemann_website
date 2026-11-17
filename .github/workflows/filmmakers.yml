@@ -39,6 +39,8 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: 22
+      - name: ImageMagick für das Teilen-Bild
+        run: command -v convert >/dev/null || (sudo apt-get update -qq && sudo apt-get install -y -qq imagemagick)
       - name: Daten holen und einsetzen
         env:
           FILMMAKERS_API_TOKEN: ${{ secrets.FILMMAKERS_API_TOKEN }}
@@ -52,7 +54,7 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898333+github-actions[bot]@users.noreply.github.com"
-          git add -A daten *.html
+          git add -A daten *.html img/teilen-1200.jpg img/teilen-quelle.txt
           git commit -m "Inhalte eingesetzt (Filmmakers/CMS)"
           # Hat Alina inzwischen weiter gespeichert, erst deren Stand holen, dann senden
           for versuch in 1 2 3; do

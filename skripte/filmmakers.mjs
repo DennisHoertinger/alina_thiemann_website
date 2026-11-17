@@ -15,6 +15,8 @@
 
 import { readFile, writeFile, readdir } from "node:fs/promises";
 import { existsSync } from "node:fs";
+import { execFileSync } from "node:child_process";
+import { createHash } from "node:crypto";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -450,6 +452,38 @@ function videoBloecke(videos) {
   return b;
 }
 
+// Teilen-Bild (Dennis 17.11.2026): Alina wählt im CMS ein Foto (fotos.teilen), das Skript schneidet es mit ImageMagick
+// auf 1200 × 630 zu (Hochformat: oberes Viertel bleibt, wegen des Gesichts) und speichert es als img/teilen-1200.jpg. img/teilen-quelle.txt merkt sich das Ausgangsbild.
+// Die Adresse bekommt ?v=Prüfsumme, damit WhatsApp & Co. ein neues Bild als neu erkennen.
+async function teilenBild(fotos) {
+  const ziel = join(WURZEL, "img", "teilen-1200.jpg");
+  const merker = join(WURZEL, "img", "teilen-quelle.txt");
+  const quelle = String(fotos?.teilen ?? "").trim().replace(/^\//, "");
+  if (quelle && quelle !== "img/teilen-1200.jpg") {
+    let bisher = "";
+    try { bisher = (await readFile(merker, "utf8")).trim(); } catch {}
+    if (bisher !== quelle) {
+      const pfad = join(WURZEL, quelle);
+      if (!existsSync(pfad)) console.warn(`Teilen-Bild ${quelle} nicht gefunden, altes Bild bleibt.`);
+      else {
+        try {
+          // Auf 1200 breit bzw. 630 hoch bringen, dann so schneiden, dass bei Hochformat das obere Drittel (Gesicht) bleibt
+          const [w, h] = execFileSync("identify", ["-format", "%w %h", pfad + "[0]"]).toString().split(" ").map(Number);
+          const f = Math.max(1200 / w, 630 / h);
+          const hn = Math.round(h * f), wn = Math.round(w * f);
+          const x = Math.max(0, Math.round((wn - 1200) / 2)), y = Math.max(0, Math.round((hn - 630) * 0.25));
+          execFileSync("convert", [pfad + "[0]", "-auto-orient", "-resize", `${wn}x${hn}!`, "-crop", `1200x630+${x}+${y}`, "+repage", "-strip", "-quality", "85", ziel]);
+          await writeFile(merker, quelle + "\n");
+          console.log(`Teilen-Bild neu erzeugt aus ${quelle}.`);
+        } catch (e) { console.warn(`Teilen-Bild konnte nicht erzeugt werden (ImageMagick?): ${e.message}`); }
+      }
+    }
+  }
+  if (!existsSync(ziel)) return null;
+  const pruef = createHash("sha256").update(await readFile(ziel)).digest("hex").slice(0, 8);
+  return `https://alinathiemann.de/img/teilen-1200.jpg?v=${pruef}`;
+}
+
 // ---------- 3. In die Seiten einsetzen ----------
 
 async function htmlDateien(ordner) {
@@ -485,7 +519,9 @@ async function main() {
       return null;
     }
   };
-  const b = { ...bloecke(kachelnAnwenden(daten, await lesen(KACHELN)), news), ...cmsBloecke(await lesen(TEXTE), await lesen(FOTOS)), ...videoBloecke((await lesen(VIDEOS)) || {}) };
+  const fotosDaten = await lesen(FOTOS);
+  const teilenUrl = await teilenBild(fotosDaten);
+  const b = { ...bloecke(kachelnAnwenden(daten, await lesen(KACHELN)), news), ...cmsBloecke(await lesen(TEXTE), fotosDaten), ...videoBloecke((await lesen(VIDEOS)) || {}) };
   let geaendert = 0;
   for (const datei of await htmlDateien(WURZEL)) {
     const alt = await readFile(datei, "utf8");
@@ -496,7 +532,8 @@ async function main() {
         return name.startsWith("videoangabe-") ? `${auf}${b[name]}${zu}` : `${auf}\n${b[name]}\n${zu}`;
       }
     );
-    if (neu !== alt) { await writeFile(datei, neu); geaendert++; }
+    const mitBild = teilenUrl ? neu.replace(/(<meta (?:property|name)="(?:og:image|twitter:image)" content=")[^"]*(")/g, `$1${teilenUrl}$2`) : neu;
+    if (mitBild !== alt) { await writeFile(datei, mitBild); geaendert++; }
   }
   console.log(`${geaendert} HTML-Datei(en) aktualisiert.`);
 }
