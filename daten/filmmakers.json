@@ -247,7 +247,13 @@
         "en": "Lead"
       },
       "regie": "Mauriz Thabo Röckle",
-      "produktion": "Nathalie Felkel"
+      "produktion": "Nathalie Felkel",
+      "video": "toni",
+      "videotext": {
+        "de": "Trailer ansehen",
+        "en": "Watch the trailer"
+      },
+      "plakat": "toni-plakat"
     },
     {
       "jahr": "2024–2025",
