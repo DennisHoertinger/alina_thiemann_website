@@ -298,6 +298,11 @@ nav.sprungleiste.seitentitel{margin-top:0;padding-top:40px}
 .vita-seite .sprungleiste{margin-top:36px}
 /* Vita-Unterseiten (Alina 16.11.2026): Übersicht vita.html, eigene Seiten für Steckbrief, Kamera, Bühne, Ausbildung */
 .wegweiser.vier .weg img{aspect-ratio:4/3}
+/* Vorschau-Karten (Dennis 17.11.2026): auf dem Handy zwei nebeneinander, kleiner, Titel unterstrichen */
+.wegweiser.vier{grid-template-columns:1fr 1fr;gap:10px}
+.wegweiser.vier .weg img{aspect-ratio:4/5}
+.wegweiser.vier .weg-text{left:12px;right:12px;bottom:12px}
+.weg-titel{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px}
 .vita-seite .seitentitel{text-align:center;padding:96px var(--rand) 0}
 .vita-seite .seitentitel .oberzeile{color:var(--gruen);margin-bottom:6px}
 .unterseiten{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 20px;max-width:40em;margin:22px auto 0;padding:0 var(--rand)}
@@ -358,7 +363,9 @@ nav.sprungleiste.seitentitel{margin-top:0;padding-top:40px}
   .vita-seite .vita-kopf{grid-template-columns:5fr 6fr;align-items:end;gap:48px;max-width:var(--breite);margin:0 auto}
   .vita-kopf .name{font-size:var(--text)}
   .wegweiser{grid-template-columns:1fr 1fr;gap:20px}
+  .wegweiser.vier{gap:20px}
   .wegweiser.vier .weg img{aspect-ratio:3/2}
+  .wegweiser.vier .weg-text{left:20px;right:20px;bottom:18px}
   .vita-seite .vita li{display:grid;grid-template-columns:8em 1fr;column-gap:20px}
   .vita-seite .vita li>*:not(.jahr){grid-column:2}
   .vita-seite .vita li .jahr{grid-row:1/span 4;padding-top:6px}
