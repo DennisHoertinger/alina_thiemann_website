@@ -98,8 +98,13 @@
     },
     {
       "titel": "Was das Nashorn sah, als es auf die andere Seite des Zauns schaute",
-      "bilder": [],
-      "foto": ""
+      "bilder": [
+        "/img/Bildschirmfoto 2026-11-17 um 16.39.14.webp",
+        "/img/Bildschirmfoto 2026-11-17 um 16.38.47.webp",
+        "/img/Bildschirmfoto 2026-11-17 um 16.38.32.webp",
+        "/img/Bildschirmfoto 2026-11-17 um 16.39.25.webp"
+      ],
+      "foto": "Sylvain Guillot"
     },
     {
       "titel": "Emil und die Detektive",
