@@ -90,3 +90,4 @@ Schrift Newsreader (eine Familie, Kursiv nur für Rollennamen). Nur zwei Schrift
 - Die Action läuft bei jeder Änderung an `daten/*.json` und committet die HTML-Seiten (mit `pull --rebase`, falls Alina schnell hintereinander speichert).
 - Anmeldung: GitHub-Konto mit Schreibrecht aufs Repo. „Mit Zugriffstoken anmelden“ geht sofort; „Mit GitHub anmelden“ braucht den Anmelde-Dienst (Sveltia CMS Authenticator als Cloudflare Worker, `base_url` in `admin/config.yml`).
 - Beim Livegang: `Disallow: /admin/` in `robots.txt` behalten.
+- Sicherheit (Bericht 17.11.2026): Sveltia-Skript mit SRI-Hash (`integrity`) eingebunden, bei Versionswechsel neu berechnen; Workflow global nur `contents: read`, Schreiben nur im Job, Actions auf Commit-SHAs gepinnt; Links im Skript nur über `sicherUrl` (https/http/mailto/relativ); CMS-Anmeldung nur mit fine-grained Token (nur dieses Repo, Contents read/write, Ablaufdatum).

@@ -11,7 +11,9 @@
 <!-- Sveltia CMS: Alina pflegt hier Aktuelles, Texte und Fotos. Jede Änderung wird ein Commit im Repo,
      die GitHub Action setzt sie in die Seiten ein, nach 1–2 Minuten ist sie online.
      Konfiguration: admin/config.yml. Version fest eingetragen; zum Aktualisieren die Nummer erhöhen
-     (https://www.npmjs.com/package/@sveltia/cms) und /admin einmal testen. -->
-<script src="https://unpkg.com/@sveltia/cms@0.266.0/dist/sveltia-cms.js"></script>
+     (https://www.npmjs.com/package/@sveltia/cms), den SRI-Hash neu berechnen
+     (npm pack @sveltia/cms@VERSION, dann openssl dgst -sha384 -binary package/dist/sveltia-cms.js | openssl base64 -A)
+     und /admin einmal testen. -->
+<script src="https://unpkg.com/@sveltia/cms@0.266.0/dist/sveltia-cms.js" integrity="sha384-MvIc9V6dpnf1+8gMj6610BmYWClYbpAyg810CA5ad7jCJmLlpGsOZTJOpOewp0wn" crossorigin="anonymous"></script>
 </body>
 </html>
