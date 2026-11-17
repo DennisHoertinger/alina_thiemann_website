@@ -366,6 +366,17 @@ function cmsBloecke(texte, fotos) {
       `\n  </div>`;
     b.fotos = fotoSpur(fotos.fotos);
     b["fotos-medien"] = fotoSpur(fotos.medien);
+    // Vita: Porträt oben (mit Credit) und Headshots im Steckbrief
+    if (fotos.vitaKopf?.bild) {
+      const k = fotos.vitaKopf;
+      b["vita-kopfbild"] = fotoImg(k, "(min-width:760px) 40vw, 100vw", 'fetchpriority="high"') +
+        (k.credit ? `<small class="nachweis">${beide("Foto: " + k.credit, "Photo: " + k.credit)}</small>` : "");
+    }
+    if (fotos.headshots) {
+      b.headshots = sichtbare(fotos.headshots).map((f) =>
+        `    <figure>${fotoImg(f, "(min-width:1100px) 25vw, (min-width:760px) 40vw, 80vw", 'loading="lazy" decoding="async"')}` +
+        (f.credit ? `<figcaption>${beide("Foto: " + f.credit, "Photo: " + f.credit)}</figcaption>` : "") + `</figure>`).join("\n");
+    }
     // Vorschau-Karten (Start und unten auf Vita, Film, Theater): Bild austauschbar, Titel und Ziel fest
     const v = fotos.vorschau || {};
     const karte = (feld, href, titel) => {
@@ -414,6 +425,17 @@ function videoBloecke(videos) {
     b[`video-${name}`] = videoKnopf(v, id);
     b[`videoangabe-${name}`] = videoAngabe(v);
   }
+  // Reihenfolge der Videos auf der Startseite (Alina 17.11.2026): Liste der Plätze, Standard wie bisher
+  const startNamen = { filmShowreel: "film-showreel", aboutMe: "about-me", theaterShowreel: "theater-showreel" };
+  const reihe = (Array.isArray(videos.reihenfolge) && videos.reihenfolge.length ? videos.reihenfolge : Object.keys(startNamen))
+    .filter((f, i, a) => startNamen[f] && a.indexOf(f) === i);
+  const startFiguren = reihe.map((feld) => {
+    const v = videos[feld];
+    const id = v && youtubeId(v.youtube);
+    if (!id) return null;
+    return `    <figure>\n      <div class="rahmen yt">\n${videoKnopf(v, id)}\n      </div>\n      <figcaption class="unterzeile">${videoAngabe(v)}</figcaption>\n    </figure>`;
+  }).filter(Boolean);
+  if (startFiguren.length) b["videos-start"] = `  <div class="videoliste">\n${startFiguren.join("\n")}\n  </div>`;
   // Weitere Videos (Dennis 17.11.2026): beliebig viele, auf Medien als eigener Abschnitt; leer = Abschnitt entfällt
   const weitere = (videos.weitere || []).filter((v) => v && v.sichtbar !== false).map((v) => {
     const id = youtubeId(v.youtube);

@@ -26,5 +26,10 @@
     "angabe": "2026 · 2:06 Min.",
     "standbild": "img/about-me-standbild.webp"
   },
-  "weitere": []
+  "weitere": [],
+  "reihenfolge": [
+    "filmShowreel",
+    "aboutMe",
+    "theaterShowreel"
+  ]
 }
