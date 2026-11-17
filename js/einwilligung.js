@@ -6,7 +6,7 @@
 
   /* ---- Einstellungen: IDs eintragen, sobald die Konten angelegt sind ---- */
   var KONFIG = {
-    googleId: "",      // z. B. "G-XXXXXXXXXX" (GA4-Mess-ID)
+    googleId: "G-LLQPLBFDLJ", // GA4-Mess-ID (Dennis 17.11.2026)
     metaPixelId: "",   // z. B. "123456789012345"
     version: 1         // erhöhen, wenn sich Zwecke ändern: Banner erscheint dann erneut
   };
