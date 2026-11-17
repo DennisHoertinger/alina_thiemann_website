@@ -58,9 +58,11 @@
     },
     {
       "titel": "Stammheim – Zeit des Terrors",
-      "bilder": [],
+      "bilder": [
+        "/img/images.webp"
+      ],
       "plakat": false,
-      "foto": ""
+      "foto": "ARD"
     },
     {
       "titel": "SOKO Stuttgart – Das Spukhaus",
