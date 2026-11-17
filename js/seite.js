@@ -383,9 +383,9 @@
     if (!knopf) return;
     knopf.addEventListener("click", function () {
       var f = document.createElement("iframe");
-      f.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(r.getAttribute("data-yt")) +
+      f.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(knopf.getAttribute("data-yt")) +
         "?autoplay=1&rel=0&playsinline=1&modestbranding=1";
-      f.title = r.getAttribute("data-titel") || "Video";
+      f.title = knopf.getAttribute("data-titel") || "Video";
       f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
       f.allowFullscreen = true;
       f.referrerPolicy = "strict-origin-when-cross-origin";

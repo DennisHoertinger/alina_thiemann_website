@@ -26,6 +26,8 @@ const NEWS = join(WURZEL, "daten", "news.json");
 const TEXTE = join(WURZEL, "daten", "texte.json");
 const FOTOS = join(WURZEL, "daten", "fotos.json");
 const KACHELN = join(WURZEL, "daten", "kacheln.json");
+// Videolinks (YouTube) aus dem CMS (Dennis 17.11.2026)
+const VIDEOS = join(WURZEL, "daten", "videos.json");
 
 // ---------- 1. Daten holen ----------
 
@@ -372,6 +374,33 @@ function cmsBloecke(texte, fotos) {
   return b;
 }
 
+// Videos aus daten/videos.json (CMS): YouTube mit Zwei-Klick-Lösung, js/seite.js lädt den Player erst beim Tippen.
+// Blöcke video-NAME (Standbild mit Abspiel-Knopf) und videoangabe-NAME (Titel und „2026 · 4:11 Min.“).
+function youtubeId(link) {
+  const s = String(link ?? "").trim();
+  const m = s.match(/(?:youtu\.be\/|[?&]v=|\/embed\/|\/shorts\/|\/live\/)([A-Za-z0-9_-]{11})/) || s.match(/^([A-Za-z0-9_-]{11})$/);
+  return m ? m[1] : null;
+}
+function videoBloecke(videos) {
+  const b = {};
+  const plaetze = { "film-showreel": "filmShowreel", "theater-showreel": "theaterShowreel", "about-me": "aboutMe" };
+  for (const [name, feld] of Object.entries(plaetze)) {
+    const v = videos[feld];
+    if (!v) continue;
+    const id = youtubeId(v.youtube);
+    if (!id) { console.warn(`Video „${feld}“: kein gültiger YouTube-Link (${v.youtube}), Block bleibt unverändert.`); continue; }
+    const de = v.titel?.de || "Video", en = v.titel?.en || de;
+    const bild = String(v.standbild ?? "").replace(/^\//, "");
+    b[`video-${name}`] =
+      `<button type="button" class="yt-start" data-yt="${esc(id)}" data-titel="${esc(de)}" aria-label="${esc(de)} abspielen (lädt YouTube)" ` +
+      `data-aria-de="${esc(de)} abspielen (lädt YouTube)" data-aria-en="Play ${esc(en)} (loads YouTube)">` +
+      (bild ? `<img src="${esc(bild)}" alt="" loading="lazy" decoding="async">` : "") +
+      `<span class="yt-play" aria-hidden="true"></span></button>`;
+    b[`videoangabe-${name}`] = (de === en ? esc(de) : beide(de, en)) + (v.angabe ? `<small>${esc(v.angabe)}</small>` : "");
+  }
+  return b;
+}
+
 // ---------- 3. In die Seiten einsetzen ----------
 
 async function htmlDateien(ordner) {
@@ -407,7 +436,7 @@ async function main() {
       return null;
     }
   };
-  const b = { ...bloecke(kachelnAnwenden(daten, await lesen(KACHELN)), news), ...cmsBloecke(await lesen(TEXTE), await lesen(FOTOS)) };
+  const b = { ...bloecke(kachelnAnwenden(daten, await lesen(KACHELN)), news), ...cmsBloecke(await lesen(TEXTE), await lesen(FOTOS)), ...videoBloecke((await lesen(VIDEOS)) || {}) };
   let geaendert = 0;
   for (const datei of await htmlDateien(WURZEL)) {
     const alt = await readFile(datei, "utf8");
@@ -415,7 +444,7 @@ async function main() {
       /(<!-- (filmmakers|cms):([a-z-]+) -->)[\s\S]*?(<!-- \/\2:\3 -->)/g,
       (ganz, auf, art, name, zu) => {
         if (!(name in b)) { console.warn(`Unbekannter Block "${name}" in ${datei}`); return ganz; }
-        return `${auf}\n${b[name]}\n${zu}`;
+        return name.startsWith("videoangabe-") ? `${auf}${b[name]}${zu}` : `${auf}\n${b[name]}\n${zu}`;
       }
     );
     if (neu !== alt) { await writeFile(datei, neu); geaendert++; }

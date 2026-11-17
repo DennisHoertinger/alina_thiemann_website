@@ -1,0 +1,29 @@
+{
+  "filmShowreel": {
+    "titel": {
+      "de": "Film-Showreel",
+      "en": "Film showreel"
+    },
+    "youtube": "https://youtu.be/PDxR_VmuQr8",
+    "standbild": "img/film-showreel-standbild.webp",
+    "angabe": "2026 · 4:11 Min."
+  },
+  "theaterShowreel": {
+    "titel": {
+      "de": "Theater-Showreel",
+      "en": "Theatre showreel"
+    },
+    "youtube": "https://youtu.be/WZ5xkkvFVug",
+    "standbild": "img/showreel-standbild-theater.webp",
+    "angabe": "2026 · 1:05 Min."
+  },
+  "aboutMe": {
+    "titel": {
+      "de": "About me",
+      "en": "About me"
+    },
+    "youtube": "https://youtu.be/8lcCwcg0bls",
+    "standbild": "img/about-me-standbild.webp",
+    "angabe": "2026 · 2:06 Min."
+  }
+}
