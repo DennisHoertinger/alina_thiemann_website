@@ -40,7 +40,15 @@ jobs:
         with:
           node-version: 22
       - name: ImageMagick für das Teilen-Bild
-        run: command -v convert >/dev/null || (sudo apt-get update -qq && sudo apt-get install -y -qq imagemagick)
+        # nur installieren, wenn im CMS ein neues Teilen-Bild gewählt ist (spart sonst ca. eine Minute)
+        run: |
+          Q=$(node -e 'try{const t=String(require("./daten/fotos.json").teilen||"").replace(/^\//,"");process.stdout.write(t)}catch(e){}')
+          B=$(cat img/teilen-quelle.txt 2>/dev/null || true)
+          if [ -n "$Q" ] && [ "$Q" != "img/teilen-1200.jpg" ] && [ "$Q" != "$B" ]; then
+            command -v convert >/dev/null || (sudo apt-get update -qq && sudo apt-get install -y -qq imagemagick)
+          else
+            echo "Teilen-Bild unverändert."
+          fi
       - name: Daten holen und einsetzen
         env:
           FILMMAKERS_API_TOKEN: ${{ secrets.FILMMAKERS_API_TOKEN }}
