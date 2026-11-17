@@ -1,4 +1,9 @@
 {
+  "reihenfolge": [
+    "aboutMe",
+    "filmShowreel",
+    "theaterShowreel"
+  ],
   "filmShowreel": {
     "youtube": "https://youtu.be/PDxR_VmuQr8",
     "titel": {
@@ -26,10 +31,5 @@
     "angabe": "2026 · 2:06 Min.",
     "standbild": "img/about-me-standbild.webp"
   },
-  "weitere": [],
-  "reihenfolge": [
-    "filmShowreel",
-    "aboutMe",
-    "theaterShowreel"
-  ]
+  "weitere": []
 }
