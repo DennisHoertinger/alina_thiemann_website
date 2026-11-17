@@ -138,6 +138,12 @@
       "sichtbar": true
     }
   ],
+  "vorschau": {
+    "vita": "/img/stella-butz-2026-01-800.webp",
+    "film": "img/zorge-standbild.webp",
+    "theater": "img/buehne-you-cant-do-it-02-1600.webp",
+    "ausbildung": "/img/annette-hauschild-2025-05-1600.webp"
+  },
   "medien": [
     {
       "bild": "img/stella-butz-2026-15-1600.webp",
@@ -364,11 +370,5 @@
       },
       "sichtbar": true
     }
-  ],
-  "vorschau": {
-    "vita": "img/annette-hauschild-2025-01-1600.webp",
-    "film": "img/zorge-standbild.webp",
-    "theater": "img/buehne-you-cant-do-it-02-1600.webp",
-    "ausbildung": "img/annette-hauschild-2025-03-1600.webp"
-  }
+  ]
 }
