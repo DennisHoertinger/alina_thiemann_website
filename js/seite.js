@@ -336,4 +336,43 @@
     zu.addEventListener("click", function () { fDlg.close(); });
     fDlg.addEventListener("close", function () { buehne.innerHTML = ""; });
   }
+
+  /* Spamschutz E-Mail (Dennis 17.11.2026): Die Adresse steht nicht im HTML, sondern wird erst hier
+     aus data-mail="name|domain" zusammengesetzt. Ohne JavaScript steht „name (at) domain“ da. */
+  document.querySelectorAll("a[data-mail]").forEach(function (a) {
+    var t = a.getAttribute("data-mail").split("|");
+    var adresse = t[0] + "\u0040" + t[1];
+    var betreff = a.getAttribute("data-betreff");
+    a.href = "mailto:" + adresse + (betreff ? "?subject=" + encodeURIComponent(betreff) : "");
+    if (a.textContent.indexOf(" (at) ") > -1) a.textContent = adresse;
+  });
+
+  /* Theater-Kacheln mit mehreren Fotos: leichte Pfeile links und rechts zeigen, dass man wischen kann (Dennis 17.11.2026) */
+  document.querySelectorAll(".stueck-bild .reihe").forEach(function (reihe) {
+    var bilder = reihe.querySelectorAll("img");
+    if (bilder.length < 2) return;
+    var feld = reihe.parentNode;
+    feld.classList.add("mit-pfeilen");
+    var s = document.documentElement.getAttribute("data-sprache") || "de";
+    [["kachel-zurueck", -1, "Vorheriges Foto", "Previous photo"], ["kachel-weiter", 1, "Nächstes Foto", "Next photo"]].forEach(function (k) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "kachel-pfeil " + k[0];
+      b.setAttribute("data-aria-de", k[2]);
+      b.setAttribute("data-aria-en", k[3]);
+      b.setAttribute("aria-label", s === "en" ? k[3] : k[2]);
+      b.addEventListener("click", function (e) {
+        e.stopPropagation();
+        reihe.scrollBy({ left: k[1] * reihe.clientWidth, behavior: "smooth" });
+      });
+      feld.appendChild(b);
+    });
+    var stand = function () {
+      var max = reihe.scrollWidth - reihe.clientWidth - 2;
+      feld.classList.toggle("am-anfang", reihe.scrollLeft <= 2);
+      feld.classList.toggle("am-ende", reihe.scrollLeft >= max);
+    };
+    reihe.addEventListener("scroll", stand, { passive: true });
+    stand();
+  });
 })();
