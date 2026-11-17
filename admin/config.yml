@@ -166,3 +166,43 @@ collections:
             collapsed: true
             summary: "{{fields.alt.de}}"
             fields: *foto
+
+      # ---------------------------------------------------------------- Kacheln Film und Theater
+      - name: kacheln
+        label: Bilder der Film- und Theaterkacheln (Titel, Rolle, Regie kommen von Filmmakers)
+        file: daten/kacheln.json
+        format: json
+        fields:
+          - name: film
+            label: Film
+            label_singular: Film
+            widget: list
+            collapsed: true
+            summary: "{{fields.titel}}"
+            hint: Der Titel muss genau so geschrieben sein wie auf Filmmakers, sonst wird die Kachel nicht gefunden.
+            fields:
+              - { name: titel, label: Titel (wie auf Filmmakers), widget: string }
+              - name: bilder
+                label: Bilder
+                hint: "Ein Bild oder mehrere zum Wischen. Leer = „Foto folgt“ (bei Filmen mit Video das Standbild). Bei einem Film mit Video liegt ein einzelnes Bild über dem Film."
+                widget: list
+                required: false
+                field: { name: bild, label: Bild, widget: image }
+              - { name: plakat, label: Erstes Bild als Filmplakat zeigen (nicht zuschneiden), widget: boolean, default: false, required: false }
+              - { name: foto, label: "Foto-Credit (z. B. Björn Klein)", widget: string, required: false, hint: "Erscheint als „Foto: …“ unter der Kachel." }
+          - name: theater
+            label: Theater
+            label_singular: Stück
+            widget: list
+            collapsed: true
+            summary: "{{fields.titel}}"
+            hint: Der Titel muss genau so geschrieben sein wie auf Filmmakers, sonst wird die Kachel nicht gefunden.
+            fields:
+              - { name: titel, label: Titel (wie auf Filmmakers), widget: string }
+              - name: bilder
+                label: Bilder
+                hint: "Ein Bild oder mehrere zum Wischen, am besten Hochformat (die Kachel ist 4:5). Leer = „Foto folgt“."
+                widget: list
+                required: false
+                field: { name: bild, label: Bild, widget: image }
+              - { name: foto, label: "Foto-Credit (z. B. Bahriye)", widget: string, required: false, hint: "Erscheint als „Foto: …“ unter der Kachel." }

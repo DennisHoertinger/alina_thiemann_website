@@ -1,0 +1,125 @@
+{
+  "film": [
+    {
+      "titel": "Home (AT)",
+      "bilder": [],
+      "plakat": false,
+      "foto": ""
+    },
+    {
+      "titel": "Freier Wille",
+      "bilder": [],
+      "plakat": false,
+      "foto": ""
+    },
+    {
+      "titel": "Quality Time (AT)",
+      "bilder": [],
+      "plakat": false,
+      "foto": ""
+    },
+    {
+      "titel": "Ballet Rivalry",
+      "bilder": [
+        "img/ballet-rivalry-standbild.webp"
+      ],
+      "plakat": false,
+      "foto": ""
+    },
+    {
+      "titel": "Zorge",
+      "bilder": [
+        "img/zorge-standbild.webp"
+      ],
+      "plakat": false,
+      "foto": ""
+    },
+    {
+      "titel": "Holy Ship!",
+      "bilder": [],
+      "plakat": false,
+      "foto": ""
+    },
+    {
+      "titel": "TONI",
+      "bilder": [
+        "img/toni-plakat-1600.webp"
+      ],
+      "plakat": true,
+      "foto": ""
+    },
+    {
+      "titel": "Stammheim – Zeit des Terrors",
+      "bilder": [],
+      "plakat": false,
+      "foto": ""
+    },
+    {
+      "titel": "SOKO Stuttgart – Das Spukhaus",
+      "bilder": [],
+      "plakat": false,
+      "foto": ""
+    },
+    {
+      "titel": "Große Freiheit",
+      "bilder": [],
+      "plakat": false,
+      "foto": ""
+    },
+    {
+      "titel": "Mountain of Miracle",
+      "bilder": [],
+      "plakat": false,
+      "foto": ""
+    },
+    {
+      "titel": "The Deep Above – First Hunt",
+      "bilder": [],
+      "plakat": false,
+      "foto": ""
+    },
+    {
+      "titel": "Feed Your Head",
+      "bilder": [],
+      "plakat": false,
+      "foto": ""
+    }
+  ],
+  "theater": [
+    {
+      "titel": "15 Minutes of Fame",
+      "bilder": [
+        "img/buehne-15-minutes-of-fame-05-1600.webp",
+        "img/buehne-15-minutes-of-fame-02-1600.webp",
+        "img/buehne-15-minutes-of-fame-08-1600.webp",
+        "img/buehne-15-minutes-of-fame-10-1600.webp"
+      ],
+      "foto": "Björn Klein"
+    },
+    {
+      "titel": "Was das Nashorn sah, als es auf die andere Seite des Zauns schaute",
+      "bilder": [],
+      "foto": ""
+    },
+    {
+      "titel": "Emil und die Detektive",
+      "bilder": [],
+      "foto": ""
+    },
+    {
+      "titel": "Performance zu „100 Jahre Sammlung, 20 Jahre Kunstmuseum“",
+      "bilder": [],
+      "foto": ""
+    },
+    {
+      "titel": "You Can't Do It",
+      "bilder": [
+        "img/buehne-you-cant-do-it-02-1600.webp",
+        "img/buehne-you-cant-do-it-01-1600.webp",
+        "img/buehne-you-cant-do-it-05-1600.webp",
+        "img/buehne-you-cant-do-it-09-1600.webp"
+      ],
+      "foto": "Bahriye"
+    }
+  ]
+}
