@@ -2,21 +2,27 @@
   "film": [
     {
       "titel": "Home (AT)",
-      "bilder": [],
+      "bilder": [
+        "/img/ARD Logo blau.webp"
+      ],
       "plakat": false,
-      "foto": ""
+      "foto": "ARD"
     },
     {
       "titel": "Freier Wille",
-      "bilder": [],
+      "bilder": [
+        "/img/Filmakademie Bawü Logo.webp"
+      ],
       "plakat": false,
-      "foto": ""
+      "foto": "Filmakademie Baden-Württemberg"
     },
     {
       "titel": "Quality Time (AT)",
-      "bilder": [],
+      "bilder": [
+        "/img/Filmakademie Bawü Logo.webp"
+      ],
       "plakat": false,
-      "foto": ""
+      "foto": "Filmakademie Baden-Württemberg"
     },
     {
       "titel": "Ballet Rivalry",
@@ -36,9 +42,11 @@
     },
     {
       "titel": "Holy Ship!",
-      "bilder": [],
+      "bilder": [
+        "/img/Filmakademie Bawü Logo.webp"
+      ],
       "plakat": false,
-      "foto": ""
+      "foto": "Filmakdemie Baden-Württemberg"
     },
     {
       "titel": "TONI",
@@ -56,33 +64,43 @@
     },
     {
       "titel": "SOKO Stuttgart – Das Spukhaus",
-      "bilder": [],
+      "bilder": [
+        "/img/ZDF Logo.webp"
+      ],
       "plakat": false,
-      "foto": ""
+      "foto": "ZDF"
     },
     {
       "titel": "Große Freiheit",
-      "bilder": [],
+      "bilder": [
+        "/img/Filmakademie Bawü Logo.webp"
+      ],
       "plakat": false,
-      "foto": ""
+      "foto": "Filmakademie Baden-Württemberg"
     },
     {
       "titel": "Mountain of Miracle",
-      "bilder": [],
+      "bilder": [
+        "/img/Filmakademie Bawü Logo.webp"
+      ],
       "plakat": false,
-      "foto": ""
+      "foto": "Filmakademie Baden-Württemberg"
     },
     {
       "titel": "The Deep Above – First Hunt",
-      "bilder": [],
+      "bilder": [
+        "/img/Filmakademie Bawü Logo.webp"
+      ],
       "plakat": false,
-      "foto": ""
+      "foto": "Filmakademie Baden-Württemberg"
     },
     {
       "titel": "Feed Your Head",
-      "bilder": [],
+      "bilder": [
+        "/img/Filmakademie Bawü Logo.webp"
+      ],
       "plakat": false,
-      "foto": ""
+      "foto": "Filmakademie Baden-Württemberg"
     }
   ],
   "theater": [
