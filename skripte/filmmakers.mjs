@@ -25,6 +25,7 @@ const NEWS = join(WURZEL, "daten", "news.json");
 // Texte und Fotos aus dem CMS (admin/config.yml)
 const TEXTE = join(WURZEL, "daten", "texte.json");
 const FOTOS = join(WURZEL, "daten", "fotos.json");
+const KACHELN = join(WURZEL, "daten", "kacheln.json");
 
 // ---------- 1. Daten holen ----------
 
@@ -87,6 +88,42 @@ function filmEintrag(f) {
     `<span class="details">${t(f.art)} · ${t(f.rollentyp)} · ${beide("Regie", "Dir.")} ${esc(f.regie)}<br>${esc(f.produktion)}</span>${video}${hinweis}</li>`;
 }
 
+// Kachelbild: Schlüssel ("buehne-x-01" → -800/-1600 mit srcset) oder Pfad aus dem CMS
+// ("img/NAME-1600.webp" mit vorhandener -800-Fassung → ebenfalls srcset, sonst die Datei direkt).
+const KACHEL = "(min-width:1100px) 360px, (min-width:760px) 33vw, 50vw";
+function quelle(b, sizes) {
+  let schluessel = null;
+  const pfad = String(b ?? "").replace(/^\//, "");
+  if (!pfad.includes("/")) schluessel = pfad;
+  else {
+    const m = pfad.match(/^img\/(.+)-1600\.webp$/);
+    if (m && existsSync(join(WURZEL, "img", `${m[1]}-800.webp`))) schluessel = m[1];
+  }
+  if (!schluessel) return `src="${esc(pfad)}"`;
+  const k = esc(schluessel);
+  return `src="img/${k}-800.webp" srcset="img/${k}-800.webp 800w, img/${k}-1600.webp 1600w" sizes="${sizes}"`;
+}
+
+// Kachelbilder aus dem CMS (daten/kacheln.json) über die Filmmakers-Daten legen, Zuordnung über den Titel.
+// Steht ein Stück dort, gelten seine Bilder und sein Credit; leere Liste = „Foto folgt“
+// (bei hinterlegtem Film bleibt das Standbild). "plakat": erstes Bild ungeschnitten als Plakat zeigen.
+function kachelnAnwenden(daten, kacheln) {
+  if (!kacheln) return daten;
+  const d = structuredClone(daten);
+  for (const art of ["film", "theater"]) {
+    for (const e of d[art] || []) {
+      const k = (kacheln[art] || []).find((x) => x && String(x.titel ?? "").trim() === e.titel);
+      if (!k) continue;
+      const bilder = (k.bilder || []).map((x) => (typeof x === "string" ? x : x?.bild)).filter(Boolean);
+      delete e.bild;
+      e.plakat = k.plakat && bilder.length ? bilder[0] : undefined;
+      e.bilder = e.plakat ? [] : bilder;
+      if ("foto" in k) e.foto = k.foto || undefined;
+    }
+  }
+  return d;
+}
+
 // Theater als Listeneintrag (Kurz-Vita auf der Startseite)
 function theaterEintrag(e) {
   const teile = [beide("Theater", "Theatre")];
@@ -104,7 +141,7 @@ function theaterKarte(e) {
   const alt = (de, en) => `alt="${esc(de)}" data-alt-de="${esc(de)}" data-alt-en="${esc(en)}"`;
   const bild = bilder.length
     ? `<div class="reihe" tabindex="0" aria-label="${esc(e.titel)}">` +
-      bilder.map((b) => `<img src="img/${esc(b)}-800.webp" srcset="img/${esc(b)}-800.webp 800w, img/${esc(b)}-1600.webp 1600w" sizes="(min-width:1100px) 360px, (min-width:760px) 33vw, 50vw" width="800" height="1000" ${alt(`Alina Thiemann in „${e.titel}“`, `Alina Thiemann in “${e.titel}”`)} loading="lazy" decoding="async">`).join("") +
+      bilder.map((b) => `<img ${quelle(b, KACHEL)} width="800" height="1000" ${alt(`Alina Thiemann in „${e.titel}“`, `Alina Thiemann in “${e.titel}”`)} loading="lazy" decoding="async">`).join("") +
       `</div>`
     : `<div class="platzhalter" aria-hidden="true"><span>${beide("Foto folgt", "Photo to come")}</span></div>`;
   const info = [];
@@ -134,11 +171,14 @@ function filmKarte(f) {
     `<a class="${klasse}" href="${datei}" data-video="${datei}" data-poster="img/${esc(f.video)}-standbild.webp">${inhalt}</a>`;
   let bild;
   if (f.plakat) {
-    const plakat = `<img class="plakat" src="img/${esc(f.plakat)}-800.webp" srcset="img/${esc(f.plakat)}-800.webp 800w, img/${esc(f.plakat)}-1600.webp 1600w" sizes="(min-width:1100px) 360px, (min-width:760px) 33vw, 50vw" ${alt(`Filmplakat „${f.titel}“`, `Film poster “${f.titel}”`)} loading="lazy" decoding="async">`;
+    const plakat = `<img class="plakat" ${quelle(f.plakat, KACHEL)} ${alt(`Filmplakat „${f.titel}“`, `Film poster “${f.titel}”`)} loading="lazy" decoding="async">`;
     bild = f.video ? filmLink(plakat, "standbild") : plakat;
+  } else if (bilder.length === 1 && f.video) {
+    // Ein eigenes Bild (CMS) bei hinterlegtem Film: liegt wie das Standbild über dem Film
+    bild = filmLink(`<img ${quelle(bilder[0], KACHEL)} ${altText} loading="lazy" decoding="async">`, "standbild");
   } else if (bilder.length) {
     bild = `<div class="reihe" tabindex="0" aria-label="${esc(f.titel)}">` +
-      bilder.map((b) => `<img src="img/${esc(b)}-800.webp" srcset="img/${esc(b)}-800.webp 800w, img/${esc(b)}-1600.webp 1600w" sizes="(min-width:1100px) 360px, (min-width:760px) 33vw, 50vw" width="800" height="1000" ${altText} loading="lazy" decoding="async">`).join("") +
+      bilder.map((b) => `<img ${quelle(b, KACHEL)} width="800" height="1000" ${altText} loading="lazy" decoding="async">`).join("") +
       `</div>`;
   } else if (f.video) {
     bild = filmLink(`<img src="img/${esc(f.video)}-standbild.webp" ${altText} loading="lazy" decoding="async">`, "standbild");
@@ -367,7 +407,7 @@ async function main() {
       return null;
     }
   };
-  const b = { ...bloecke(daten, news), ...cmsBloecke(await lesen(TEXTE), await lesen(FOTOS)) };
+  const b = { ...bloecke(kachelnAnwenden(daten, await lesen(KACHELN)), news), ...cmsBloecke(await lesen(TEXTE), await lesen(FOTOS)) };
   let geaendert = 0;
   for (const datei of await htmlDateien(WURZEL)) {
     const alt = await readFile(datei, "utf8");
