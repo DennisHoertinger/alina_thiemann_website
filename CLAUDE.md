@@ -61,7 +61,7 @@ Listen links ausgerichtet, Jahr als eigene Spalte.
 - Banner: „Alle ablehnen“ und „Alle akzeptieren“ gleichwertig, Einstellungen pro Kategorie, Widerruf über „Cookies“ im Fuß. Die Einwilligung (Version, Zeit, zufällige Kennung) liegt im `localStorage`. Ändern sich Zwecke: `version` erhöhen.
 - Schriften (Newsreader), Bilder, Kurzfilme selbst gehostet; keine externen Einbindungen ohne Zwei-Klick-Lösung.
 - YouTube (Dennis 17.11.2026, bessere Qualität): Film-Showreel `PDxR_VmuQr8`, Theater-Showreel `WZ5xkkvFVug`, About me `8lcCwcg0bls` als `.rahmen.yt[data-yt]` mit Standbild und Abspiel-Knopf; erst beim Tippen lädt `js/seite.js` den Player von youtube-nocookie.com (rel=0). Hinweis `.yt-hinweis` unter jedem Video, Abschnitt `#youtube` in der Datenschutzerklärung. Die mp4-Fassungen in `medien/` sind nicht mehr eingebunden.
-- `impressum.html` und `datenschutz.html` sind Entwürfe mit markierten offenen Stellen (`class="offen"`), vor Livegang prüfen lassen.
+- `impressum.html` und `datenschutz.html` sind fertig (Dennis 17.11.2026: kein Anwalt, nach bestem Wissen; keine Entwurf-Hinweise mehr). Bei neuen Diensten den Abschnitt in `datenschutz.html` ergänzen und „Stand“ anpassen.
 - Bis zum Livegang: `<meta name="robots" content="noindex, nofollow">` in jeder Seite und `robots.txt` mit `Disallow: /`.
 - Keine privaten Daten aus Lebenslauf/Bachelorarbeit (Telefon, Anschrift, Geburtsdatum), die Schule der Theater-AG nicht nennen.
 
