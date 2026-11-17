@@ -287,17 +287,18 @@ nav.sprungleiste.seitentitel{margin-top:0;padding-top:40px}
 .kurzdaten dd{font-size:var(--text)}
 .schnellzugriff{list-style:none;display:flex;flex-wrap:wrap;gap:10px 24px;margin-top:24px}
 
-.wegweiser{display:grid;gap:14px;padding:var(--luft) var(--rand) 0;max-width:var(--breite);margin:0 auto}
+.wegweiser{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:var(--luft) var(--rand) 0;max-width:var(--breite);margin:0 auto}
 .weg{position:relative;display:block;overflow:hidden;color:#fff}
 .weg img{aspect-ratio:3/2;object-fit:cover;transition:transform .6s ease}
 .weg:hover img{transform:scale(1.03)}
 .weg::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55),rgba(0,0,0,0) 65%)}
-.weg-text{position:absolute;left:20px;right:20px;bottom:18px;z-index:1;display:flex;flex-direction:column;gap:2px}
-.weg-titel{font-size:var(--text);line-height:1.1}
+.weg-text{position:absolute;left:14px;right:14px;bottom:14px;z-index:1;display:flex;flex-direction:column;gap:2px}
+.weg-titel{font-size:var(--text);line-height:1.1;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px;text-decoration-color:rgba(255,255,255,.75)}
 .weg-inhalt{font-size:var(--klein);opacity:.9}
 .vita-seite .sprungleiste{margin-top:36px}
 /* Vita-Unterseiten (Alina 16.11.2026): Übersicht vita.html, eigene Seiten für Steckbrief, Kamera, Bühne, Ausbildung */
-.wegweiser.vier .weg img{aspect-ratio:4/3}
+/* Wegweiser-Kacheln klein, zwei nebeneinander, Titel unterstrichen (Dennis 17.11.2026) */
+.wegweiser.vier .weg img{aspect-ratio:4/5}
 .vita-seite .seitentitel{text-align:center;padding:96px var(--rand) 0}
 .vita-seite .seitentitel .oberzeile{color:var(--gruen);margin-bottom:6px}
 .unterseiten{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 20px;max-width:40em;margin:22px auto 0;padding:0 var(--rand)}
@@ -357,8 +358,8 @@ nav.sprungleiste.seitentitel{margin-top:0;padding-top:40px}
 @media (min-width:760px){
   .vita-seite .vita-kopf{grid-template-columns:5fr 6fr;align-items:end;gap:48px;max-width:var(--breite);margin:0 auto}
   .vita-kopf .name{font-size:var(--text)}
-  .wegweiser{grid-template-columns:1fr 1fr;gap:20px}
-  .wegweiser.vier .weg img{aspect-ratio:3/2}
+  .wegweiser{gap:20px}
+  .wegweiser.vier{grid-template-columns:repeat(4,1fr)}
   .vita-seite .vita li{display:grid;grid-template-columns:8em 1fr;column-gap:20px}
   .vita-seite .vita li>*:not(.jahr){grid-column:2}
   .vita-seite .vita li .jahr{grid-row:1/span 4;padding-top:6px}
