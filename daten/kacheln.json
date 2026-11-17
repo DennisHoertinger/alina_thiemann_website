@@ -126,8 +126,13 @@
     },
     {
       "titel": "Emil und die Detektive",
-      "bilder": [],
-      "foto": ""
+      "bilder": [
+        "/img/EMIL-6.webp",
+        "/img/EMIL-15.webp",
+        "/img/EMIL-10.webp",
+        "/img/EMIL-12.webp"
+      ],
+      "foto": "Geronimo Schmidt"
     },
     {
       "titel": "Performance zu „100 Jahre Sammlung, 20 Jahre Kunstmuseum“",
