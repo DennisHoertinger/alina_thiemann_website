@@ -150,6 +150,15 @@ collections:
             collapsed: true
             summary: "{{fields.alt.de}}"
             fields: *foto
+          - name: vorschau
+            label: Vorschau-Karten (Start und unten auf Vita, Film, Theater)
+            hint: Ein Bild pro Karte. Am besten Hochformat, die Karte schneidet es zu.
+            widget: object
+            fields:
+              - { name: vita, label: Karte Vita, widget: image }
+              - { name: film, label: Karte Film, widget: image }
+              - { name: theater, label: Karte Theater, widget: image }
+              - { name: ausbildung, label: Karte Ausbildung, widget: image }
           - name: medien
             label: Fotos auf der Seite Medien
             label_singular: Foto

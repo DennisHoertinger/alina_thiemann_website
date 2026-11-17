@@ -314,6 +314,20 @@ function cmsBloecke(texte, fotos) {
       `\n  </div>`;
     b.fotos = fotoSpur(fotos.fotos);
     b["fotos-medien"] = fotoSpur(fotos.medien);
+    // Vorschau-Karten (Start und unten auf Vita, Film, Theater): Bild austauschbar, Titel und Ziel fest
+    const v = fotos.vorschau || {};
+    const karte = (feld, href, titel) => {
+      const img = v[feld]
+        ? fotoImg({ bild: v[feld] }, "(min-width:760px) 50vw, 100vw", 'loading="lazy" decoding="async"').replace(/ alt="[^"]*" data-alt-de="[^"]*" data-alt-en="[^"]*"/, ' alt=""')
+        : "";
+      return `  <a class="weg" href="${href}">\n    ${img}\n    <span class="weg-text"><span class="weg-titel">${titel}</span></span>\n  </a>`;
+    };
+    b.vorschau = [
+      karte("vita", "vita.html", "Vita"),
+      karte("film", "film.html", '<span data-l="de">Film</span><span data-l="en">Film</span>'),
+      karte("theater", "theater.html", beide("Theater", "Theatre")),
+      karte("ausbildung", "vita.html#ausbildung", beide("Ausbildung", "Training")),
+    ].join("\n");
   }
   return b;
 }
