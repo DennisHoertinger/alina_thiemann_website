@@ -150,6 +150,26 @@ collections:
             collapsed: true
             summary: "{{fields.alt.de}}"
             fields: *foto
+          - name: vitaKopf
+            label: Vita, Porträt oben
+            widget: object
+            fields:
+              - { name: bild, label: Foto, widget: image }
+              - { name: credit, label: Credit (Fotograf:in und Jahr), widget: string, hint: "z. B. Annette Hauschild, 2025. Erscheint als „Foto: …“." }
+              - name: alt
+                label: Bildbeschreibung (für Blinde und Suchmaschinen)
+                widget: object
+                fields:
+                  - { name: de, label: Deutsch, widget: string }
+                  - { name: en, label: Englisch, widget: string }
+          - name: headshots
+            label: Vita, Headshots (im Steckbrief)
+            label_singular: Headshot
+            hint: Reihenfolge durch Ziehen ändern.
+            widget: list
+            collapsed: true
+            summary: "{{fields.alt.de}}"
+            fields: *foto
           - name: vorschau
             label: Vorschau-Karten (Start und unten auf Vita, Film, Theater)
             hint: Ein Bild pro Karte. Am besten Hochformat, die Karte schneidet es zu.
@@ -172,8 +192,21 @@ collections:
         label: Videos (YouTube-Links)
         file: daten/videos.json
         format: json
-        description: Showreels, About me und weitere Videos. Neues Video bei YouTube hochladen, Link hier eintragen, speichern. Nach etwa zwei Minuten ist es überall auf der Website.
+        # Showreels, About me und weitere Videos. Neues Video bei YouTube hochladen, Link hier eintragen, speichern. Nach etwa zwei Minuten ist es überall auf der Website.
         fields:
+          - name: reihenfolge
+            label: Reihenfolge der Videos auf der Startseite
+            label_singular: Video
+            hint: Durch Ziehen sortieren. Ein Video, das hier fehlt, erscheint nicht auf der Startseite (auf Film, Theater und Medien bleibt es).
+            widget: list
+            field:
+              name: video
+              label: Video
+              widget: select
+              options:
+                - { label: Film-Showreel, value: filmShowreel }
+                - { label: About me, value: aboutMe }
+                - { label: Theater-Showreel, value: theaterShowreel }
           - name: filmShowreel
             label: Film-Showreel (Start, Film, Medien)
             widget: object
