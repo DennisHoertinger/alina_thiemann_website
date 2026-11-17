@@ -170,6 +170,11 @@ collections:
             collapsed: true
             summary: "{{fields.alt.de}}"
             fields: *foto
+          - name: teilen
+            label: Teilen-Bild (Vorschau, wenn jemand den Link in WhatsApp, Instagram usw. teilt)
+            widget: image
+            required: false
+            hint: Am besten ein Querformat-Foto. Es wird automatisch auf 1200 × 630 zugeschnitten (bei Hochformat bleibt der obere Teil mit dem Gesicht). Apps zeigen ein neues Bild manchmal erst nach ein paar Tagen.
           - name: vorschau
             label: Vorschau-Karten (Start und unten auf Vita, Film, Theater)
             hint: Ein Bild pro Karte. Am besten Hochformat, die Karte schneidet es zu.
