@@ -10,6 +10,9 @@ backend:
   branch: main
   # Anmelde-Dienst (Sveltia CMS Authenticator als Cloudflare Worker), sobald eingerichtet:
   # base_url: https://sveltia-cms-auth.NAME.workers.dev
+  # und dann die Zeile auth_methods löschen (zeigt bis dahin nur „Mit Zugriffstoken anmelden“,
+  # weil „Mit GitHub anmelden“ ohne Worker bei api.netlify.com mit „Not Found“ endet).
+  auth_methods: [token]
   commit_messages:
     update: "CMS: {{collection}} „{{slug}}“ geändert ({{author-name}})"
     uploadMedia: "CMS: Foto „{{path}}“ hochgeladen ({{author-name}})"
