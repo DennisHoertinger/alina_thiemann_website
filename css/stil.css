@@ -457,3 +457,10 @@ body.start{--klein:var(--text)}
 .film-buehne video{width:100%;height:100%;max-height:100%;object-fit:contain;background:#000}
 /* Vermerk „In Entwicklung“ an der Film-Kachel: schlichter Text, kein Knopf */
 .stueck-status{color:var(--gruen);font-size:var(--klein);margin-top:6px}
+/* Leichte Pfeile auf Theater-Kacheln mit mehreren Fotos (Dennis 17.11.2026) */
+.stueck-bild{position:relative}
+.kachel-pfeil{position:absolute;top:50%;width:36px;height:44px;margin-top:-22px;background:none;border:0;color:#fff;cursor:pointer;opacity:.85;transition:opacity .2s;filter:drop-shadow(0 0 2px rgba(0,0,0,.35))}
+.kachel-pfeil::after{content:"";position:absolute;left:50%;top:50%;width:10px;height:10px;border-top:1.5px solid currentColor;border-right:1.5px solid currentColor}
+.kachel-zurueck{left:0}.kachel-zurueck::after{transform:translate(-30%,-50%) rotate(-135deg)}
+.kachel-weiter{right:0}.kachel-weiter::after{transform:translate(-70%,-50%) rotate(45deg)}
+.am-anfang .kachel-zurueck,.am-ende .kachel-weiter{opacity:0;pointer-events:none}
